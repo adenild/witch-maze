@@ -10,11 +10,11 @@ body {
   display: grid;
   grid-gap: 10px;
   grid-template-areas:
-    'header header'
-    'canvas settings'
-    'canvas controls'
-    'footer footer';
-  grid-template-columns: max-content max-content;
+    'header'
+    'settings'
+    'canvas'
+    'controls';
+  grid-template-columns: max-content;
   grid-template-rows: max-content max-content max-content max-content;
   height: max-content;
   width: max-content;
@@ -50,6 +50,7 @@ label {
 }
 
 .controls {
+
   display: grid;
   grid-template-areas:
     '. up .'
