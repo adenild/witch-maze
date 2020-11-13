@@ -7,14 +7,15 @@ let player;
 
 class Player {
 
-  constructor() {
+  constructor(moves) {
     this.reset();
-    this.moves = 10;
+    this.moves = moves;
   }
-
   reset() {
     this.col = 0;
     this.row = 0;
+    this.moves = 99
+    $('.moves-left').text(this.moves);
   }
 
   moveUp() {
@@ -26,7 +27,7 @@ class Player {
         console.log(this.col, this.row);
         $('.moves-left').text(this.moves);
       }
-    } else {alert("Você perdeu!")}
+    } else {alert("Sem movimentos restantes! Deseja comprar mais?")}
   }
 
   moveDown() {
@@ -38,7 +39,7 @@ class Player {
         console.log(this.col, this.row);
         $('.moves-left').text(this.moves);
       }
-    } else {alert("Você perdeu!")}
+    } else {alert("Sem movimentos restantes! Deseja comprar mais?")}
   }
 
   moveLeft() {
@@ -50,7 +51,7 @@ class Player {
         console.log(this.col, this.row);
         $('.moves-left').text(this.moves);
       }
-    } else {alert("Você perdeu!")}
+    } else {alert("Sem movimentos restantes! Deseja comprar mais?")}
   }
 
   moveRight() {
@@ -62,7 +63,7 @@ class Player {
         console.log(this.col, this.row);
         $('.moves-left').text(this.moves);
       }
-    } else {alert("Você perdeu!")}
+    } else {alert("Sem movimentos restantes! Deseja comprar mais?")}
   }
 
 }
@@ -173,7 +174,7 @@ class Maze {
 
 }
 
-function onClick(event) {
+function onClick() {
   player.reset();
   maze.cols = document.getElementById("cols").value;
   maze.rows = document.getElementById("rows").value;
@@ -229,9 +230,9 @@ function onLoad() {
   canvas = document.getElementById('mainForm');
   ctx = canvas.getContext('2d');
 
-  player = new Player();
+  player = new Player(99);
   maze = new Maze(10, 10, 25);
-
+  $('.moves-left').text(player.moves)
   document.addEventListener('keydown', onKeyDown);
   document.getElementById('generate').addEventListener('click', onClick);
   document.getElementById('up').addEventListener('click', onControlClick);

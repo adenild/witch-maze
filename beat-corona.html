@@ -6,17 +6,19 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
     <script src='beat-corona.js'></script>
-    <title>htmlMaze</title>
+    <title>Beat Corona</title>
   </head>
 
   <body onload='onLoad();'>
-    <header>htmlMaze</header>
+    <header>Beat Corona</header>
     <canvas id='mainForm'></canvas>
     <div class='settings'>
       <label for='cols'>Columns:</label>
       <input id='cols' type='text' size='5' value='10'><br>
       <label for='rows'>Rows:</label>
       <input id='rows' type='text' size='5' value='10'><br>
+      <label for='moves-left'>Moves:</label>
+      <span id='moves-left' class="moves-left">10</span><br>
       <input id='generate' type='button' value='Generate'>
     </div>
 
@@ -26,6 +28,6 @@
       <div id='down' class='down'>&#8681;</div>
       <div id='left' class='left'>&#8678;</div>
     </div>
-    <span class="moves-left">10</span>
+
   </body>
 </html>
