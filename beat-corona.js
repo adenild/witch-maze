@@ -9,12 +9,13 @@ class Player {
 
   constructor(moves) {
     this.reset();
+    this.startMoves = moves;
     this.moves = moves;
   }
   reset() {
     this.col = 0;
     this.row = 0;
-    this.moves = 99
+    this.moves = this.startMoves;
     $('.moves-left').text(this.moves);
   }
 
@@ -230,8 +231,8 @@ function onLoad() {
   canvas = document.getElementById('mainForm');
   ctx = canvas.getContext('2d');
 
-  player = new Player(99);
-  maze = new Maze(10, 10, 25);
+  player = new Player(10);
+  maze = new Maze(10, 10, 50);
   $('.moves-left').text(player.moves)
   document.addEventListener('keydown', onKeyDown);
   document.getElementById('generate').addEventListener('click', onClick);

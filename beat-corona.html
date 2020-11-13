@@ -13,16 +13,27 @@
     <header>Beat Corona</header>
     <canvas id='mainForm'></canvas>
     <div class='settings'>
-      <label for='cols'>Columns:</label>
-      <input id='cols' type='text' size='5' value='10'><br>
-      <label for='rows'>Rows:</label>
-      <input id='rows' type='text' size='5' value='10'><br>
-      <label for='moves-left'>Moves:</label>
-      <span id='moves-left' class="moves-left">10</span><br>
-      <input id='generate' type='button' value='Generate'>
+      <table style="width: 100%; text-align: center">
+        <tr>
+          <th>Movimentos</th>
+          <th>Nível</th>
+          <th>Pontuação</th>
+        </tr>
+        <tr>
+          <td><span id='moves-left' class="moves-left">10</span></td>
+          <td>1</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>Cols:<input id='cols' type='text' size='5' value='10'></td>
+          <td>Rows:<input id='rows' type='text' size='5' value='10'></td>
+          <td><input id='generate' type='button' value='Generate'></td>
+        </tr>
+      </table>
+
     </div>
 
-    <div class='controls'>
+    <div class='controls' style="margin: 0 auto;">
       <div id='up' class='up'>&#8679;</div>
       <div id='right' class='right'>&#8680;</div>
       <div id='down' class='down'>&#8681;</div>
