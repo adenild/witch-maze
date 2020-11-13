@@ -9,6 +9,7 @@ class Player {
 
   constructor() {
     this.reset();
+    this.moves = 10;
   }
 
   reset() {
@@ -17,31 +18,51 @@ class Player {
   }
 
   moveUp() {
-    if (!maze.cells[this.col][this.row].northWall && this.row !== 0) {
-      this.row -= 1;
-      console.log(this.col, this.row)
-    }
+    if (this.moves > 0) {
+      if (!maze.cells[this.col][this.row].northWall && this.row !== 0) {
+        this.row -= 1;
+        this.moves -= 1;
+        console.log("moves:", this.moves);
+        console.log(this.col, this.row);
+        $('.moves-left').text(this.moves);
+      }
+    } else {alert("Você perdeu!")}
   }
 
   moveDown() {
-    if (!maze.cells[this.col][this.row].southWall && this.row !== maze.rows-1) {
-      this.row += 1;
-      console.log(this.col, this.row)
-    }
+    if (this.moves > 0) {
+      if (!maze.cells[this.col][this.row].southWall && this.row !== maze.rows - 1) {
+        this.row += 1;
+        this.moves -= 1;
+        console.log("moves:", this.moves);
+        console.log(this.col, this.row);
+        $('.moves-left').text(this.moves);
+      }
+    } else {alert("Você perdeu!")}
   }
 
   moveLeft() {
-    if (!maze.cells[this.col][this.row].westWall && this.col !== 0) {
-      this.col -= 1;
-      console.log(this.col, this.row)
-    }
+    if (this.moves > 0) {
+      if (!maze.cells[this.col][this.row].westWall && this.col !== 0) {
+        this.col -= 1;
+        this.moves -= 1;
+        console.log("moves:", this.moves);
+        console.log(this.col, this.row);
+        $('.moves-left').text(this.moves);
+      }
+    } else {alert("Você perdeu!")}
   }
 
   moveRight() {
-    if (!maze.cells[this.col][this.row].eastWall && this.col !== maze.cols-1) {
-      this.col += 1;
-      console.log(this.col, this.row)
-    }
+    if (this.moves > 0) {
+      if (!maze.cells[this.col][this.row].eastWall && this.col !== maze.cols - 1) {
+        this.col += 1;
+        this.moves -= 1;
+        console.log("moves:", this.moves);
+        console.log(this.col, this.row);
+        $('.moves-left').text(this.moves);
+      }
+    } else {alert("Você perdeu!")}
   }
 
 }
@@ -217,5 +238,4 @@ function onLoad() {
   document.getElementById('right').addEventListener('click', onControlClick);
   document.getElementById('down').addEventListener('click', onControlClick);
   document.getElementById('left').addEventListener('click', onControlClick);
-
 }

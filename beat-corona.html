@@ -4,9 +4,11 @@
     <link rel='stylesheet' href='beat-corona.css'>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
     <script src='beat-corona.js'></script>
     <title>htmlMaze</title>
   </head>
+
   <body onload='onLoad();'>
     <header>htmlMaze</header>
     <canvas id='mainForm'></canvas>
@@ -17,12 +19,13 @@
       <input id='rows' type='text' size='5' value='10'><br>
       <input id='generate' type='button' value='Generate'>
     </div>
+
     <div class='controls'>
       <div id='up' class='up'>&#8679;</div>
       <div id='right' class='right'>&#8680;</div>
       <div id='down' class='down'>&#8681;</div>
       <div id='left' class='left'>&#8678;</div>
     </div>
-    <footer>&copy; 2017 <a href='mailto:JakesAddress@gmail.com?Subject=htmlMaze'>Jake (John) Moe</a></footer>
+    <span class="moves-left">10</span>
   </body>
 </html>
