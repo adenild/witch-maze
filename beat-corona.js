@@ -28,7 +28,7 @@ class Player {
         console.log(this.col, this.row);
         $('.moves-left').text(this.moves);
       }
-    } else {alert("Sem movimentos restantes! Deseja comprar mais?")}
+    } else { alert("Sem movimentos restantes! Deseja comprar mais?") }
   }
 
   moveDown() {
@@ -40,7 +40,7 @@ class Player {
         console.log(this.col, this.row);
         $('.moves-left').text(this.moves);
       }
-    } else {alert("Sem movimentos restantes! Deseja comprar mais?")}
+    } else { alert("Sem movimentos restantes! Deseja comprar mais?") }
   }
 
   moveLeft() {
@@ -52,7 +52,7 @@ class Player {
         console.log(this.col, this.row);
         $('.moves-left').text(this.moves);
       }
-    } else {alert("Sem movimentos restantes! Deseja comprar mais?")}
+    } else { alert("Sem movimentos restantes! Deseja comprar mais?") }
   }
 
   moveRight() {
@@ -64,7 +64,7 @@ class Player {
         console.log(this.col, this.row);
         $('.moves-left').text(this.moves);
       }
-    } else {alert("Sem movimentos restantes! Deseja comprar mais?")}
+    } else { alert("Sem movimentos restantes! Deseja comprar mais?") }
   }
 
 }
@@ -94,8 +94,13 @@ class Maze {
     this.playerColor = "#880088";
     this.rows = rows;
     this.cellSize = cellSize;
+    this.newRewards = true; // -----------------------------------------------------------------------------------------------
+    this.rewardsCoords = []; // -----------------------------------------------------------------------------------------------
+    this.rewards = 0;
+    this.nivel = 1;
 
     this.cells = [];
+
 
     this.generate()
 
@@ -118,12 +123,6 @@ class Maze {
       }
     }
 
-    let rndCol = Math.floor(Math.random() * this.cols);
-    let rndRow = Math.floor(Math.random() * this.rows);
-
-    let stack = [];
-    stack.push(this.cells[rndCol][rndRow]);
-
     this.redraw();
 
   }
@@ -134,7 +133,38 @@ class Maze {
     ctx.fillRect(0, 0, mazeHeight, mazeWidth);
 
     ctx.fillStyle = this.endColor;
-    ctx.fillRect((this.cols - 1) * this.cellSize, (this.rows - 1) * this.cellSize, this.cellSize, this.cellSize);
+
+    for (let i = 0; i < this.rewardsCoords.length; i++) {
+      if (player.col == this.rewardsCoords[i][0] && player.row == this.rewardsCoords[i][1]) {
+        this.rewards += 1;
+        $('.rewards').text(this.rewards);
+        console.log(this.rewards);
+        this.rewardsCoords.splice(i, 1);
+        if (this.rewardsCoords.length == 0) {
+          this.newRewards = true;
+          this.nivel += 1;
+          $('.nivel').text(this.nivel);
+        }
+      }
+    }
+
+    if (this.newRewards) {
+      let count = 0;
+      while (count < (this.nivel*2)) {
+        let rndCol = Math.floor(Math.random() * this.cols);
+        let rndRow = Math.floor(Math.random() * this.rows);
+        if (player.col != rndCol || player.row != rndRow) {
+          this.rewardsCoords.push([rndCol, rndRow]);
+          ctx.fillRect((rndCol) * this.cellSize + 5, (rndRow) * this.cellSize + 5, this.cellSize - 5, this.cellSize - 5);
+          count += 1;
+        }
+      }
+      this.newRewards = false
+    } else {
+      for (let i = 0; i < this.rewardsCoords.length; i++) {
+        ctx.fillRect((this.rewardsCoords[i][0]) * this.cellSize + 5, (this.rewardsCoords[i][1]) * this.cellSize + 5, this.cellSize - 5, this.cellSize - 5);
+      }
+    }
 
     ctx.strokeStyle = this.mazeColor;
     ctx.strokeRect(0, 0, mazeHeight, mazeWidth);
@@ -169,7 +199,7 @@ class Maze {
     }
 
     ctx.fillStyle = this.playerColor;
-    ctx.fillRect((player.col * this.cellSize) + 2, (player.row * this.cellSize) + 2, this.cellSize - 4, this.cellSize - 4);
+    ctx.fillRect((player.col * this.cellSize) + 5, (player.row * this.cellSize) + 5, this.cellSize - 5, this.cellSize - 5);
 
   }
 
@@ -231,7 +261,7 @@ function onLoad() {
   canvas = document.getElementById('mainForm');
   ctx = canvas.getContext('2d');
 
-  player = new Player(10);
+  player = new Player(200);
   maze = new Maze(10, 10, 50);
   $('.moves-left').text(player.moves)
   document.addEventListener('keydown', onKeyDown);
