@@ -248,20 +248,20 @@ function onLoad() {
 }
 
 function obtem_csv(){
-  let ret
-  ret = $(document).ready(function() {
+  return $(document).ready(function () {
     $.ajax({
-        type: "GET",
-        url: "cenario_teste.csv",
-        dataType: "text",
-        success: function(data) {csv_novo(data).then;}
-     });
-  });
-  return ret  
+      type: "GET",
+      url: "cenario_teste.csv",
+      dataType: "text",
+      success: function (data) {
+        csv_novo(data).then(r => alert(JSON.stringify(data)));
+      }
+    });
+  })
 }
 
-function csv_novo(allText){
-  var data = $.csv.toObjects(allText);
+async function csv_novo(allText){
+  let data = $.csv.toObjects(allText);
   console.log(data)
   return data
 }
