@@ -5,6 +5,7 @@ let mazeHeight;
 let mazeWidth;
 let player;
 
+
 class Player {
 
   constructor(moves) {
@@ -110,6 +111,10 @@ class Maze {
     canvas.width = mazeWidth;
     canvas.style.height = mazeHeight;
     canvas.style.width = mazeWidth;
+
+    var batata = obtem_csv();
+    //var batataResponse = batata.responseText;
+    console.log(batata)
 
     for (let col = 0; col < this.cols; col++) {
       this.cells[col] = [];
@@ -241,3 +246,33 @@ function onLoad() {
   document.getElementById('down').addEventListener('click', onControlClick);
   document.getElementById('left').addEventListener('click', onControlClick);
 }
+
+function obtem_csv(){
+  let ret
+  ret = $(document).ready(function() {
+    $.ajax({
+        type: "GET",
+        url: "cenario_teste.csv",
+        dataType: "text",
+        success: function(data) {csv_novo(data).then;}
+     });
+  });
+  return ret  
+}
+
+function csv_novo(allText){
+  var data = $.csv.toObjects(allText);
+  console.log(data)
+  return data
+}
+
+function maze_generator(maze_data,maze){
+  let col;
+  let row;
+  for (let obj_index = 0; obj_index < maze_data.length; obj_index++) {
+    col = maze_data[obj_index]['Col']
+    row = maze_data[obj_index]['Row']
+  }
+  //maze.cells[col][row] = new MazeCell(col, row);
+  console.log(maze)
+  }
