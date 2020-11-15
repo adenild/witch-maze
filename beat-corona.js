@@ -115,13 +115,48 @@ class Maze {
     canvas.style.width = mazeWidth;
 
     console.log(this.map[17])
-
+    // let map_index = 0;
     for (let col = 0; col < this.cols; col++) {
       this.cells[col] = [];
       for (let row = 0; row < this.rows; row++) {
         this.cells[col][row] = new MazeCell(col, row);
+
+        // if (this.map[map_index].EastWall == 1) {
+        //   this.cells[col][row].eastWall = true;
+        // }
+        // if (this.map[map_index].NorthWall == 1) {
+        //   this.cells[col][row].northWall = true;
+        // }
+        // if (this.map[map_index].SouthWall == 1) {
+        //   this.cells[col][row].southWall = true;
+        // }
+        // if (this.map[map_index].WestWall == 1) {
+        //   this.cells[col][row].westWall = true;
+        // }
+        //console.log(this.map[map_index].EastWall)
+        // map_index += 1;
       }
     }
+
+    for (let map_index = 0; map_index < 100; map_index++) {
+        if (this.map[map_index].EastWall == 1) {
+          this.cells[this.map[map_index].Col-1][this.map[map_index].Row-1].eastWall = true;
+        }
+        if (this.map[map_index].NorthWall == 1) {
+          this.cells[this.map[map_index].Col-1][this.map[map_index].Row-1].northWall = true;
+        }
+        if (this.map[map_index].SouthWall == 1) {
+          this.cells[this.map[map_index].Col-1][this.map[map_index].Row-1].southWall = true;
+        }
+        if (this.map[map_index].WestWall == 1) {
+          this.cells[this.map[map_index].Col-1][this.map[map_index].Row-1].westWall = true;
+        }
+        //console.log(this.map[map_index].EastWall)
+
+      }
+    
+
+
 
     let rndCol = Math.floor(Math.random() * this.cols);
     let rndRow = Math.floor(Math.random() * this.rows);
@@ -261,7 +296,7 @@ async function obtem_csv(){
 
 async function csv_novo(allText){
   let data = $.csv.toObjects(allText);
-  console.log(data)
+  //console.log(data)
   return data
 }
 
