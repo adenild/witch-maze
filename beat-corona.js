@@ -86,7 +86,7 @@ class MazeCell {
 
 class Maze {
 
-  constructor(cols, rows, cellSize) {
+  constructor(cols, rows, cellSize, map) {
 
     this.backgroundColor = "#ffffff";
     this.cols = cols;
@@ -98,11 +98,13 @@ class Maze {
 
     this.cells = [];
 
+    this.map = $.csv.toObjects(map);
+
     this.generate()
 
   }
 
-  generate() {
+  async generate() {
 
     mazeHeight = this.rows * this.cellSize;
     mazeWidth = this.cols * this.cellSize;
@@ -112,9 +114,7 @@ class Maze {
     canvas.style.height = mazeHeight;
     canvas.style.width = mazeWidth;
 
-    var batata = obtem_csv();
-    //var batataResponse = batata.responseText;
-    console.log(batata)
+    console.log(this.map[17])
 
     for (let col = 0; col < this.cols; col++) {
       this.cells[col] = [];
@@ -231,14 +231,16 @@ function onKeyDown(event) {
   maze.redraw();
 }
 
-function onLoad() {
+async function onLoad() {
 
   canvas = document.getElementById('mainForm');
   ctx = canvas.getContext('2d');
 
   player = new Player(10);
-  maze = new Maze(10, 10, 50);
   $('.moves-left').text(player.moves)
+
+  maze = new Maze(10, 10, 50, await obtem_csv());
+
   document.addEventListener('keydown', onKeyDown);
   document.getElementById('generate').addEventListener('click', onClick);
   document.getElementById('up').addEventListener('click', onControlClick);
@@ -247,16 +249,13 @@ function onLoad() {
   document.getElementById('left').addEventListener('click', onControlClick);
 }
 
-function obtem_csv(){
-  return $(document).ready(function () {
-    $.ajax({
-      type: "GET",
-      url: "cenario_teste.csv",
-      dataType: "text",
-      success: function (data) {
-        csv_novo(data).then(r => alert(JSON.stringify(data)));
-      }
-    });
+async function obtem_csv(){
+  return $.ajax({
+    type: "GET",
+    url: "cenario_teste.csv",
+    success: function (data) {
+      csv_novo(data).then(r => console.log("Consegui!"))
+    }
   })
 }
 
