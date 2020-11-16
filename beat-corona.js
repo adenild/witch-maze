@@ -103,7 +103,7 @@ class Maze {
       }
     }
 
-    for (let map_index = 0; map_index < 100; map_index++) {
+    for (let map_index = 0; map_index < this.cols*this.rows; map_index++) {
         if (this.map[map_index].EastWall == 1) {
           this.cells[this.map[map_index].Col-1][this.map[map_index].Row-1].eastWall = true;
         }
