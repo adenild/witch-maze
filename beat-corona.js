@@ -13,8 +13,8 @@ class Player {
     this.moves = moves;
   }
   reset() {
-    this.col = 0;
-    this.row = 0;
+    this.col = Math.floor(Math.random() * 10);
+    this.row = Math.floor(Math.random() * 10);
     this.moves = this.startMoves;
     $('.moves-left').text(this.moves);
   }
