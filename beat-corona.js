@@ -126,16 +126,29 @@ class Maze {
 
     this.redraw();
   }
+  checkRewardsPosition(rewardsList,randomCol,randomRow){
+      for(let index = 0;index<rewardsList.length;index++){
+        if(rewardsList[index][0] == randomCol && rewardsList[index][1] == randomRow)
+            return true;
+      }
 
+      return false;
+
+  }
   spawnRewards() {
     if (this.newRewards) {
       let cont = 0;
       while (cont < (this.level*2)) {
         let randomCol = Math.floor(Math.random() * this.cols);
         let randomRow = Math.floor(Math.random() * this.rows);
+        while(this.checkRewardsPosition(this.rewardsList,randomCol,randomRow)){
+          let randomCol = Math.floor(Math.random() * this.cols);
+          let randomRow = Math.floor(Math.random() * this.rows);
+        }
         // Checa se o jogador está na casa, para nao colocar uma recompensa lá
         if (player.col !== randomCol || player.row !== randomRow) {
           this.rewardsList.push([randomCol, randomRow]);
+
           ctx.fillRect((randomCol)*this.cellSize+5, (randomRow)*this.cellSize+5, this.cellSize-5, this.cellSize-5);
           cont += 1;
         }
@@ -292,7 +305,7 @@ async function onLoad() {
 async function obtem_csv(){
   return $.ajax({
     type: "GET",
-    url: "cenario_teste.csv",
+    url: "grid/cenario_teste.csv",
     success: function (data) {
       csv_novo(data).then(r => console.log("Consegui!"))
     }
