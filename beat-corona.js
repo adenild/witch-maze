@@ -1,5 +1,3 @@
-//import { compara_rewards } from "./utils.js"
-// import compara_rewards from "./utils";
 let ctx;
 let canvas;
 let maze;
@@ -89,6 +87,65 @@ class Maze {
     this.generate()
   }
 
+  reset() {
+    this.newRewards = true;
+    this.rewardsList = [];
+    this.rewardsScore = 0;
+    this.level = 1;
+    $("#level").text(this.level);
+    $("#rewardsScore").text(this.rewardsScore);
+  }
+
+  spawnRewards() {
+    if (this.newRewards) {
+      let cont = 0;
+      let same_position = false
+      while (cont < (this.level*2)) {
+        let randomCol = Math.floor(Math.random() * this.cols);
+        let randomRow = Math.floor(Math.random() * this.rows);
+        // Checa se o jogador está na casa, para nao colocar uma recompensa lá
+        if (player.col !== randomCol || player.row !== randomRow) {
+          // Checa se existe recompença naquela posição, se houver, gera outra.
+          this.rewardsList.forEach(reward => {
+            if (compara_rewards(reward,[randomCol, randomRow])) {
+              console.log('Recompensa seria em cima de outra');
+              same_position = true
+            }
+          });
+          if (same_position === true){
+            same_position = false
+            continue;
+          }
+
+          this.rewardsList.push([randomCol, randomRow]);
+
+          ctx.fillRect((randomCol)*this.cellSize+5, (randomRow)*this.cellSize+5, this.cellSize-5, this.cellSize-5);
+          cont += 1;
+        }
+      }
+      this.newRewards = false;
+    } else {
+      for (let r = 0; r < this.rewardsList.length; r++) {
+        ctx.fillRect((this.rewardsList[r][0])*this.cellSize+5, (this.rewardsList[r][1])*this.cellSize+5, this.cellSize-5, this.cellSize-5);
+      }
+    }
+  }
+
+  countScore() {
+    for (let r = 0; r < this.rewardsList.length; r++) {
+      if (player.col === this.rewardsList[r][0] && player.row === this.rewardsList[r][1]) {
+        this.rewardsScore += 1;
+        $("#rewardsScore").text(this.rewardsScore);
+        this.rewardsList.splice(r, 1);
+        if (this.rewardsList.length === 0) {
+          this.newRewards = true;
+          this.level += 1;
+          $("#level").text(this.level);
+        }
+      }
+    }
+  }
+
   async generate() {
     mazeHeight = this.rows * this.cellSize;
     mazeWidth = this.cols * this.cellSize;
@@ -127,62 +184,6 @@ class Maze {
     stack.push(this.cells[rndCol][rndRow]);
 
     this.redraw();
-  }
-  checkRewardsPosition(rewardsList,randomCol,randomRow){
-      for(let index = 0;index<rewardsList.length;index++){
-        if(rewardsList[index][0] == randomCol && rewardsList[index][1] == randomRow)
-            return true;
-      }
-      return false;
-  }
-  spawnRewards() {
-    if (this.newRewards) {
-      let cont = 0;
-      let same_position = false
-      while (cont < (this.level*2)) {
-        let randomCol = Math.floor(Math.random() * this.cols);
-        let randomRow = Math.floor(Math.random() * this.rows);
-        // Checa se o jogador está na casa, para nao colocar uma recompensa lá
-        if (player.col !== randomCol || player.row !== randomRow) {
-          // Checa se existe recompença naquela posição, se houver, gera outra.
-          this.rewardsList.forEach(reward => {
-            if (compara_rewards(reward,[randomCol, randomRow])) {
-              console.log('Recompensa seria em cima de outra');
-              same_position = true
-            }
-          });
-          if (same_position === true){
-            same_position = false
-            continue;
-          }
-          
-          this.rewardsList.push([randomCol, randomRow]);
-
-          ctx.fillRect((randomCol)*this.cellSize+5, (randomRow)*this.cellSize+5, this.cellSize-5, this.cellSize-5);
-          cont += 1;
-        }
-      }
-      this.newRewards = false;
-    } else {
-      for (let r = 0; r < this.rewardsList.length; r++) {
-        ctx.fillRect((this.rewardsList[r][0])*this.cellSize+5, (this.rewardsList[r][1])*this.cellSize+5, this.cellSize-5, this.cellSize-5);
-      }
-    }
-  }
-
-  countScore() {
-    for (let r = 0; r < this.rewardsList.length; r++) {
-      if (player.col === this.rewardsList[r][0] && player.row === this.rewardsList[r][1]) {
-        this.rewardsScore += 1;
-        $("#rewardsScore").text(this.rewardsScore);
-        this.rewardsList.splice(r, 1);
-        if (this.rewardsList.length === 0) {
-          this.newRewards = true;
-          this.level += 1;
-          $("#level").text(this.level);
-        }
-      }
-    }
   }
 
   redraw() {
@@ -228,15 +229,6 @@ class Maze {
 
     ctx.fillStyle = this.playerColor;
     ctx.fillRect((player.col * this.cellSize) + 5, (player.row * this.cellSize) + 5, this.cellSize - 5, this.cellSize - 5);
-  }
-
-  reset() {
-    this.newRewards = true;
-    this.rewardsList = new Array();
-    this.rewardsScore = 0;
-    this.level = 1;
-    $("#level").text(this.level);
-    $("#rewardsScore").text(this.rewardsScore);
   }
 }
 
@@ -311,6 +303,7 @@ async function onLoad() {
   document.getElementById('left').addEventListener('click', onControlClick);
 }
 
+// TODO: Passar essas coisas pro utils.js
 async function obtem_csv(){
   return $.ajax({
     type: "GET",
