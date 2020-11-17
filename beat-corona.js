@@ -1,3 +1,5 @@
+//import { compara_rewards } from "./utils.js"
+// import compara_rewards from "./utils";
 let ctx;
 let canvas;
 let maze;
@@ -131,22 +133,30 @@ class Maze {
         if(rewardsList[index][0] == randomCol && rewardsList[index][1] == randomRow)
             return true;
       }
-
       return false;
-
   }
   spawnRewards() {
     if (this.newRewards) {
       let cont = 0;
+      let same_position = false
       while (cont < (this.level*2)) {
         let randomCol = Math.floor(Math.random() * this.cols);
         let randomRow = Math.floor(Math.random() * this.rows);
-        while(this.checkRewardsPosition(this.rewardsList,randomCol,randomRow)){
-          let randomCol = Math.floor(Math.random() * this.cols);
-          let randomRow = Math.floor(Math.random() * this.rows);
-        }
+
         // Checa se o jogador está na casa, para nao colocar uma recompensa lá
         if (player.col !== randomCol || player.row !== randomRow) {
+          // Checa se existe recompença naquela posição, se houver, gera outra.
+          this.rewardsList.forEach(reward => {
+            if (compara_rewards(reward,[randomCol, randomRow])) {
+              console.log('Recompensa seria em cima de outra');
+              same_position = true
+            }
+          });
+          if (same_position === true){
+            same_position = false
+            continue;
+          }
+          
           this.rewardsList.push([randomCol, randomRow]);
 
           ctx.fillRect((randomCol)*this.cellSize+5, (randomRow)*this.cellSize+5, this.cellSize-5, this.cellSize-5);
@@ -223,7 +233,7 @@ class Maze {
 
   reset() {
     this.newRewards = true;
-    this.rewardsList = [];
+    this.rewardsList = new Array();
     this.rewardsScore = 0;
     this.level = 1;
     $("#level").text(this.level);
@@ -288,7 +298,7 @@ async function onLoad() {
   canvas = document.getElementById('mainForm');
   ctx = canvas.getContext('2d');
 
-  player = new Player(200);
+  player = new Player(2000);
   // $('#movesLeft').text(player.moves)
 
   maze = new Maze(10, 10, 50, await obtem_csv());
@@ -326,3 +336,4 @@ function maze_generator(maze_data,maze){
   //maze.cells[col][row] = new MazeCell(col, row);
   console.log(maze)
   }
+
