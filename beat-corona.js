@@ -25,7 +25,7 @@ class Player {
         this.moves -= 1;
         $('#movesLeft').text(this.moves);
       }
-    } else {alert("Sem movimentos restantes! Deseja comprar mais?")}
+    } else {alert("Sem movimentos restantes! Deseja jogar novamente?")}
   }
   moveDown() {
     if (this.moves > 0) {
@@ -34,7 +34,7 @@ class Player {
         this.moves -= 1;
         $('#movesLeft').text(this.moves);
       }
-    } else {alert("Sem movimentos restantes! Deseja comprar mais?")}
+    } else {alert("Sem movimentos restantes! Deseja jogar novamente?")}
   }
   moveLeft() {
     if (this.moves > 0) {
@@ -43,7 +43,7 @@ class Player {
         this.moves -= 1;
         $('#movesLeft').text(this.moves);
       }
-    } else {alert("Sem movimentos restantes! Deseja comprar mais?")}
+    } else {alert("Sem movimentos restantes! Deseja jogar novamente?")}
   }
   moveRight() {
     if (this.moves > 0) {
@@ -52,7 +52,7 @@ class Player {
         this.moves -= 1;
         $('#movesLeft').text(this.moves);
       }
-    } else {alert("Sem movimentos restantes! Deseja comprar mais?")}
+    } else {alert("Sem movimentos restantes! Deseja jogar novamente?")}
   }
 
 }
@@ -126,25 +126,13 @@ class Maze {
 
     this.redraw();
   }
-  checkRewardsPosition(rewardsList,randomCol,randomRow){
-      for(let index = 0;index<rewardsList.length;index++){
-        if(rewardsList[index][0] == randomCol && rewardsList[index][1] == randomRow)
-            return true;
-      }
 
-      return false;
-
-  }
   spawnRewards() {
     if (this.newRewards) {
       let cont = 0;
       while (cont < (this.level*2)) {
         let randomCol = Math.floor(Math.random() * this.cols);
         let randomRow = Math.floor(Math.random() * this.rows);
-        while(this.checkRewardsPosition(this.rewardsList,randomCol,randomRow)){
-          let randomCol = Math.floor(Math.random() * this.cols);
-          let randomRow = Math.floor(Math.random() * this.rows);
-        }
         // Checa se o jogador está na casa, para nao colocar uma recompensa lá
         if (player.col !== randomCol || player.row !== randomRow) {
           this.rewardsList.push([randomCol, randomRow]);
