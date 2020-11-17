@@ -289,8 +289,8 @@ async function onLoad() {
   canvas = document.getElementById('mainForm');
   ctx = canvas.getContext('2d');
 
-  player = new Player(2000);
-  // $('#movesLeft').text(player.moves)
+  player = new Player(200);
+  $('#movesLeft').text(player.moves)
 
   maze = new Maze(10, 10, 50, await obtem_csv());
 
