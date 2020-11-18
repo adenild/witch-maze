@@ -46,9 +46,9 @@ class Maze {
                         same_position = false
                         continue;
                     }
-
-                    reward.rewardsList.push([randomCol, randomRow]);
-
+                    let aux_color = reward.generateRandomColor();
+                    reward.rewardsList.push([randomCol, randomRow,aux_color]);
+                    ctx.fillStyle = aux_color;
                     ctx.fillRect((randomCol)*this.cellSize+5, (randomRow)*this.cellSize+5, this.cellSize-5, this.cellSize-5);
                     cont += 1;
                 }
@@ -56,6 +56,7 @@ class Maze {
             reward.newRewards = false;
         } else {
             for (let r = 0; r < reward.rewardsList.length; r++) {
+                ctx.fillStyle = reward.rewardsList[r][2];
                 ctx.fillRect((reward.rewardsList[r][0])*this.cellSize+5, (reward.rewardsList[r][1])*this.cellSize+5, this.cellSize-5, this.cellSize-5);
             }
         }
