@@ -18,7 +18,7 @@ class Player {
                 this.moves -= 1;
                 $('#movesLeft').text(this.moves);
             }
-        } else {if (confirm("Sem movimentos restantes! Deseja jogar novamente?")){window.location.reload()}}
+        } else {if (confirm("Sem movimentos restantes! Deseja jogar novamente?")){onClick()}}
     }
     moveDown() {
         if (this.moves > 0) {
@@ -27,7 +27,7 @@ class Player {
                 this.moves -= 1;
                 $('#movesLeft').text(this.moves);
             }
-        } else {if (confirm("Sem movimentos restantes! Deseja jogar novamente?")){window.location.reload()}}
+        } else {if (confirm("Sem movimentos restantes! Deseja jogar novamente?")){onClick()}}
     }
     moveLeft() {
         if (this.moves > 0) {
@@ -36,7 +36,7 @@ class Player {
                 this.moves -= 1;
                 $('#movesLeft').text(this.moves);
             }
-        } else {if (confirm("Sem movimentos restantes! Deseja jogar novamente?")){window.location.reload()}}
+        } else {if (confirm("Sem movimentos restantes! Deseja jogar novamente?")){onClick()}}
     }
     moveRight() {
         if (this.moves > 0) {
@@ -45,6 +45,6 @@ class Player {
                 this.moves -= 1;
                 $('#movesLeft').text(this.moves);
             }
-        } else {if (confirm("Sem movimentos restantes! Deseja jogar novamente?")){window.location.reload()}}
+        } else {if (confirm("Sem movimentos restantes! Deseja jogar novamente?")){onClick()}}
     }
 }
