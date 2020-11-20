@@ -18,6 +18,8 @@ body {
   grid-template-rows: max-content max-content max-content max-content;
   height: max-content;
   width: max-content;
+  background-color: azure;
+  color: teal;
 }
 
 header {
@@ -26,6 +28,7 @@ header {
   font-weight: bold;
   padding: 10px;
   text-align: center;
+  
 }
 
 canvas {
