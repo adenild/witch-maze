@@ -31,8 +31,8 @@ class Maze {
             let cont = 0;
             let same_position = false
             while (cont < (reward.level*2)) {
-                let randomCol = Math.floor(Math.random() * this.cols);
-                let randomRow = Math.floor(Math.random() * this.rows);
+                let randomCol = Math.floor(MTGenerator.random() * this.cols);
+                let randomRow = Math.floor(MTGenerator.random() * this.rows);
                 // Checa se o jogador está na casa, para nao colocar uma recompensa lá
                 if (player.col !== randomCol || player.row !== randomRow) {
                     // Checa se existe recompença naquela posição, se houver, gera outra.

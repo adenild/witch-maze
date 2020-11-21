@@ -5,8 +5,8 @@ class Player {
         this.moves = moves;
     }
     reset() {
-        this.col = Math.floor(Math.random() * 10);
-        this.row = Math.floor(Math.random() * 10);
+        this.col = Math.floor(MTGenerator.random() * 10);
+        this.row = Math.floor(MTGenerator.random() * 10);
         this.moves = this.startMoves;
         $('#movesLeft').text(this.moves);
     }
