@@ -18,6 +18,8 @@ body {
   grid-template-rows: max-content max-content max-content max-content;
   height: max-content;
   width: max-content;
+  background-color: azure;
+  color: teal;
 }
 
 header {
@@ -26,6 +28,7 @@ header {
   font-weight: bold;
   padding: 10px;
   text-align: center;
+  
 }
 
 canvas {
@@ -96,14 +99,29 @@ footer > a:hover {
   background-color: lightgrey;
 }
 
-@media (width: 320px) {
+@media (max-width: 700px) {
+  :root{
+    font-size: 62.5%;
+  }
   body {
     grid-template-areas:
-      'header header'
-      'canvas canvas'
-      'settings controls'
-      'footer footer';
-    grid-template-columns: max-content max-content;
-    grid-template-rows: max-content max-content max-content max-content;
+      'header'
+      'settings'
+      'canvas'
+      'controls'
+      'footer';
+    grid-template-columns: max-content;
+    grid-template-rows: max-content max-content max-content max-content max-content;
+  }
+  canvas { 
+    width: 90vw;
+    align-self: center;
+  }
+  *{
+    margin: 0;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
   }
 }
