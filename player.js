@@ -17,9 +17,8 @@ class Player {
             this.moves -= 1;
             $('#movesLeft').text(this.moves);
             maze.redraw();
-        } else {
-            alert('Sem movimentos restantes! Deseja jogar novamente?')
-        }
+        } else {if (confirm('Obrigado por contribuir com este experimento científico!\n' +
+            'Deseja jogar de novo para ajudar mais com a coleta de dados?')){onClick()}}
     }
 
     up() {
