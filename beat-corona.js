@@ -15,42 +15,26 @@ function onClick() {
 }
 
 function onControlClick(event) {
-  switch (event.target.id) {
-    case 'left':
-      player.moveLeft()
-      break;
-    case 'right':
-      player.moveRight()
-      break;
-    case 'down':
-      player.moveDown()
-      break;
-    case 'up':
-      player.moveUp()
-      break;
-    default:
-      break;
-  }
-  maze.redraw();
+  player.moveHandler(event.target.id)
 }
 
 function onKeyDown(event) {
   switch (event.keyCode) {
     case 37:
     case 65:
-      player.moveLeft()
+      player.moveHandler("left")
       break;
     case 39:
     case 68:
-      player.moveRight()
+      player.moveHandler("right")
       break;
     case 40:
     case 83:
-      player.moveDown()
+      player.moveHandler("down")
       break;
     case 38:
     case 87:
-      player.moveUp()
+      player.moveHandler("up")
       break;
     default:
       break;

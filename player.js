@@ -11,44 +11,35 @@ class Player {
         $('#movesLeft').text(this.moves);
     }
 
-    moveUp() {
+    moveHandler(direction) {
         if (this.moves > 0) {
+            this[direction]();
+            this.moves -= 1;
+            $('#movesLeft').text(this.moves);
+            maze.redraw();
+        } else {if (confirm('Obrigado por contribuir com este experimento científico!\n' +
+            'Deseja jogar de novo para ajudar mais com a coleta de dados?')){onClick()}}
+    }
+
+    up() {
             if (!maze.cells[this.col][this.row].northWall && this.row !== 0) {
                 this.row -= 1;
-                this.moves -= 1;
-                $('#movesLeft').text(this.moves);
             }
-        } else {if (confirm('Obrigado por contribuir com este experimento científico!\n' +
-        'Deseja jogar de novo para ajudar mais com a coleta de dados?')){onClick()}}
-    }
-    moveDown() {
-        if (this.moves > 0) {
+        }
+
+    down() {
             if (!maze.cells[this.col][this.row].southWall && this.row !== maze.rows - 1) {
                 this.row += 1;
-                this.moves -= 1;
-                $('#movesLeft').text(this.moves);
             }
-        } else {if (confirm('Obrigado por contribuir com este experimento científico!\n' +
-        'Deseja jogar de novo para ajudar mais com a coleta de dados?')){onClick()}}
     }
-    moveLeft() {
-        if (this.moves > 0) {
+    left() {
             if (!maze.cells[this.col][this.row].westWall && this.col !== 0) {
                 this.col -= 1;
-                this.moves -= 1;
-                $('#movesLeft').text(this.moves);
             }
-        } else {if (confirm('Obrigado por contribuir com este experimento científico!\n' +
-        'Deseja jogar de novo para ajudar mais com a coleta de dados?')){onClick()}}
     }
-    moveRight() {
-        if (this.moves > 0) {
+    right() {
             if (!maze.cells[this.col][this.row].eastWall && this.col !== maze.cols - 1) {
                 this.col += 1;
-                this.moves -= 1;
-                $('#movesLeft').text(this.moves);
             }
-        } else {if (confirm('Obrigado por contribuir com este experimento científico!\n' +
-        'Deseja jogar de novo para ajudar mais com a coleta de dados?')){onClick()}}
     }
 }
