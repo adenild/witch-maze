@@ -37,7 +37,7 @@ class Maze {
                 if (player.col !== randomCol || player.row !== randomRow) {
                     // Checa se existe recompença naquela posição, se houver, gera outra.
                     reward.rewardsList.forEach(reward => {
-                        if (compara_rewards(reward,[randomCol, randomRow])) {
+                        if (compara_rewards(reward,[randomCol, randomRow, reward[2]])) {
                             console.log('Recompensa seria em cima de outra');
                             same_position = true
                         }
