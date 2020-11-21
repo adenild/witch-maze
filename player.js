@@ -18,7 +18,8 @@ class Player {
                 this.moves -= 1;
                 $('#movesLeft').text(this.moves);
             }
-        } else {if (confirm("Sem movimentos restantes! Deseja jogar novamente?")){onClick()}}
+        } else {if (confirm('Obrigado por contribuir com este experimento científico!\n' +
+        'Deseja jogar de novo para ajudar mais com a coleta de dados?')){onClick()}}
     }
     moveDown() {
         if (this.moves > 0) {
@@ -27,7 +28,8 @@ class Player {
                 this.moves -= 1;
                 $('#movesLeft').text(this.moves);
             }
-        } else {if (confirm("Sem movimentos restantes! Deseja jogar novamente?")){onClick()}}
+        } else {if (confirm('Obrigado por contribuir com este experimento científico!\n' +
+        'Deseja jogar de novo para ajudar mais com a coleta de dados?')){onClick()}}
     }
     moveLeft() {
         if (this.moves > 0) {
@@ -36,7 +38,8 @@ class Player {
                 this.moves -= 1;
                 $('#movesLeft').text(this.moves);
             }
-        } else {if (confirm("Sem movimentos restantes! Deseja jogar novamente?")){onClick()}}
+        } else {if (confirm('Obrigado por contribuir com este experimento científico!\n' +
+        'Deseja jogar de novo para ajudar mais com a coleta de dados?')){onClick()}}
     }
     moveRight() {
         if (this.moves > 0) {
@@ -45,6 +48,7 @@ class Player {
                 this.moves -= 1;
                 $('#movesLeft').text(this.moves);
             }
-        } else {if (confirm("Sem movimentos restantes! Deseja jogar novamente?")){onClick()}}
+        } else {if (confirm('Obrigado por contribuir com este experimento científico!\n' +
+        'Deseja jogar de novo para ajudar mais com a coleta de dados?')){onClick()}}
     }
 }
