@@ -65,9 +65,6 @@
 */
 
 var MersenneTwister = function(seed) {
-  if (seed == undefined) {
-    seed = new Date().getTime();
-  }
   /* Period parameters */
   this.N = 624;
   this.M = 397;

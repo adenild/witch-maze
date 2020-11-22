@@ -28,7 +28,7 @@ class Reward {
         }
     }
     generateRandomColor(){
-        let index = Math.floor(MTGenerator.random() * 6);
+        let index = Math.floor(randomModule.random() * 6);
         let colorList = ["#0000FF","#FFD700","#CAE1FF","#228B22","#FF0000","#FF00FF"];
         return colorList[index];
     }

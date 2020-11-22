@@ -47,7 +47,7 @@ function onKeyDown(event) {
 
 async function onLoad() {
 
-  seed = null;
+  seed = new Date().getTime();
   randomModule = new MersenneTwister(seed);
 
   canvas = document.getElementById('mainForm');
