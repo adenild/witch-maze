@@ -5,11 +5,11 @@ let mazeHeight;
 let mazeWidth;
 let player;
 let reward;
-let MTGenerator;
+let randomModule;
 let seed;
 
 function onClick() {
-  MTGenerator = new MersenneTwister(seed);
+  randomModule = new MersenneTwister(seed);
   player.reset();
   reward.reset();
   maze.cols = document.getElementById("cols").value;
@@ -48,7 +48,7 @@ function onKeyDown(event) {
 async function onLoad() {
 
   seed = null;
-  MTGenerator = new MersenneTwister(seed);
+  randomModule = new MersenneTwister(seed);
 
   canvas = document.getElementById('mainForm');
   ctx = canvas.getContext('2d');
