@@ -9,6 +9,7 @@ let randomModule;
 let seed;
 
 function onClick() {
+  seed = new Date().getTime();
   randomModule = new MersenneTwister(seed);
   player.reset();
   reward.reset();
@@ -53,7 +54,7 @@ async function onLoad() {
   canvas = document.getElementById('mainForm');
   ctx = canvas.getContext('2d');
 
-  player = new Player(200);
+  player = new Player(20);
   $('#movesLeft').text(player.moves)
 
   reward = new Reward();
