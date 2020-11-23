@@ -6,6 +6,50 @@ let mazeWidth;
 let player;
 let reward;
 
+var x_down = null;                                                        
+var y_down = null;
+
+
+function getTouches(event) {
+  return event.touches ||             // browser API
+         event.originalEvent.touches; // jQuery
+}                                                     
+
+function handleTouchStart(event) {
+  const firstTouch = getTouches(event)[0];                                      
+  x_down = firstTouch.clientX;                                      
+  y_down = firstTouch.clientY;                                      
+};                                                
+
+function handleTouchMove(event) {
+  if ( ! x_down || ! y_down ) {
+      return;
+  }
+
+  var x_up = event.touches[0].clientX;                                    
+  var y_up = event.touches[0].clientY;
+
+  var x_diff = x_down - x_up;
+  var y_diff = y_down - y_up;
+
+  if ( Math.abs( x_diff ) > Math.abs( y_diff ) ) {/*most significant*/
+      if ( x_diff > 0 ) {
+          player.moveHandler("left")
+      } else {
+          player.moveHandler("right")
+      }                       
+  } else {
+      if ( y_diff > 0 ) {
+          player.moveHandler("up")
+      } else { 
+          player.moveHandler("down")
+      }                                                                 
+  }
+  maze.redraw();
+  x_down = null;
+  y_down = null;                                             
+};
+
 function onClick() {
   player.reset();
   reward.reset();
@@ -62,47 +106,3 @@ async function onLoad() {
   document.getElementById('down').addEventListener('click', onControlClick);
   document.getElementById('left').addEventListener('click', onControlClick);
 }
-
-
-var xDown = null;                                                        
-var yDown = null;
-
-function getTouches(evt) {
-  return evt.touches ||             // browser API
-         evt.originalEvent.touches; // jQuery
-}                                                     
-
-function handleTouchStart(evt) {
-    const firstTouch = getTouches(evt)[0];                                      
-    xDown = firstTouch.clientX;                                      
-    yDown = firstTouch.clientY;                                      
-};                                                
-
-function handleTouchMove(evt) {
-    if ( ! xDown || ! yDown ) {
-        return;
-    }
-
-    var xUp = evt.touches[0].clientX;                                    
-    var yUp = evt.touches[0].clientY;
-
-    var xDiff = xDown - xUp;
-    var yDiff = yDown - yUp;
-
-    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
-        if ( xDiff > 0 ) {
-            player.moveHandler("left")
-        } else {
-            player.moveHandler("right")
-        }                       
-    } else {
-        if ( yDiff > 0 ) {
-            player.moveHandler("up")
-        } else { 
-            player.moveHandler("down")
-        }                                                                 
-    }
-    maze.redraw();
-    xDown = null;
-    yDown = null;                                             
-};
