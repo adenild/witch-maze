@@ -5,8 +5,8 @@ class Player {
         this.moves = moves;
     }
     reset() {
-        this.col = Math.floor(Math.random() * 10);
-        this.row = Math.floor(Math.random() * 10);
+        this.col = Math.floor(randomModule.random() * 10);
+        this.row = Math.floor(randomModule.random() * 10);
         this.moves = this.startMoves;
         $('#movesLeft').text(this.moves);
     }
@@ -14,7 +14,6 @@ class Player {
     moveHandler(direction) {
         if (this.moves > 0) {
             this[direction]();
-            this.moves -= 1;
             $('#movesLeft').text(this.moves);
             maze.redraw();
         } else {if (confirm('Obrigado por contribuir com este experimento científico!\n' +
@@ -24,22 +23,26 @@ class Player {
     up() {
             if (!maze.cells[this.col][this.row].northWall && this.row !== 0) {
                 this.row -= 1;
+                this.moves -= 1;
             }
         }
 
     down() {
             if (!maze.cells[this.col][this.row].southWall && this.row !== maze.rows - 1) {
                 this.row += 1;
+                this.moves -= 1;
             }
     }
     left() {
             if (!maze.cells[this.col][this.row].westWall && this.col !== 0) {
                 this.col -= 1;
+                this.moves -= 1;
             }
     }
     right() {
             if (!maze.cells[this.col][this.row].eastWall && this.col !== maze.cols - 1) {
                 this.col += 1;
+                this.moves -= 1;
             }
     }
 }
