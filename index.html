@@ -12,23 +12,23 @@
     <script src='reward.js'></script>
     <script src='beat-corona.js'></script>
     <script src='utils.js'></script>
-    <title>Beat Corona</title>
+    <title>Witch Maze</title>
   </head>
 
   <body onload='onLoad();'>
-    <header>Beat Corona</header>
+    <header>Witch Maze</header>
     <canvas id='mainForm'></canvas>
     <div class='settings'>
-      <table style="width: 100%; text-align: center">
+      <table style='width: 100%; text-align: center'>
         <tr>
-          <th>Movimentos</th>
-          <th>Nível</th>
-          <th>Pontuação</th>
+          <th>Moves</th>
+          <th>Level</th>
+          <th>Score</th>
         </tr>
         <tr>
-          <td><span id='movesLeft' class="moves-left">200</span></td>
-          <td><span id='level' class="level">1</span></td>
-          <td><span id='rewardsScore' class='rewards-score'>0</span></td>
+          <td><span id='movesLeft' class='round_text_box'>200</span></td>
+          <td><span id='level' class='round_text_box'>1</span></td>
+          <td><span id='rewardsScore' class='round_text_box'>0</span></td>
         </tr>
         <tr>
           <td>Cols:<input id='cols' type='text' size='5' value='10'></td>
@@ -37,13 +37,6 @@
         </tr>
       </table>
 
-    </div>
-
-    <div class='controls' style="margin: 0 auto;">
-      <div id='up' class='up'>&#8679;</div>
-      <div id='right' class='right'>&#8680;</div>
-      <div id='down' class='down'>&#8681;</div>
-      <div id='left' class='left'>&#8678;</div>
     </div>
   </body>
 </html>
