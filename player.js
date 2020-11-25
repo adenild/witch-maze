@@ -9,12 +9,17 @@ class Player {
     create_user_structure(){
         this.user_data = new Object();
         this.user_data['moves'] = new Array();
-        this.user_data['round'] = new Object();
-        this.user_data['seed'] = ''; //Normalizar
-        this.user_data['used_alg'] = '';
+        //this.user_data['round'] = new Object();
+        this.user_data['flevel'] = '1';
+        this.user_data['score'] = '100';
+        this.user_data['seed'] = '123123123'; //Normalizar
+        this.user_data['used_alg'] = 'batatao';
         this.user_data['version'] = 'v1.0'
         this.user_data['user_id'] = 'inserir_uma_hash_aqui_baseado_talvez_em_cookie'
         
+        //this.user_data['round'][''] = 
+        
+
     }
     // {
     //     id_move:1,
@@ -39,26 +44,29 @@ class Player {
             maze.redraw();
         } else {
             this.create_user_structure()
-            this.send_user_data()
+            this.postData('https://safe-basin-68612.herokuapp.com/data',this.user_data).then(data => {
+                console.log(data);
+            });
             if (confirm('Obrigado por contribuir com este experimento científico!\n' +
             'Deseja jogar de novo para ajudar mais com a coleta de dados?')){onClick()}}
     }
-
-    send_user_data(){
-        var formData = JSON.stringify($(this.user_data).serializeArray());
-    
-        $.ajax({
-            type: "POST",
-            url: "backend...",
-            data: formData,
-            success: function(){
-                console.log('Sucesso ao inserir no banco de dados!')
+//'https://safe-basin-68612.herokuapp.com/data'
+    async postData(url = '', data = {}){
+        const response = await fetch (url,{
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
             },
-            dataType: "json",
-            contentType : "application/json"
-          });
+            redirect: 'follow',
+            referrerPolicy: 'no-referrer',
+            body: JSON.stringify(data)
+        });
+        return response.json();
     }
-    
+
     up() {
             if (!maze.cells[this.col][this.row].northWall && this.row !== 0) {
                 this.row -= 1;
