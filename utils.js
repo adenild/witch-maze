@@ -36,3 +36,4 @@ function maze_generator(maze_data,maze){
     //maze.cells[col][row] = new MazeCell(col, row);
     console.log(maze)
 }
+
