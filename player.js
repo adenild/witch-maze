@@ -3,6 +3,7 @@ class Player {
         this.reset();
         this.startMoves = moves;
         this.moves = moves;
+        this.image_path = 'src/sprites/mio static.gif'
     }
     reset() {
         this.col = Math.floor(randomModule.random() * 10);

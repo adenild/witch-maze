@@ -4,7 +4,7 @@ class Reward {
         this.rewardsList = [];
         this.rewardsScore = 0;
         this.level = 1;
-    }
+    };
     reset() {
         this.newRewards = true;
         this.rewardsList = [];
@@ -12,7 +12,7 @@ class Reward {
         this.level = 1;
         $("#level").text(this.level);
         $("#rewardsScore").text(this.rewardsScore);
-    }
+    };
     countScore() {
         for (let r = 0; r < this.rewardsList.length; r++) {
             if (player.col === this.rewardsList[r][0] && player.row === this.rewardsList[r][1]) {
@@ -26,7 +26,7 @@ class Reward {
                 }
             }
         }
-    }
+    };
     generateRandomColor(){
         let colorList = [
             "/src/sprites/Items/PotionPurple.PNG",
@@ -36,6 +36,7 @@ class Reward {
 
         let index = Math.floor(randomModule.random() * colorList.length);
         return colorList[index];
-    }
+    };
 
+    
 }
