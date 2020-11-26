@@ -47,14 +47,17 @@ class Maze {
                     }
                     let aux_color = reward.generateRandomColor();
                     reward.rewardsList.push([randomCol, randomRow,aux_color]);
-                    this.drawObstacle((randomCol), (randomRow), aux_color);
+                    this.drawObstacle(
+                        randomCol, randomRow, aux_color);
                     cont += 1;
                 }
             }
             reward.newRewards = false;
         } else {
             for (let r = 0; r < reward.rewardsList.length; r++) {
-                this.drawObstacle((reward.rewardsList[r][0]), (reward.rewardsList[r][1]), reward.rewardsList[r][2])
+                this.drawObstacle(
+                    reward.rewardsList[r][0],
+                    reward.rewardsList[r][1], reward.rewardsList[r][2])
             }
         }
     }
@@ -93,16 +96,15 @@ class Maze {
         this.redraw();
     }
 
-    drawObstacle(x_cell_position, y_cell_position, colour) {
+    drawObstacle(x_cell_position, y_cell_position, image_path) {
         // Função responsável por desenhar obstáculos
         let x_dimension = this.cellSize - 5
         let y_dimension = this.cellSize - 5
         let x_position = x_cell_position * this.cellSize + 5
         let y_position = y_cell_position * this.cellSize + 5
-
-        ctx.fillStyle = colour;
-        ctx.fillRect(
-            x_position, y_position,
+        var img = new Image();
+        img.src = image_path;
+        ctx.drawImage(img, x_position, y_position,
             x_dimension, y_dimension);
     }
 

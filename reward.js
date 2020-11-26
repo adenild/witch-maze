@@ -28,8 +28,13 @@ class Reward {
         }
     }
     generateRandomColor(){
-        let index = Math.floor(randomModule.random() * 6);
-        let colorList = ["#0000FF","#FFD700","#CAE1FF","#228B22","#FF0000","#FF00FF"];
+        let colorList = [
+            "/src/sprites/Items/PotionPurple.PNG",
+            "/src/sprites/Items/PotionRed.PNG",
+            "/src/sprites/Items/PotionAquamarine.PNG",
+            "/src/sprites/Items/PotionEmerald.PNG"];
+
+        let index = Math.floor(randomModule.random() * colorList.length);
         return colorList[index];
     }
 
