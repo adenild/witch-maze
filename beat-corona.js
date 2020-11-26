@@ -108,8 +108,4 @@ async function onLoad() {
   document.addEventListener('touchstart', handleTouchStart, false);        
   document.addEventListener('touchmove', handleTouchMove, false);
   document.getElementById('generate').addEventListener('click', onClick);
-  document.getElementById('up').addEventListener('click', onControlClick);
-  document.getElementById('right').addEventListener('click', onControlClick);
-  document.getElementById('down').addEventListener('click', onControlClick);
-  document.getElementById('left').addEventListener('click', onControlClick);
 }
