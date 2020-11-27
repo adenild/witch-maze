@@ -7,15 +7,26 @@ class Player {
         
     }
     create_user_structure(){
+
+        //Variaveis internas de Round
         this.user_data = new Object();
-        this.user_data['moves'] = new Array();
-        //this.user_data['round'] = new Object();
-        this.user_data['flevel'] = '1';
-        this.user_data['score'] = '100';
-        this.user_data['seed'] = '123123123'; //Normalizar
-        this.user_data['used_alg'] = 'batatao';
-        this.user_data['version'] = 'v1.0'
-        this.user_data['user_id'] = 'inserir_uma_hash_aqui_baseado_talvez_em_cookie'
+        this.user_data['moves'] = new Array(); //Apagar depois que mudar no banco
+
+        this.user_data['round'] = new Object();
+        this.user_data['round']['moves'] = new Array();
+        this.user_data['round']['flevel'] = '1';
+        this.user_data['round']['score'] = new Array();
+        this.user_data['round']['direcao'] = new Array();
+    
+        
+        // Variaveis fixas
+        this.user_data['seed'] = ''; //Finalizado
+        this.user_data['used_alg'] = ''; //Finalizado
+        this.user_data['version'] = 'v0.3'; //Finalizado - ALTERAR TODA VEZ QUE FIZEREM UMA NOVA VERSÃO
+        this.user_data['user_id'] = ''// Finalizado
+
+        
+
         
         //this.user_data['round'][''] = 
         
@@ -43,7 +54,7 @@ class Player {
             $('#movesLeft').text(this.moves);
             maze.redraw();
         } else {
-            this.create_user_structure()
+            
             this.postData('https://safe-basin-68612.herokuapp.com/data',this.user_data).then(data => {
                 console.log(data);
             });
@@ -71,7 +82,8 @@ class Player {
             if (!maze.cells[this.col][this.row].northWall && this.row !== 0) {
                 this.row -= 1;
                 this.moves -= 1;
-                this.user_data['moves'].push('up');
+                this.user_data['round']['direcao'].push('up');
+                this.user_data['round']['moves'].push(this.startMoves-this.moves);
             }
     }
 
@@ -79,21 +91,24 @@ class Player {
             if (!maze.cells[this.col][this.row].southWall && this.row !== maze.rows - 1) {
                 this.row += 1;
                 this.moves -= 1;
-                this.user_data['moves'].push('down');
+                this.user_data['round']['direcao'].push('down');
+                this.user_data['round']['moves'].push(this.startMoves-this.moves);
             }
     }
     left() {
             if (!maze.cells[this.col][this.row].westWall && this.col !== 0) {
                 this.col -= 1;
                 this.moves -= 1;
-                this.user_data['moves'].push('left');
+                this.user_data['round']['direcao'].push('left');
+                this.user_data['round']['moves'].push(this.startMoves-this.moves);
             }
     }
     right() {
             if (!maze.cells[this.col][this.row].eastWall && this.col !== maze.cols - 1) {
                 this.col += 1;
                 this.moves -= 1;
-                this.user_data['moves'].push('right');
+                this.user_data['round']['direcao'].push('right');
+                this.user_data['round']['moves'].push(this.startMoves-this.moves);
             }
     }
 }

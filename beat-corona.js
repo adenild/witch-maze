@@ -10,8 +10,13 @@ let seed;
 
 function onClick() {
   seed = new Date().getTime();
-  randomModule = new MersenneTwister(seed);
+  //randomModule = new MersenneTwister(seed);
+  randomModule = random_check(seed,'Mersenne');
   player.reset();
+
+  player.user_data['seed'] = seed;
+  player.user_data['used_alg'] = 'Mersenne';
+  
   reward.reset();
   maze.cols = document.getElementById("cols").value;
   maze.rows = document.getElementById("rows").value;
@@ -46,15 +51,33 @@ function onKeyDown(event) {
   maze.redraw();
 }
 
+//Como vai ser definido se qual metodo vamos utilizar, e se for utilizado varios como sera a escolha.
+function random_check (seed,method) {
+  if (method == 'Mersenne') {
+    randomModule = new MersenneTwister(seed);
+  } else if (method == 'random_batata') {
+    randomModule = new random_batata(seed);
+  }
+  return randomModule
+}
+
 async function onLoad() {
 
   seed = new Date().getTime();
-  randomModule = new MersenneTwister(seed);
-
+  randomModule = random_check(seed,'Mersenne')
+  //randomModule = new MersenneTwister(seed);
+  if (document.cookie.indexOf('user_id') == -1) {
+    document.cookie = 'user_id='+String(seed);
+  };
+  
   canvas = document.getElementById('mainForm');
   ctx = canvas.getContext('2d');
 
   player = new Player(20);
+  player.user_data['seed'] = seed;
+  player.user_data['used_alg'] = 'Mersenne';
+  player.user_data['user_id'] = document.cookie;
+  
   $('#movesLeft').text(player.moves)
 
   reward = new Reward();
