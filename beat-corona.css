@@ -6,23 +6,6 @@
   font-family: 'Text Me One', sans-serif;
 }
 
-.body,
-.wrapper {
-  /* Break the flow */
-  position: absolute;
-  top: 0px;
-
-  /* Give them all the available space */
-  width: 100%;
-  height: 100%;
-
-  /* Remove the margins if any */
-  margin: 0;
-
-  /* Allow them to scroll down the document */
-  overflow-y: hidden;
-}
-
 body {
   display: grid;
   grid-gap: 10px;
