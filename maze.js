@@ -31,8 +31,8 @@ class Maze {
             let cont = 0;
             let same_position = false
             while (cont < (reward.level*2)) {
-                let randomCol = Math.floor(randomModule.random() * this.cols);
-                let randomRow = Math.floor(randomModule.random() * this.rows);
+                let randomCol = Math.floor(randomModule.random() * 10);
+                let randomRow = Math.floor(randomModule.random() * 10);
                 // Checa se o jogador está na casa, para nao colocar uma recompensa lá
                 if (player.col !== randomCol || player.row !== randomRow) {
                     // Checa se existe recompença naquela posição, se houver, gera outra.
@@ -46,9 +46,11 @@ class Maze {
                         continue;
                     }
                     let aux_color = reward.generateRandomColor();
+                    
                     reward.rewardsList.push([randomCol, randomRow,aux_color]);
                     this.drawCell(
                         randomCol, randomRow, aux_color);
+                    console.log(randomCol,randomRow);
                     cont += 1;
                 }
             }
@@ -102,10 +104,15 @@ class Maze {
         let y_dimension = this.cellSize - 5
         let x_position = x_cell_position * this.cellSize + 5
         let y_position = y_cell_position * this.cellSize + 5
+
         var img = new Image();
-        img.src = image_path;
-        ctx.drawImage(img, x_position, y_position,
-            x_dimension, y_dimension);
+        img.src = image_path;       
+        //Obriga o img a esperar a imagem ser totalmente carregada antes de desenhar
+        img.addEventListener('load', function() {
+            ctx.drawImage(img, x_position, y_position,
+                x_dimension, y_dimension);
+            }, false)
+        
     }
 
     redraw() {
@@ -113,9 +120,8 @@ class Maze {
         ctx.fillStyle = this.backgroundColor;
         ctx.fillRect(0, 0, mazeHeight, mazeWidth);
 
-        ctx.fillStyle = this.endColor;
-
         reward.countScore()
+
         this.spawnRewards()
 
         ctx.strokeStyle = this.mazeColor;

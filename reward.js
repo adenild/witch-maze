@@ -35,6 +35,7 @@ class Reward {
             "/src/sprites/Items/PotionEmerald.PNG"];
 
         let index = Math.floor(randomModule.random() * colorList.length);
+        
         return colorList[index];
     };
 
