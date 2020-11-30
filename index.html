@@ -16,27 +16,29 @@
   </head>
 
   <body onload='onLoad();'>
-    <header>Witch Maze</header>
-    <canvas id='mainForm'></canvas>
-    <div class='settings'>
-      <table style='width: 100%; text-align: center'>
-        <tr>
-          <th>Moves</th>
-          <th>Level</th>
-          <th>Score</th>
-        </tr>
-        <tr>
-          <td><span id='movesLeft' class='round_text_box'>200</span></td>
-          <td><span id='level' class='round_text_box'>1</span></td>
-          <td><span id='rewardsScore' class='round_text_box'>0</span></td>
-        </tr>
-        <tr>
-            <td>Cols:<input id='cols' type='text' size='5' value='10'></td>
-            <td>Rows:<input id='rows' type='text' size='5' value='10'></td>
-            <td><input id='generate' type='button' value='Generate'></td>
-        </tr>
-    </table>
-    </div>
+      <div class="wrapper">
+        <header>Witch Maze</header>
+        <canvas id='mainForm'></canvas>
+        <div class='settings'>
+          <table style='width: 100%; text-align: center'>
+            <tr>
+              <th>Moves</th>
+              <th>Level</th>
+              <th>Score</th>
+            </tr>
+            <tr>
+              <td><span id='movesLeft' class='round_text_box'>200</span></td>
+              <td><span id='level' class='round_text_box'>1</span></td>
+              <td><span id='rewardsScore' class='round_text_box'>0</span></td>
+            </tr>
+            <tr>
+                <td>Cols:<input id='cols' type='text' size='5' value='10'></td>
+                <td>Rows:<input id='rows' type='text' size='5' value='10'></td>
+                <td><input id='generate' type='button' value='Generate'></td>
+            </tr>
+        </table>
+        </div>
+     </div>
   </body>
 
 </html>
