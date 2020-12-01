@@ -27,6 +27,7 @@ class Player {
                 }else{
                     user_data['round']['eixo'].push('horizontal');
                 }
+                this.valid = false
             }
             console.log(user_data)
             $('#movesLeft').text(this.moves);
@@ -61,8 +62,6 @@ class Player {
                 this.row -= 1;
                 this.moves -= 1;
                 this.valid = true;
-            } else{
-                this.valid = false;
             }
     }
 
@@ -71,8 +70,6 @@ class Player {
                 this.row += 1;
                 this.moves -= 1;
                 this.valid = true;
-            } else{
-                this.valid = false;
             }
     }
     left() {
@@ -80,8 +77,6 @@ class Player {
                 this.col -= 1;
                 this.moves -= 1;
                 this.valid = true;
-            } else{
-                this.valid = false;
             }
     }
     right() {
@@ -89,8 +84,6 @@ class Player {
                 this.col += 1;
                 this.moves -= 1;
                 this.valid = true;
-            } else{
-                this.valid = false;
             }
     }
 }
