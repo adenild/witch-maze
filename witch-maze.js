@@ -8,8 +8,8 @@ let reward;
 let randomModule;
 let seed;
 
-var x_down = null;                                                        
-var y_down = null;
+let x_down = null;
+let y_down = null;
 
 
 function getTouches(event) {
@@ -21,7 +21,7 @@ function handleTouchStart(event) {
   const firstTouch = getTouches(event)[0];                                      
   x_down = firstTouch.clientX;                                      
   y_down = firstTouch.clientY;                                      
-};                                                
+}
 
 function handleTouchMove(event) {
   if ( ! x_down || ! y_down ) {
@@ -60,10 +60,6 @@ function onClick() {
   maze.cols = document.getElementById("cols").value;
   maze.rows = document.getElementById("rows").value;
   maze.generate();
-}
-
-function onControlClick(event) {
-  player.moveHandler(event.target.id)
 }
 
 function onKeyDown(event) {
@@ -108,8 +104,4 @@ async function onLoad() {
   document.addEventListener('touchstart', handleTouchStart, false);        
   document.addEventListener('touchmove', handleTouchMove, false);
   document.getElementById('generate').addEventListener('click', onClick);
-  document.getElementById('up').addEventListener('click', onControlClick);
-  document.getElementById('right').addEventListener('click', onControlClick);
-  document.getElementById('down').addEventListener('click', onControlClick);
-  document.getElementById('left').addEventListener('click', onControlClick);
 }
