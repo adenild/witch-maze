@@ -3,6 +3,7 @@ class Player {
         this.reset();
         this.startMoves = moves;
         this.moves = moves;
+        this.image_path = 'src/sprites/mio static.gif'
     }
     reset() {
         this.col = Math.floor(randomModule.random() * 10);
@@ -21,28 +22,28 @@ class Player {
     }
 
     up() {
-            if (!maze.cells[this.col][this.row].northWall && this.row !== 0) {
-                this.row -= 1;
-                this.moves -= 1;
-            }
+        if (!maze.cells[this.col][this.row].northWall && this.row !== 0) {
+            this.row -= 1;
+            this.moves -= 1;
         }
+    }
 
     down() {
-            if (!maze.cells[this.col][this.row].southWall && this.row !== maze.rows - 1) {
-                this.row += 1;
-                this.moves -= 1;
-            }
+        if (!maze.cells[this.col][this.row].southWall && this.row !== maze.rows - 1) {
+            this.row += 1;
+            this.moves -= 1;
+        }
     }
     left() {
-            if (!maze.cells[this.col][this.row].westWall && this.col !== 0) {
-                this.col -= 1;
-                this.moves -= 1;
-            }
+        if (!maze.cells[this.col][this.row].westWall && this.col !== 0) {
+            this.col -= 1;
+            this.moves -= 1;
+        }
     }
     right() {
-            if (!maze.cells[this.col][this.row].eastWall && this.col !== maze.cols - 1) {
-                this.col += 1;
-                this.moves -= 1;
-            }
+        if (!maze.cells[this.col][this.row].eastWall && this.col !== maze.cols - 1) {
+            this.col += 1;
+            this.moves -= 1;
+        }
     }
 }

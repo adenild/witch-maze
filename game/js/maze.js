@@ -47,16 +47,18 @@ class Maze {
                     }
                     let aux_color = reward.generateRandomColor();
                     reward.rewardsList.push([randomCol, randomRow,aux_color]);
-                    ctx.fillStyle = aux_color;
-                    ctx.fillRect((randomCol)*this.cellSize+5, (randomRow)*this.cellSize+5, this.cellSize-5, this.cellSize-5);
+                    this.drawCell(
+                        randomCol, randomRow, aux_color);
+                    console.log(randomCol,randomRow);
                     cont += 1;
                 }
             }
             reward.newRewards = false;
         } else {
             for (let r = 0; r < reward.rewardsList.length; r++) {
-                ctx.fillStyle = reward.rewardsList[r][2];
-                ctx.fillRect((reward.rewardsList[r][0])*this.cellSize+5, (reward.rewardsList[r][1])*this.cellSize+5, this.cellSize-5, this.cellSize-5);
+                this.drawCell(
+                    reward.rewardsList[r][0],
+                    reward.rewardsList[r][1], reward.rewardsList[r][2])
             }
         }
     }
@@ -95,13 +97,31 @@ class Maze {
         this.redraw();
     }
 
+
+    drawCell(x_cell_position, y_cell_position, image_path) {
+        // Função responsável por desenhar obstáculos
+        let x_dimension = this.cellSize - 5
+        let y_dimension = this.cellSize - 5
+        let x_position = x_cell_position * this.cellSize + 5
+        let y_position = y_cell_position * this.cellSize + 5
+
+        var img = new Image();
+        img.src = image_path;
+        //Obriga o img a esperar a imagem ser totalmente carregada antes de desenhar
+        img.addEventListener('load', function() {
+            ctx.drawImage(img, x_position, y_position,
+                x_dimension, y_dimension);
+        }, false)
+
+    }
+
     redraw() {
+        // Função responsável por desenhar no ecrã
         ctx.fillStyle = this.backgroundColor;
         ctx.fillRect(0, 0, mazeHeight, mazeWidth);
 
-        ctx.fillStyle = this.endColor;
-
         reward.countScore()
+
         this.spawnRewards()
 
         ctx.strokeStyle = this.mazeColor;
@@ -136,7 +156,6 @@ class Maze {
             }
         }
 
-        ctx.fillStyle = this.playerColor;
-        ctx.fillRect((player.col * this.cellSize) + 5, (player.row * this.cellSize) + 5, this.cellSize - 5, this.cellSize - 5);
+        this.drawCell(player.col, player.row, player.image_path);
     }
 }
