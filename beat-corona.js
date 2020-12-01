@@ -8,19 +8,40 @@ let reward;
 let randomModule;
 let seed;
 
+function create_user_structure(){
+
+    //Variaveis internas de Round
+    user_data = new Object();
+    user_data['moves'] = new Array(); //Apagar depois que mudar no banco
+
+    user_data['round'] = new Object();
+    user_data['round']['moves'] = new Array();
+    user_data['round']['level'] = new Array();
+    user_data['round']['score'] = new Array();
+    user_data['round']['direcao'] = new Array();
+    user_data['round']['eixo'] = new Array();
+
+    // Variaveis fixas
+    user_data['version'] = 'v1'; //Finalizado - ALTERAR TODA VEZ QUE FIZEREM UMA NOVA VERSÃO
+    user_data['seed'] = seed; //Finalizado
+    user_data['used_alg'] = method; //Trocar para variável
+    user_data['user_id'] = document.cookie; // Finalizado
+    user_data['game_type'] = 'player'; // Finalizado
+
+}
+
 function onClick() {
   seed = new Date().getTime();
   //randomModule = new MersenneTwister(seed);
-  randomModule = random_check(seed,'Mersenne');
+  randomModule = random_check(seed,method);
   player.reset();
-
-  player.user_data['seed'] = seed;
-  player.user_data['used_alg'] = 'Mersenne';
   
   reward.reset();
   maze.cols = document.getElementById("cols").value;
   maze.rows = document.getElementById("rows").value;
   maze.generate();
+
+  create_user_structure();
 }
 
 function onControlClick(event) {
@@ -48,7 +69,6 @@ function onKeyDown(event) {
     default:
       break;
   }
-  maze.redraw();
 }
 
 //Como vai ser definido se qual metodo vamos utilizar, e se for utilizado varios como sera a escolha.
@@ -64,7 +84,8 @@ function random_check (seed,method) {
 async function onLoad() {
 
   seed = new Date().getTime();
-  randomModule = random_check(seed,'Mersenne')
+  method = 'Mersenne'
+  randomModule = random_check(seed,method)
   //randomModule = new MersenneTwister(seed);
   if (document.cookie.indexOf('user_id') == -1) {
     document.cookie = 'user_id='+String(seed);
@@ -73,11 +94,9 @@ async function onLoad() {
   canvas = document.getElementById('mainForm');
   ctx = canvas.getContext('2d');
 
-  player = new Player(20);
-  player.user_data['seed'] = seed;
-  player.user_data['used_alg'] = 'Mersenne';
-  player.user_data['user_id'] = document.cookie;
-  
+  player = new Player(200);
+  create_user_structure();
+
   $('#movesLeft').text(player.moves)
 
   reward = new Reward();
