@@ -93,6 +93,7 @@ class Maze {
         }
 
         this.redraw();
+        player.initialTime = new Date().getTime();
     }
 
     redraw() {

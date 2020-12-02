@@ -4,6 +4,7 @@ class Player {
         this.startMoves = moves;
         this.moves = moves;
         this.valid = false;
+        this.initialTime = null;
     }
 
     reset() {
@@ -17,16 +18,51 @@ class Player {
         if (this.moves > 0) {
             this[direction]();
             if (this.valid){
+
                 maze.redraw();
+
+                //Variáveis psicológicas
+
+                let dateAux = new Date().getTime();
+                user_data['round']['timeStep'].push(dateAux - this.initialTime);
+                this.initialTime = dateAux;
+                //user_data['round']['swipeDistance'].push();
+                //user_data['round']['timeBetweenClicks'].push();
+                //user_data['round']['swipeTime'].push();
+
+                //Outras variáveis
                 user_data['round']['moves'].push(this.startMoves-this.moves);
                 user_data['round']['level'].push(reward.level);
                 user_data['round']['score'].push(reward.rewardsScore);
-                user_data['round']['direcao'].push(direction);
+                user_data['round']['direction'].push(direction);
+
                 if (direction == ('up') || direction == 'down'){
-                    user_data['round']['eixo'].push('vertical');
+                    user_data['round']['axis'].push('vertical');
                 }else{
-                    user_data['round']['eixo'].push('horizontal');
+                    user_data['round']['axis'].push('horizontal');
                 }
+
+                //Variáveis físicas
+
+                let rewardColorList = new Array();
+                let rewardSize = new Array();
+                let rewardLocation = new Array();
+                let rewardType = new Array();
+
+                for (let r = 0; r < reward.rewardsList.length; r++) {
+
+                    //rewardSize.push(reward.rewardsList[r][preencher])
+                    rewardLocation.push([reward.rewardsList[r][0],reward.rewardsList[r][1]]);
+                    rewardColorList.push([reward.rewardsList[r][2]]);
+                    //rewardType.push(reward.rewardsList[r][preencher])
+
+                }
+
+                user_data['round']['rewardColor'].push(rewardColorList);
+                //user_data['round']['rewardSize'].push()
+                user_data['round']['rewardLocation'].push(rewardLocation);
+                //user_data['round']['rewardType'].push();
+
                 this.valid = false
             }
             console.log(user_data)

@@ -14,12 +14,25 @@ function create_user_structure(){
     user_data = new Object();
     user_data['moves'] = new Array(); //Apagar depois que mudar no banco
 
+    //Outras variáveis
     user_data['round'] = new Object();
     user_data['round']['moves'] = new Array();
     user_data['round']['level'] = new Array();
     user_data['round']['score'] = new Array();
-    user_data['round']['direcao'] = new Array();
-    user_data['round']['eixo'] = new Array();
+    user_data['round']['direction'] = new Array();
+    user_data['round']['axis'] = new Array();
+
+    //Variáveis físicas
+    user_data['round']['rewardColor'] = new Array();
+    user_data['round']['rewardSize'] = new Array();
+    user_data['round']['rewardLocation'] = new Array();
+    user_data['round']['rewardType'] = new Array();
+
+    //Variáveis psicológicas
+    user_data['round']['timeBetweenClicks'] = new Array();
+    user_data['round']['swipeDistance'] = new Array();
+    user_data['round']['timeStep'] = new Array();
+    user_data['round']['swipeTime'] = new Array();
 
     // Variaveis fixas
     user_data['version'] = 'v1'; //Finalizado - ALTERAR TODA VEZ QUE FIZEREM UMA NOVA VERSÃO
@@ -27,6 +40,8 @@ function create_user_structure(){
     user_data['used_alg'] = method; //Trocar para variável
     user_data['user_id'] = document.cookie; // Finalizado
     user_data['game_type'] = 'player'; // Finalizado
+
+
 
 }
 
