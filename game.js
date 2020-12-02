@@ -100,7 +100,7 @@ async function onLoad() {
   player.loadPlayerImage();
   $('#movesLeft').text(player.moves)
   reward = new Reward();
-  reward.loadImages();
+  await reward.loadImages();
   maze = new Maze(10, 10, 50, await obtem_csv());
   document.addEventListener('keydown', onKeyDown);
   document.addEventListener('touchstart', handleTouchStart, false);        
