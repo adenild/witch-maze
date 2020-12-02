@@ -97,7 +97,7 @@ async function onLoad() {
   canvas = document.getElementById('mainForm');
   ctx = canvas.getContext('2d');
   player = new Player(200);
-  player.loadPlayerImage();
+  await player.loadPlayerImage();
   $('#movesLeft').text(player.moves)
   reward = new Reward();
   await reward.loadImages();
