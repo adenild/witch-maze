@@ -14,44 +14,42 @@ let y_down = null;
 
 function getTouches(event) {
   return event.touches ||             // browser API
-      event.originalEvent.touches; // jQuery
-}
+         event.originalEvent.touches; // jQuery
+}                                                     
 
 function handleTouchStart(event) {
-  const firstTouch = getTouches(event)[0];
-  x_down = firstTouch.clientX;
-  y_down = firstTouch.clientY;
+  const firstTouch = getTouches(event)[0];                                      
+  x_down = firstTouch.clientX;                                      
+  y_down = firstTouch.clientY;                                      
 }
 
 function handleTouchMove(event) {
   if ( ! x_down || ! y_down ) {
-    return;
+      return;
   }
 
-  var x_up = event.touches[0].clientX;
+  var x_up = event.touches[0].clientX;                                    
   var y_up = event.touches[0].clientY;
 
   var x_diff = x_down - x_up;
   var y_diff = y_down - y_up;
 
   if ( Math.abs( x_diff ) > Math.abs( y_diff ) ) {/*most significant*/
-
-    if ( x_diff > 0 ) {
-      player.moveHandler("left")
-    } else {
-      player.moveHandler("right")
-    }
+      if ( x_diff > 0 ) {
+          player.moveHandler("left")
+      } else {
+          player.moveHandler("right")
+      }                       
   } else {
-    if ( y_diff > 0 ) {
-      player.moveHandler("up")
-    } else {
-      player.moveHandler("down")
-    }
+      if ( y_diff > 0 ) {
+          player.moveHandler("up")
+      } else { 
+          player.moveHandler("down")
+      }                                                                 
   }
   maze.redraw();
   x_down = null;
-  y_down = null;
-
+  y_down = null;                                             
 };
 
 function onClick() {
@@ -103,7 +101,7 @@ async function onLoad() {
   maze = new Maze(10, 10, 50, await obtem_csv());
 
   document.addEventListener('keydown', onKeyDown);
-  document.addEventListener('touchstart', handleTouchStart, false);
+  document.addEventListener('touchstart', handleTouchStart, false);        
   document.addEventListener('touchmove', handleTouchMove, false);
   document.getElementById('generate').addEventListener('click', onClick);
 }
