@@ -4,6 +4,7 @@ class Reward {
         this.rewardsList = [];
         this.rewardsScore = 0;
         this.level = 1;
+        this.imageList = [];
     };
     reset() {
         this.newRewards = true;
@@ -27,16 +28,41 @@ class Reward {
             }
         }
     };
-    generateRandomColor(){
-        let colorList = [
-            "/src/sprites/Items/PotionPurple.PNG",
-            "/src/sprites/Items/PotionRed.PNG",
-            "/src/sprites/Items/PotionAquamarine.PNG",
-            "/src/sprites/Items/PotionEmerald.PNG"];
-
-        let index = Math.floor(randomModule.random() * colorList.length);
+    loadImages(){
+        let pathList = [
+            "/src/sprites/Icons/icons/16x16/potion_03a.png",
+            "/src/sprites/Icons/icons/16x16/potion_03b.png",
+            "/src/sprites/Icons/icons/16x16/potion_03c.png",
+            "/src/sprites/Icons/icons/16x16/potion_03d.png",
+            "/src/sprites/Icons/icons/16x16/potion_03e.png",
+            "/src/sprites/Icons/icons/16x16/book_01b.png",
+            "/src/sprites/Icons/icons/16x16/book_02b.png",
+            "/src/sprites/Icons/icons/16x16/book_03b.png",
+            "/src/sprites/Icons/icons/16x16/book_04b.png",
+            "/src/sprites/Icons/icons/16x16/book_05b.png",
+            "/src/sprites/Icons/icons/16x16/candy_01a.png",
+            "/src/sprites/Icons/icons/16x16/candy_01b.png",
+            "/src/sprites/Icons/icons/16x16/candy_01c.png",
+            "/src/sprites/Icons/icons/16x16/candy_01d.png",
+            "/src/sprites/Icons/icons/16x16/candy_01e.png",
+            "/src/sprites/Icons/icons/16x16/shard_01a.png",
+            "/src/sprites/Icons/icons/16x16/shard_01b.png",
+            "/src/sprites/Icons/icons/16x16/shard_01c.png",
+            "/src/sprites/Icons/icons/16x16/shard_01d.png",
+            "/src/sprites/Icons/icons/16x16/shard_01e.png"
+        ];
+        for(let i = 0; i<pathList.length;i++){
+            var img = new Image();
+            img.src = pathList[i];
+            this.imageList.push(img);
+        }
         
-        return colorList[index];
+    }
+    generateRandomColor(){
+        
+        let index = Math.floor(randomModule.random() * this.imageList.length);
+        
+        return this.imageList[index];
     };
 
     

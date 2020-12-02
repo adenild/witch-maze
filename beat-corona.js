@@ -94,18 +94,22 @@ async function onLoad() {
 
   seed = new Date().getTime();
   randomModule = new MersenneTwister(seed);
-
   canvas = document.getElementById('mainForm');
   ctx = canvas.getContext('2d');
-
+  
   player = new Player(200);
   $('#movesLeft').text(player.moves)
-
+  
   reward = new Reward();
+
+  reward.loadImages();
+
+  player.loadPlayerImage();
+
   maze = new Maze(10, 10, 50, await obtem_csv());
 
   document.addEventListener('keydown', onKeyDown);
   document.addEventListener('touchstart', handleTouchStart, false);        
   document.addEventListener('touchmove', handleTouchMove, false);
-  document.getElementById('generate').addEventListener('click', onClick);
+
 }

@@ -9,6 +9,9 @@
 body {
   display: grid;
   grid-gap: 10px;
+  align-self: center;
+  margin: auto;
+  max-width: 960px;
   grid-template-areas:
     'header'
     'settings'
@@ -17,8 +20,8 @@ body {
   grid-template-rows: max-content max-content max-content;
   height: max-content;
   width: max-content;
-  background-color: azure;
-  color: teal;
+  background-color: #141414;
+  color: #e88a1a;
 }
 
 header {
@@ -32,6 +35,9 @@ header {
 
 canvas {
   grid-area: canvas;
+ 
+
+
 }
 
 label {

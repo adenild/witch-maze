@@ -18,7 +18,7 @@ class Maze {
         this.cells = [];
         this.map = $.csv.toObjects(map);
 
-        this.backgroundColor = "#ffffff";
+        this.backgroundColor = "#d9d9d9";
         this.endColor = "#88FF88";
         this.mazeColor = "#000000";
         this.playerColor = "#880088";
@@ -45,12 +45,13 @@ class Maze {
                         same_position = false
                         continue;
                     }
-                    let aux_color = reward.generateRandomColor();
+                    var aux_color =  new Image();
+                    aux_color = reward.generateRandomColor();
                     
                     reward.rewardsList.push([randomCol, randomRow,aux_color]);
                     this.drawCell(
                         randomCol, randomRow, aux_color);
-                    console.log(randomCol,randomRow);
+                   
                     cont += 1;
                 }
             }
@@ -100,18 +101,28 @@ class Maze {
 
     drawCell(x_cell_position, y_cell_position, image_path) {
         // Função responsável por desenhar obstáculos
+        let x_dimension = this.cellSize - 18
+        let y_dimension = this.cellSize - 18
+        let x_position = x_cell_position * this.cellSize + 5
+        let y_position = y_cell_position * this.cellSize + 18
+
+        
+        ctx.drawImage(image_path, x_position, y_position,
+            x_dimension, y_dimension);
+        
+        
+    }
+    drawCellPlayer(x_cell_position, y_cell_position, image_path) {
+        // Função responsável por desenhar obstáculos
         let x_dimension = this.cellSize - 5
         let y_dimension = this.cellSize - 5
         let x_position = x_cell_position * this.cellSize + 5
         let y_position = y_cell_position * this.cellSize + 5
 
-        var img = new Image();
-        img.src = image_path;       
-        //Obriga o img a esperar a imagem ser totalmente carregada antes de desenhar
-        img.addEventListener('load', function() {
-            ctx.drawImage(img, x_position, y_position,
-                x_dimension, y_dimension);
-            }, false)
+        
+        ctx.drawImage(image_path, x_position, y_position,
+            x_dimension, y_dimension);
+        
         
     }
 
@@ -155,8 +166,8 @@ class Maze {
                 }
             }
         }
-
-        this.drawCell(player.col, player.row, player.image_path);
+        
+        this.drawCellPlayer(player.col, player.row, player.image[0]);
     }
 
 }
