@@ -5,10 +5,10 @@ class Player {
         this.moves = moves;
         this.image=[];
     }
-    loadPlayerImage(){
-        var img = new Image();
-        img.src = 'src/sprites/mio static.gif';
-        this.image.push(img);
+    async loadPlayerImage(){
+        let img = new Image();
+        img.src = 'assets/src/sprites/mio_static.gif';
+        await this.image.push(img);
     }
     reset() {
         this.col = Math.floor(randomModule.random() * 10);

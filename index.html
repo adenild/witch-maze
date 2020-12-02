@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-    <link rel='stylesheet' href='beat-corona.css'>
+    <link rel='stylesheet' href='game/css/game.css'>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.9/jquery.csv.js"></script>
-    <script src='MersenneTwisterGenerator.js'></script>
-    <script src='player.js'></script>
-    <script src='maze.js'></script>
-    <script src='reward.js'></script>
-    <script src='beat-corona.js'></script>
-    <script src='utils.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/mersenne-twister@1/src/mersenne-twister.min.js"></script>
+    <script src='game/js/player.js'></script>
+    <script src='game/js/maze.js'></script>
+    <script src='game.js'></script>
+    <script src='game/js/reward.js'></script>
+    <script src='support/utils.js'></script>
     <title>Witch Maze</title>
   </head>
 
@@ -26,9 +26,9 @@
           <th>Score</th>
         </tr>
         <tr>
-          <td><span id='movesLeft' class='round_text_box'>200</span></td>
-          <td><span id='level' class='round_text_box'>1</span></td>
-          <td><span id='rewardsScore' class='round_text_box'>0</span></td>
+          <td><span class='round_text_box'><strong id='movesLeft'>200</strong></span></td>
+          <td><span class='round_text_box'><strong id='level'>1</strong></span></td>
+          <td><span class='round_text_box'><strong id='rewardsScore'>0</strong></span></td>
         </tr>
 
     </table>

@@ -45,8 +45,8 @@ class Maze {
                         same_position = false
                         continue;
                     }
-                    var aux_color =  new Image();
-                    aux_color = reward.generateRandomColor();
+                    let aux_color =  new Image();
+                    aux_color = reward.generateRandomItem();
                     
                     reward.rewardsList.push([randomCol, randomRow,aux_color]);
                     this.drawCell(
@@ -99,7 +99,7 @@ class Maze {
         this.redraw();
     }
 
-    drawCell(x_cell_position, y_cell_position, image_path) {
+    async drawCell(x_cell_position, y_cell_position, image_path) {
         // Função responsável por desenhar obstáculos
         let x_dimension = this.cellSize - 18
         let y_dimension = this.cellSize - 18
@@ -119,11 +119,8 @@ class Maze {
         let x_position = x_cell_position * this.cellSize + 5
         let y_position = y_cell_position * this.cellSize + 5
 
-        
         ctx.drawImage(image_path, x_position, y_position,
             x_dimension, y_dimension);
-        
-        
     }
 
     redraw() {

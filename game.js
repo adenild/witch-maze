@@ -8,8 +8,8 @@ let reward;
 let randomModule;
 let seed;
 
-var x_down = null;                                                        
-var y_down = null;
+let x_down = null;
+let y_down = null;
 
 
 function getTouches(event) {
@@ -28,11 +28,11 @@ function handleTouchMove(event) {
       return;
   }
 
-  var x_up = event.touches[0].clientX;                                    
-  var y_up = event.touches[0].clientY;
+  let x_up = event.touches[0].clientX;
+  let y_up = event.touches[0].clientY;
 
-  var x_diff = x_down - x_up;
-  var y_diff = y_down - y_up;
+  let x_diff = x_down - x_up;
+  let y_diff = y_down - y_up;
 
   if ( Math.abs( x_diff ) > Math.abs( y_diff ) ) {/*most significant*/
       if ( x_diff > 0 ) {
@@ -96,18 +96,12 @@ async function onLoad() {
   randomModule = new MersenneTwister(seed);
   canvas = document.getElementById('mainForm');
   ctx = canvas.getContext('2d');
-  
   player = new Player(200);
-  $('#movesLeft').text(player.moves)
-  
-  reward = new Reward();
-
-  reward.loadImages();
-
   player.loadPlayerImage();
-
+  $('#movesLeft').text(player.moves)
+  reward = new Reward();
+  reward.loadImages();
   maze = new Maze(10, 10, 50, await obtem_csv());
-
   document.addEventListener('keydown', onKeyDown);
   document.addEventListener('touchstart', handleTouchStart, false);        
   document.addEventListener('touchmove', handleTouchMove, false);
