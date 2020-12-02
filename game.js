@@ -47,7 +47,6 @@ function handleTouchMove(event) {
           player.moveHandler("down")
       }                                                                 
   }
-  maze.redraw();
   x_down = null;
   y_down = null;                                             
 };
@@ -87,7 +86,6 @@ function onKeyDown(event) {
     default:
       break;
   }
-  maze.redraw();
 }
 
 async function onLoad() {

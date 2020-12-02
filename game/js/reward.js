@@ -25,6 +25,7 @@ class Reward {
                     this.level += 1;
                     $("#level").text(this.level);
                 }
+                break;
             }
         }
     };
