@@ -62,10 +62,6 @@ function onClick() {
   maze.generate();
 }
 
-function onControlClick(event) {
-  player.moveHandler(event.target.id)
-}
-
 function onKeyDown(event) {
   switch (event.keyCode) {
     case 37:
@@ -105,5 +101,4 @@ async function onLoad() {
   document.addEventListener('keydown', onKeyDown);
   document.addEventListener('touchstart', handleTouchStart, false);        
   document.addEventListener('touchmove', handleTouchMove, false);
-
 }
