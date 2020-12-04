@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Text+Me+One&display=swap');
 
 * {
-  /*  border: solid black 1px;*/
+/*  border: solid black 1px;*/
+
   box-sizing: border-box;
   font-family: 'Text Me One', sans-serif;
 }
@@ -30,14 +31,10 @@ header {
   font-weight: bold;
   padding: 10px;
   text-align: center;
-
 }
 
 canvas {
   grid-area: canvas;
-
-
-
 }
 
 label {

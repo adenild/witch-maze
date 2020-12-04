@@ -6,6 +6,7 @@ class Reward {
         this.level = 1;
         this.imageList = [];
     }
+
     reset() {
         this.newRewards = true;
         this.rewardsList = [];

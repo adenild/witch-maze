@@ -13,7 +13,6 @@ class Player {
         this.moves = this.startMoves;
         $('#movesLeft').text(this.moves);
     }
-
     async loadPlayerImage() {
         let img = new Image();
         img.src = 'assets/src/sprites/mio_static.gif';
