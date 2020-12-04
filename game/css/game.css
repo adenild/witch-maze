@@ -88,8 +88,11 @@ footer > a:hover {
 }
 
 .round_text_box {
-  border-radius: 10px;
-  border: 2px solid #73AD21;
-  padding: 2px;
-  background: #f9fff7
+  border-radius: 10px; 
+  border: 2px solid #73AD21; 
+  padding: 2px; 
+  background: #ffffff;
+  text-align: center;
+  font-weight: bold;
+  color: teal;
 }
