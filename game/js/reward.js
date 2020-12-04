@@ -5,7 +5,8 @@ class Reward {
         this.rewardsScore = 0;
         this.level = 1;
         this.imageList = [];
-    };
+    }
+
     reset() {
         this.newRewards = true;
         this.rewardsList = [];
@@ -13,7 +14,7 @@ class Reward {
         this.level = 1;
         $("#level").text(this.level);
         $("#rewardsScore").text(this.rewardsScore);
-    };
+    }
     countScore() {
         for (let r = 0; r < this.rewardsList.length; r++) {
             if (player.col === this.rewardsList[r][0] && player.row === this.rewardsList[r][1]) {
@@ -27,7 +28,7 @@ class Reward {
                 }
             }
         }
-    };
+    }
     async loadImages(){
         let pathList = [
             "assets/src/sprites/Icons/icons/16x16/potion_03a.png",
@@ -56,12 +57,9 @@ class Reward {
             img.src = pathList[i];
             this.imageList.push(img);
         }
-        
     }
     generateRandomItem(){
         let index = Math.floor(randomModule.random() * this.imageList.length);
         return this.imageList[index];
     };
-
-    
 }

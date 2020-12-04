@@ -47,11 +47,9 @@ class Maze {
                     }
                     let aux_color =  new Image();
                     aux_color = reward.generateRandomItem();
-                    
                     reward.rewardsList.push([randomCol, randomRow,aux_color]);
                     this.drawCell(
                         randomCol, randomRow, aux_color);
-                   
                     cont += 1;
                 }
             }
@@ -97,6 +95,7 @@ class Maze {
         }
 
         this.redraw();
+        player.initialTime = new Date().getTime();
     }
 
     async drawCell(x_cell_position, y_cell_position, image_path) {
@@ -105,12 +104,8 @@ class Maze {
         let y_dimension = this.cellSize - 18
         let x_position = x_cell_position * this.cellSize + 5
         let y_position = y_cell_position * this.cellSize + 18
-
-        
         ctx.drawImage(image_path, x_position, y_position,
             x_dimension, y_dimension);
-        
-        
     }
     drawCellPlayer(x_cell_position, y_cell_position, image_path) {
         // Função responsável por desenhar obstáculos
@@ -163,8 +158,6 @@ class Maze {
                 }
             }
         }
-        
         this.drawCellPlayer(player.col, player.row, player.image[0]);
     }
-
 }

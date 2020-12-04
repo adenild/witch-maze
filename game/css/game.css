@@ -2,6 +2,7 @@
 
 * {
 /*  border: solid black 1px;*/
+
   box-sizing: border-box;
   font-family: 'Text Me One', sans-serif;
 }
@@ -30,14 +31,10 @@ header {
   font-weight: bold;
   padding: 10px;
   text-align: center;
-  
 }
 
 canvas {
   grid-area: canvas;
- 
-
-
 }
 
 label {
@@ -79,7 +76,7 @@ footer > a:hover {
     grid-template-columns: max-content;
     grid-template-rows: max-content max-content max-content max-content;
   }
-  canvas { 
+  canvas {
     width: 90vw;
     align-self: center;
   }
@@ -91,8 +88,8 @@ footer > a:hover {
 }
 
 .round_text_box {
-  border-radius: 10px; 
-  border: 2px solid #73AD21; 
-  padding: 2px; 
+  border-radius: 10px;
+  border: 2px solid #73AD21;
+  padding: 2px;
   background: #f9fff7
 }
