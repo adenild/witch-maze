@@ -64,7 +64,6 @@ function handleTouchMove(event) {
             player.moveHandler("down")
         }
     }
-    maze.redraw();
     x_down = null;
     y_down = null;
 };
