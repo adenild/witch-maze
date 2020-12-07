@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Text+Me+One&display=swap');
+
+* {
+/*  border: solid black 1px;*/
+
+  box-sizing: border-box;
+  font-family: 'Text Me One', sans-serif;
+}
+
+body {
+  display: grid;
+  grid-gap: 10px;
+  align-self: center;
+  margin: auto;
+  max-width: 960px;
+  grid-template-areas:
+    'header'
+    'settings'
+    'canvas';
+  grid-template-columns: max-content;
+  grid-template-rows: max-content max-content max-content;
+  height: max-content;
+  width: max-content;
+  background-color: #141414;
+  color: #e88a1a;
+}
+
+header {
+  grid-area: header;
+  font-size: 2em;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+}
+
+canvas {
+  grid-area: canvas;
+}
+
+label {
+  display: inline-block;
+  width: 75px;
+}
+
+.cols {
+  grid-area: cols;
+}
+
+.rows {
+  grid-area: rows;
+}
+
+.generate {
+  grid-area: generate;
+}
+
+footer {
+  grid-area: footer;
+  text-align: center;
+}
+
+footer > a:hover {
+  background-color: lightgrey;
+}
+
+@media (max-width: 700px) {
+  :root{
+    font-size: 82%;
+  }
+  body {
+    grid-template-areas:
+      'header'
+      'settings'
+      'canvas'
+      'footer';
+    grid-template-columns: max-content;
+    grid-template-rows: max-content max-content max-content max-content;
+  }
+  canvas {
+    width: 90vw;
+    align-self: center;
+  }
+  *{
+    padding: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+}
+
+.table-center {
+  display: inline-block;
+  /*min-width: 320px;*/
+  text-align: center;
+}
+
+.round-box {
+  width: 50px;
+  border-radius: 10px;
+  border: 2px solid #73AD21;
+  background: #ffffff;
+  text-align: center;
+}
+
+.round-box-text {
+  padding: 2px;
+  font-weight: bold;
+  color: teal;
+}
+
+.settings {
+  text-align: center;
+}

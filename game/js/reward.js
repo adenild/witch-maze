@@ -4,7 +4,9 @@ class Reward {
         this.rewardsList = [];
         this.rewardsScore = 0;
         this.level = 1;
+        this.imageList = [];
     }
+
     reset() {
         this.newRewards = true;
         this.rewardsList = [];
@@ -24,13 +26,41 @@ class Reward {
                     this.level += 1;
                     $("#level").text(this.level);
                 }
+                break;
             }
         }
     }
-    generateRandomColor(){
-        let index = Math.floor(randomModule.random() * 6);
-        let colorList = ["#0000FF","#FFD700","#CAE1FF","#228B22","#FF0000","#FF00FF"];
-        return colorList[index];
+    async loadImages(){
+        let pathList = [
+            "assets/src/sprites/Icons/icons/16x16/potion_03a.png",
+            "assets/src/sprites/Icons/icons/16x16/potion_03b.png",
+            "assets/src/sprites/Icons/icons/16x16/potion_03c.png",
+            "assets/src/sprites/Icons/icons/16x16/potion_03d.png",
+            "assets/src/sprites/Icons/icons/16x16/potion_03e.png",
+            "assets/src/sprites/Icons/icons/16x16/book_01b.png",
+            "assets/src/sprites/Icons/icons/16x16/book_02b.png",
+            "assets/src/sprites/Icons/icons/16x16/book_03b.png",
+            "assets/src/sprites/Icons/icons/16x16/book_04b.png",
+            "assets/src/sprites/Icons/icons/16x16/book_05b.png",
+            "assets/src/sprites/Icons/icons/16x16/candy_01a.png",
+            "assets/src/sprites/Icons/icons/16x16/candy_01b.png",
+            "assets/src/sprites/Icons/icons/16x16/candy_01c.png",
+            "assets/src/sprites/Icons/icons/16x16/candy_01d.png",
+            "assets/src/sprites/Icons/icons/16x16/candy_01e.png",
+            "assets/src/sprites/Icons/icons/16x16/shard_01a.png",
+            "assets/src/sprites/Icons/icons/16x16/shard_01b.png",
+            "assets/src/sprites/Icons/icons/16x16/shard_01c.png",
+            "assets/src/sprites/Icons/icons/16x16/shard_01d.png",
+            "assets/src/sprites/Icons/icons/16x16/shard_01e.png"
+        ];
+        for(let i = 0; i<pathList.length;i++){
+            let img = new Image();
+            img.src = pathList[i];
+            this.imageList.push(img);
+        }
     }
-
+    generateRandomItem(){
+        let index = Math.floor(randomModule.random() * this.imageList.length);
+        return this.imageList[index];
+    };
 }

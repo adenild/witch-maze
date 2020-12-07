@@ -17,12 +17,10 @@ class Maze {
         this.cellSize = cellSize;
         this.cells = [];
         this.map = $.csv.toObjects(map);
-
-        this.backgroundColor = "#ffffff";
+        this.backgroundColor = "#d9d9d9";
         this.endColor = "#88FF88";
         this.mazeColor = "#000000";
         this.playerColor = "#880088";
-
         this.generate()
     }
 
@@ -31,8 +29,8 @@ class Maze {
             let cont = 0;
             let same_position = false
             while (cont < (reward.level*2)) {
-                let randomCol = Math.floor(randomModule.random() * this.cols);
-                let randomRow = Math.floor(randomModule.random() * this.rows);
+                let randomCol = Math.floor(randomModule.random() * 10);
+                let randomRow = Math.floor(randomModule.random() * 10);
                 // Checa se o jogador está na casa, para nao colocar uma recompensa lá
                 if (player.col !== randomCol || player.row !== randomRow) {
                     // Checa se existe recompença naquela posição, se houver, gera outra.
@@ -45,18 +43,20 @@ class Maze {
                         same_position = false
                         continue;
                     }
-                    let aux_color = reward.generateRandomColor();
+                    let aux_color =  new Image();
+                    aux_color = reward.generateRandomItem();
                     reward.rewardsList.push([randomCol, randomRow,aux_color]);
-                    ctx.fillStyle = aux_color;
-                    ctx.fillRect((randomCol)*this.cellSize+5, (randomRow)*this.cellSize+5, this.cellSize-5, this.cellSize-5);
+                    this.drawCell(
+                        randomCol, randomRow, aux_color);
                     cont += 1;
                 }
             }
             reward.newRewards = false;
         } else {
             for (let r = 0; r < reward.rewardsList.length; r++) {
-                ctx.fillStyle = reward.rewardsList[r][2];
-                ctx.fillRect((reward.rewardsList[r][0])*this.cellSize+5, (reward.rewardsList[r][1])*this.cellSize+5, this.cellSize-5, this.cellSize-5);
+                this.drawCell(
+                    reward.rewardsList[r][0],
+                    reward.rewardsList[r][1], reward.rewardsList[r][2])
             }
         }
     }
@@ -93,13 +93,33 @@ class Maze {
         }
 
         this.redraw();
+        player.initialTime = new Date().getTime();
+    }
+
+    async drawCell(x_cell_position, y_cell_position, image_path) {
+        // Função responsável por desenhar obstáculos
+        let x_dimension = this.cellSize - 18
+        let y_dimension = this.cellSize - 18
+        let x_position = x_cell_position * this.cellSize + 5
+        let y_position = y_cell_position * this.cellSize + 18
+        ctx.drawImage(image_path, x_position, y_position,
+            x_dimension, y_dimension);
+    }
+    drawCellPlayer(x_cell_position, y_cell_position, image_path) {
+        // Função responsável por desenhar obstáculos
+        let x_dimension = this.cellSize - 5
+        let y_dimension = this.cellSize - 5
+        let x_position = x_cell_position * this.cellSize + 5
+        let y_position = y_cell_position * this.cellSize + 5
+
+        ctx.drawImage(image_path, x_position, y_position,
+            x_dimension, y_dimension);
     }
 
     redraw() {
+        // Função responsável por desenhar no ecrã
         ctx.fillStyle = this.backgroundColor;
         ctx.fillRect(0, 0, mazeHeight, mazeWidth);
-
-        ctx.fillStyle = this.endColor;
 
         reward.countScore()
         this.spawnRewards()
@@ -135,8 +155,6 @@ class Maze {
                 }
             }
         }
-
-        ctx.fillStyle = this.playerColor;
-        ctx.fillRect((player.col * this.cellSize) + 5, (player.row * this.cellSize) + 5, this.cellSize - 5, this.cellSize - 5);
+        this.drawCellPlayer(player.col, player.row, player.image[0]);
     }
 }
