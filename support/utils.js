@@ -17,7 +17,7 @@ async function obtem_csv(){
         type: "GET",
         url: "grid/cenario_teste.csv",
         success: function (data) {
-            csv_novo(data).then(r => console.log("Consegui!"))
+            csv_novo(data)
         }
     })
 }
