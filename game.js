@@ -38,6 +38,7 @@ function handleTouchStart(event) {
     const firstTouch = getTouches(event)[0];
     x_down = firstTouch.clientX;
     y_down = firstTouch.clientY;
+    start_time_swipe = new Date().getTime();
 };
 
 function handleTouchMove(event) {
@@ -47,26 +48,33 @@ function handleTouchMove(event) {
 
     let x_up = event.touches[0].clientX;
     let y_up = event.touches[0].clientY;
+    finish_time_swipe = new Date().getTime();
 
     let x_diff = x_down - x_up;
     let y_diff = y_down - y_up;
 
+    //x_up,y_up,x_down,y_down
+    let diff_swipe_time = finish_time_swipe - start_time_swipe
+    let move_data = [x_down , y_down, x_up, y_up, diff_swipe_time];
+    let move_type = 'swipe';
+
     if (Math.abs(x_diff) > Math.abs(y_diff)) {/*most significant*/
         if (x_diff > 0) {
-            player.moveHandler("left")
+            player.moveHandler("left", move_data=move_data, move_type)
         } else {
-            player.moveHandler("right")
+            player.moveHandler("right", move_data, move_type)
         }
     } else {
         if (y_diff > 0) {
-            player.moveHandler("up")
+            player.moveHandler("up", move_data, move_type)
         } else {
-            player.moveHandler("down")
+            player.moveHandler("down", move_data, move_type)
         }
     }
     x_down = null;
     y_down = null;
 };
+
 
 function onClick() {
     seed = new Date().getTime();
@@ -114,7 +122,7 @@ async function onLoad() {
     canvas = document.getElementById('mainForm');
     ctx = canvas.getContext('2d');
 
-    player = new Player(200);
+    player = new Player(20);
     await player.loadPlayerImage();
     $('#movesLeft').text(player.moves)
 

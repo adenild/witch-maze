@@ -67,10 +67,12 @@ class UserData{
         this.userDict['round']['rewardType'] = [];
 
         // Variáveis psicológicas
-        this.userDict['round']['timeBetweenClicks'] = [];
         this.userDict['round']['swipeDistance'] = [];
         this.userDict['round']['timeStep'] = [];
         this.userDict['round']['swipeTime'] = [];
+        this.userDict['round']['swipeCoordStart'] = []
+        this.userDict['round']['swipeCoordFinish'] = []
+        
 
         // Variaveis fixas
         this.userDict['version'] = '3.2.7'; // Finalizado - MAJOR_CHANGES.ISSUE(DEZENA).ISSUE(UNIDADE)
@@ -80,4 +82,8 @@ class UserData{
         this.userDict['user_id'] = this.userCookie; // Finalizado
         this.userDict['game_type'] = 'player'; // Finalizado
     }
+}
+
+function euclidianDistance (startPos, finishPos) {
+    return Math.sqrt(startPos.reduce((acc, val, i) => acc + Math.pow(val - finishPos[i], 2), 0));
 }

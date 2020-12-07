@@ -20,7 +20,7 @@ class Player {
     }
 
     // Banco de dados: 'https://safe-basin-68612.herokuapp.com/data'
-    saveUserData(valid, direction) {
+    saveUserData(valid, direction, move_data=[], move_type='keyboard') {
         if (valid) {
             maze.redraw();
             //Variáveis psicológicas
@@ -28,10 +28,17 @@ class Player {
             userData.userDict['round']['timeStep'].push(dateAux - this.initialTime);
             this.initialTime = dateAux;
 
-            //userData.userDict['round']['swipeDistance'].push();
-            //userData.userDict['round']['timeBetweenClicks'].push();
-            //userData.userDict['round']['swipeTime'].push();
 
+            if (move_type == 'swipe'){
+                let startPos = move_data.slice(0,2);
+                let finishPos = move_data.slice(2,4);
+
+                userData.userDict['round']['swipeDistance'].push(euclidianDistance(startPos,finishPos));
+                userData.userDict['round']['swipeCoordStart'].push(startPos);
+                userData.userDict['round']['swipeCoordFinish'].push(finishPos);
+                userData.userDict['round']['swipeTime'].push(move_data[4]);
+            }
+            
             //Outras variáveis
             userData.userDict['round']['moves'].push(this.startMoves - this.moves);
             userData.userDict['round']['level'].push(reward.level);
@@ -59,6 +66,7 @@ class Player {
             //userData.userDict['round']['rewardSize'].push()
             //userData.userDict['round']['rewardType'].push()
             this.valid = false
+            console.log(userData)
         }
     }
     async postData(url = '', data = {}) {
@@ -77,10 +85,10 @@ class Player {
         return response.json();
     }
 
-    moveHandler(direction) {
+    moveHandler(direction, move_data=[], move_type='keyboard') {
         if (this.moves > 0) {
             this[direction]();
-            this.saveUserData(this.valid, direction)
+            this.saveUserData(this.valid, direction, move_data, move_type)
             $('#movesLeft').text(this.moves);
         } else {
             if (confirm('Obrigado por contribuir com este experimento científico!\n' +
