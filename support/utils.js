@@ -39,14 +39,20 @@ function maze_generator(maze_data,maze){
 
 class UserData{
     constructor(seed, method, userCookie) {
-        this.userDict = {}
+        this.userDict = {};
+        this.seed = seed;
+        this.method = method;
+        this.userCookie = userCookie;
     }
 
     setDataStructure() {
-        //Variaveis internas de Round
-        this.userDict['moves'] = []; //Apagar depois que mudar no banco
+        let d = new Date()
+        let now = `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} ${d.getTime()}`
 
-        //Outras variáveis
+        // Variaveis internas de Round
+        this.userDict['moves'] = []; // TODO: Apagar depois que mudar no banco
+
+        // Outras variáveis
         this.userDict['round'] = {};
         this.userDict['round']['moves'] = [];
         this.userDict['round']['level'] = [];
@@ -54,23 +60,24 @@ class UserData{
         this.userDict['round']['direction'] = [];
         this.userDict['round']['axis'] = [];
 
-        //Variáveis físicas
+        // Variáveis físicas
         this.userDict['round']['rewardColor'] = [];
         this.userDict['round']['rewardSize'] = [];
         this.userDict['round']['rewardLocation'] = [];
         this.userDict['round']['rewardType'] = [];
 
-        //Variáveis psicológicas
+        // Variáveis psicológicas
         this.userDict['round']['timeBetweenClicks'] = [];
         this.userDict['round']['swipeDistance'] = [];
         this.userDict['round']['timeStep'] = [];
         this.userDict['round']['swipeTime'] = [];
 
-        //Variaveis fixas
-        this.userDict['version'] = 'v1'; //Finalizado - ALTERAR TODA VEZ QUE FIZEREM UMA NOVA VERSÃO
-        this.userDict['seed'] = seed; //Finalizado
-        this.userDict['used_alg'] = method; //Trocar para variável
-        this.userDict['user_id'] = userCookie; // Finalizado
+        // Variaveis fixas
+        this.userDict['version'] = '3.2.7'; // Finalizado - MAJOR_CHANGES.ISSUE(DEZENA).ISSUE(UNIDADE)
+        this.userDict['game_date'] = now;
+        this.userDict['seed'] = this.seed; // Finalizado
+        this.userDict['used_alg'] = this.method; // Trocar para variável
+        this.userDict['user_id'] = this.userCookie; // Finalizado
         this.userDict['game_type'] = 'player'; // Finalizado
     }
 }
