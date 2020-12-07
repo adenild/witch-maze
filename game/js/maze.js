@@ -17,12 +17,10 @@ class Maze {
         this.cellSize = cellSize;
         this.cells = [];
         this.map = $.csv.toObjects(map);
-
         this.backgroundColor = "#d9d9d9";
         this.endColor = "#88FF88";
         this.mazeColor = "#000000";
         this.playerColor = "#880088";
-
         this.generate()
     }
 
@@ -124,7 +122,6 @@ class Maze {
         ctx.fillRect(0, 0, mazeHeight, mazeWidth);
 
         reward.countScore()
-
         this.spawnRewards()
 
         ctx.strokeStyle = this.mazeColor;
