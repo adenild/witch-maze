@@ -55,14 +55,14 @@ class Player {
             let rewardLocation = [];
             let rewardSize = [];
             let rewardType = [];
-            for (let r = 0; r < reward.rewardsList.length; r++) {
-                rewardLocation.push([reward.rewardsList[r][0], reward.rewardsList[r][1]]);
-                rewardColorList.push([reward.rewardsList[r][2]]);
-                //rewardSize.push(reward.rewardsList[r][preencher])
-                //rewardType.push(reward.rewardsList[r][preencher])
-            }
-            userData.userDict['round']['rewardLocation'].push(rewardLocation);
-            userData.userDict['round']['rewardColor'].push(rewardColorList);
+            // for (let r = 0; r < reward.rewardsList.length; r++) {
+            //     rewardLocation.push([reward.rewardsList[r][0], reward.rewardsList[r][1]]);
+            //     rewardColorList.push([reward.rewardsList[r][2]]);
+            //     //rewardSize.push(reward.rewardsList[r][preencher])
+            //     //rewardType.push(reward.rewardsList[r][preencher])
+            // }
+            // userData.userDict['round']['rewardLocation'].push(rewardLocation);
+            // userData.userDict['round']['rewardColor'].push(rewardColorList);
             //userData.userDict['round']['rewardSize'].push()
             //userData.userDict['round']['rewardType'].push()
             this.valid = false
@@ -93,6 +93,7 @@ class Player {
         } else {
             if (confirm('Obrigado por contribuir com este experimento científico!\n' +
                 'Deseja jogar de novo para ajudar mais com a coleta de dados?')) {
+                console.log(userData.userDict)
                 this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log("Dados enviados!"));
                 onClick();
 

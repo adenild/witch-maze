@@ -50,7 +50,7 @@ class UserData{
         let now = `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} ${d.getTime()}`
 
         // Variaveis internas de Round
-        this.userDict['moves'] = []; // TODO: Apagar depois que mudar no banco
+        //this.userDict['moves'] = []; // TODO: Apagar depois que mudar no banco
 
         // Outras variáveis
         this.userDict['round'] = {};
@@ -61,10 +61,11 @@ class UserData{
         this.userDict['round']['axis'] = [];
 
         // Variáveis físicas
-        this.userDict['round']['rewardColor'] = [];
-        this.userDict['round']['rewardSize'] = [];
-        this.userDict['round']['rewardLocation'] = [];
-        this.userDict['round']['rewardType'] = [];
+        //this.userDict['round']['rewardColor'] = [];
+        //this.userDict['round']['rewardSize'] = [];
+        //this.userDict['round']['rewardLocation'] = [];
+        //this.userDict['round']['rewardType'] = [];
+        //this.userDict['round']['rewardType'] = [];
 
         // Variáveis psicológicas
         this.userDict['round']['swipeDistance'] = [];
