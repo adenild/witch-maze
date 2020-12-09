@@ -12,6 +12,7 @@ let x_down = null;
 let y_down = null;
 let userData;
 let userCookie;
+let start_time_swipe, finish_time_swipe
 
 function checkRandomModule(seed, module) {
     if (module == 'Mersenne') {
@@ -39,7 +40,7 @@ function handleTouchStart(event) {
     x_down = firstTouch.clientX;
     y_down = firstTouch.clientY;
     start_time_swipe = new Date().getTime();
-};
+}
 
 function handleTouchMove(event) {
     if (!x_down || !y_down) {
@@ -60,7 +61,7 @@ function handleTouchMove(event) {
 
     if (Math.abs(x_diff) > Math.abs(y_diff)) {/*most significant*/
         if (x_diff > 0) {
-            player.moveHandler("left", move_data=move_data, move_type)
+            player.moveHandler("left", move_data, move_type)
         } else {
             player.moveHandler("right", move_data, move_type)
         }
@@ -73,7 +74,7 @@ function handleTouchMove(event) {
     }
     x_down = null;
     y_down = null;
-};
+}
 
 
 function onClick() {
@@ -116,8 +117,8 @@ async function onLoad() {
     randomModule = checkRandomModule(seed, method)
     userCookie = getCookie()
 
-    userData = new UserData(seed, method, userCookie);
-    userData.setDataStructure();
+    userData = new UserData();
+    userData.setDataStructure(seed, method, userCookie);
 
     canvas = document.getElementById('mainForm');
     ctx = canvas.getContext('2d');
