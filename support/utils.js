@@ -38,14 +38,14 @@ function maze_generator(maze_data,maze){
 }
 
 class UserData{
-    constructor() {
+    constructor(seed, method, userCookie) {
         this.userDict = {};
-        /*this.seed = seed;
+        this.seed = seed;
         this.method = method;
-        this.userCookie = userCookie;*/
+        this.userCookie = userCookie;
     }
 
-    setDataStructure(seed, method, userCookie) {
+    setDataStructure() {
         let d = new Date()
         let now = `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} ${d.getTime()}`
 
@@ -78,9 +78,9 @@ class UserData{
         // Variaveis fixas
         this.userDict['version'] = '3.2.4'; // Finalizado - MAJOR_CHANGES.PR_IMPLEMENTADO(DEZENA).PR_IMPLEMENTADO(UNIDADE)
         this.userDict['game_date'] = now;
-        this.userDict['seed'] = seed; // Finalizado
-        this.userDict['used_alg'] = method; // Trocar para variável
-        this.userDict['user_id'] = userCookie; // Finalizado
+        this.userDict['seed'] = this.seed; // Finalizado
+        this.userDict['used_alg'] = this.method; // Trocar para variável
+        this.userDict['user_id'] = this.userCookie; // Finalizado
         this.userDict['game_type'] = 'player'; // Finalizado
     }
 }
