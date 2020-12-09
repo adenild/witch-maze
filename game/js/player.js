@@ -33,7 +33,7 @@ class Player {
                 let startPos = move_data.slice(0,2);
                 let finishPos = move_data.slice(2,4);
 
-                userData.userDict['round']['swipeDistance'].push(euclidianDistance(startPos,finishPos));
+                userData.userDict['round']['swipeDistance'].push(euclideanDistance(startPos,finishPos));
                 userData.userDict['round']['swipeCoordStart'].push(startPos);
                 userData.userDict['round']['swipeCoordFinish'].push(finishPos);
                 userData.userDict['round']['swipeTime'].push(move_data[4]);
@@ -50,23 +50,22 @@ class Player {
                 userData.userDict['round']['axis'].push('horizontal')
             }
 
-            //Variáveis físicas
+            /*Variáveis físicas
             let rewardColorList = [];
             let rewardLocation = [];
             let rewardSize = [];
             let rewardType = [];
-            // for (let r = 0; r < reward.rewardsList.length; r++) {
-            //     rewardLocation.push([reward.rewardsList[r][0], reward.rewardsList[r][1]]);
-            //     rewardColorList.push([reward.rewardsList[r][2]]);
-            //     //rewardSize.push(reward.rewardsList[r][preencher])
-            //     //rewardType.push(reward.rewardsList[r][preencher])
-            // }
-            // userData.userDict['round']['rewardLocation'].push(rewardLocation);
-            // userData.userDict['round']['rewardColor'].push(rewardColorList);
-            //userData.userDict['round']['rewardSize'].push()
-            //userData.userDict['round']['rewardType'].push()
+            for (let r = 0; r < reward.rewardsList.length; r++) {
+                rewardLocation.push([reward.rewardsList[r][0], reward.rewardsList[r][1]]);
+                rewardColorList.push([reward.rewardsList[r][2]]);
+                //rewardSize.push(reward.rewardsList[r][preencher])
+                //rewardType.push(reward.rewardsList[r][preencher])
+            }
+            userData.userDict['round']['rewardLocation'].push(rewardLocation);
+            userData.userDict['round']['rewardColor'].push(rewardColorList);
+            userData.userDict['round']['rewardSize'].push()
+            userData.userDict['round']['rewardType'].push()*/
             this.valid = false
-            console.log(userData)
         }
     }
     async postData(url = '', data = {}) {
@@ -93,10 +92,8 @@ class Player {
         } else {
             if (confirm('Obrigado por contribuir com este experimento científico!\n' +
                 'Deseja jogar de novo para ajudar mais com a coleta de dados?')) {
-                console.log(userData.userDict)
-                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log("Dados enviados!"));
+                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response)) //"Dados enviados! Obrigado"));
                 onClick();
-
             }
         }
     }
