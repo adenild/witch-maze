@@ -20,7 +20,7 @@ class Player {
     }
 
     // Banco de dados: 'https://safe-basin-68612.herokuapp.com/data'
-    saveUserData(valid, direction) {
+    saveUserData(valid, direction, move_data=[], move_type='keyboard') {
         if (valid) {
             maze.redraw();
             //Variáveis psicológicas
@@ -28,10 +28,17 @@ class Player {
             userData.userDict['round']['timeStep'].push(dateAux - this.initialTime);
             this.initialTime = dateAux;
 
-            //userData.userDict['round']['swipeDistance'].push();
-            //userData.userDict['round']['timeBetweenClicks'].push();
-            //userData.userDict['round']['swipeTime'].push();
 
+            if (move_type == 'swipe'){
+                let startPos = move_data.slice(0,2);
+                let finishPos = move_data.slice(2,4);
+
+                userData.userDict['round']['swipeDistance'].push(euclideanDistance(startPos,finishPos));
+                userData.userDict['round']['swipeCoordStart'].push(startPos);
+                userData.userDict['round']['swipeCoordFinish'].push(finishPos);
+                userData.userDict['round']['swipeTime'].push(move_data[4]);
+            }
+            
             //Outras variáveis
             userData.userDict['round']['moves'].push(this.startMoves - this.moves);
             userData.userDict['round']['level'].push(reward.level);
@@ -43,7 +50,7 @@ class Player {
                 userData.userDict['round']['axis'].push('horizontal')
             }
 
-            //Variáveis físicas
+            /*Variáveis físicas
             let rewardColorList = [];
             let rewardLocation = [];
             let rewardSize = [];
@@ -56,8 +63,8 @@ class Player {
             }
             userData.userDict['round']['rewardLocation'].push(rewardLocation);
             userData.userDict['round']['rewardColor'].push(rewardColorList);
-            //userData.userDict['round']['rewardSize'].push()
-            //userData.userDict['round']['rewardType'].push()
+            userData.userDict['round']['rewardSize'].push()
+            userData.userDict['round']['rewardType'].push()*/
             this.valid = false
         }
     }
@@ -77,15 +84,15 @@ class Player {
         return response.json();
     }
 
-    moveHandler(direction) {
+    moveHandler(direction, move_data=[], move_type='keyboard') {
         if (this.moves > 0) {
             this[direction]();
-            this.saveUserData(this.valid, direction)
+            this.saveUserData(this.valid, direction, move_data, move_type)
             $('#movesLeft').text(this.moves);
         } else {
-            this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log("Dados enviados!"));
             if (confirm('Obrigado por contribuir com este experimento científico!\n' +
                 'Deseja jogar de novo para ajudar mais com a coleta de dados?')) {
+                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response)) //"Dados enviados! Obrigado"));
                 onClick();
             }
         }
