@@ -38,14 +38,14 @@ function maze_generator(maze_data,maze){
 }
 
 class UserData{
-    constructor(seed, method, userCookie) {
+    constructor() {
         this.userDict = {};
-        this.seed = seed;
+        /*this.seed = seed;
         this.method = method;
-        this.userCookie = userCookie;
+        this.userCookie = userCookie;*/
     }
 
-    setDataStructure() {
+    setDataStructure(seed, method, userCookie) {
         let d = new Date()
         let now = `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} ${d.getTime()}`
 
@@ -61,11 +61,11 @@ class UserData{
         this.userDict['round']['axis'] = [];
 
         // Variáveis físicas
-        //this.userDict['round']['rewardColor'] = [];
-        //this.userDict['round']['rewardSize'] = [];
-        //this.userDict['round']['rewardLocation'] = [];
-        //this.userDict['round']['rewardType'] = [];
-        //this.userDict['round']['rewardType'] = [];
+        /*this.userDict['round']['rewardColor'] = [];
+        this.userDict['round']['rewardSize'] = [];
+        this.userDict['round']['rewardLocation'] = [];
+        this.userDict['round']['rewardType'] = [];
+        this.userDict['round']['rewardType'] = [];*/
 
         // Variáveis psicológicas
         this.userDict['round']['swipeDistance'] = [];
@@ -76,15 +76,15 @@ class UserData{
         
 
         // Variaveis fixas
-        this.userDict['version'] = '3.2.7'; // Finalizado - MAJOR_CHANGES.ISSUE(DEZENA).ISSUE(UNIDADE)
+        this.userDict['version'] = '3.2.4'; // Finalizado - MAJOR_CHANGES.PR_IMPLEMENTADO(DEZENA).PR_IMPLEMENTADO(UNIDADE)
         this.userDict['game_date'] = now;
-        this.userDict['seed'] = this.seed; // Finalizado
-        this.userDict['used_alg'] = this.method; // Trocar para variável
-        this.userDict['user_id'] = this.userCookie; // Finalizado
+        this.userDict['seed'] = seed; // Finalizado
+        this.userDict['used_alg'] = method; // Trocar para variável
+        this.userDict['user_id'] = userCookie; // Finalizado
         this.userDict['game_type'] = 'player'; // Finalizado
     }
 }
 
-function euclidianDistance (startPos, finishPos) {
+function euclideanDistance (startPos, finishPos) {
     return Math.sqrt(startPos.reduce((acc, val, i) => acc + Math.pow(val - finishPos[i], 2), 0));
 }
