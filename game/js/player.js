@@ -87,7 +87,6 @@ class Player {
             if (confirm('Obrigado por contribuir com este experimento científico!\n' +
                 'Deseja jogar de novo para ajudar mais com a coleta de dados?')) {
                 onClick();
-
             }
         }
     }
