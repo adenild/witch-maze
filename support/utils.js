@@ -61,6 +61,8 @@ class UserData{
         this.userDict['round']['axis'] = [];
 
         // Variáveis físicas
+        this.userDict['round']['fourScoreVariables'] = [];
+        this.userDict['round']['magicScore'] = [];
         /*this.userDict['round']['rewardColor'] = [];
         this.userDict['round']['rewardSize'] = [];
         this.userDict['round']['rewardLocation'] = [];

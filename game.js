@@ -14,6 +14,17 @@ let userData;
 let userCookie;
 let start_time_swipe, finish_time_swipe
 
+function generateRandomBetween(n,a,b) {
+
+    let numbersList = [];
+
+    for (i = 1; i <= n; ++i) {
+        numbersList.push((a + randomModule.random() * (b-a)));
+    }
+
+    return numbersList
+}
+
 function checkRandomModule(seed, module) {
     if (module == 'Mersenne') {
         randomModule = new MersenneTwister(seed);

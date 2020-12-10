@@ -50,8 +50,13 @@ class Player {
                 userData.userDict['round']['axis'].push('horizontal')
             }
 
-            /*Variáveis físicas
-            let rewardColorList = [];
+            //Variáveis físicas
+
+            userData.userDict['round']['fourScoreVariables'].push(reward.fourScoreVariables);
+            userData.userDict['round']['magicScore'].push(reward.magicScore);
+            console.log('Seu score mágico é:',reward.magicScore,'!!')
+
+            /*let rewardColorList = [];
             let rewardLocation = [];
             let rewardSize = [];
             let rewardType = [];
@@ -92,6 +97,7 @@ class Player {
         } else {
             if (confirm('Obrigado por contribuir com este experimento científico!\n' +
                 'Deseja jogar de novo para ajudar mais com a coleta de dados?')) {
+                console.log(userData.userDict)
                 this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response)) //"Dados enviados! Obrigado"));
                 onClick();
             }

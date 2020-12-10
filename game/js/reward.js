@@ -5,6 +5,8 @@ class Reward {
         this.rewardsScore = 0;
         this.level = 1;
         this.imageList = [];
+        this.magicScore = 0;
+        this.fourScoreVariables = [];
     }
 
     reset() {
@@ -16,8 +18,10 @@ class Reward {
         $("#rewardsScore").text(this.rewardsScore);
     }
     countScore() {
+        this.fourScoreVariables = generateRandomBetween(4,1,2);
         for (let r = 0; r < this.rewardsList.length; r++) {
             if (player.col === this.rewardsList[r][0] && player.row === this.rewardsList[r][1]) {
+                this.magicScore += this.fourScoreVariables.reduce((a, b) => a * b);
                 this.rewardsScore += 1;
                 $("#rewardsScore").text(this.rewardsScore);
                 this.rewardsList.splice(r, 1);
