@@ -8,6 +8,9 @@ class Player {
     async loadPlayerImage(){
         let img = new Image();
         img.src = 'assets/src/sprites/mio_static.gif';
+        img.addEventListener('load', e=>{
+
+        });
         await this.image.push(img);
     }
     reset() {

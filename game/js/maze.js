@@ -16,12 +16,14 @@ class Maze {
         this.rows = rows;
         this.cellSize = cellSize;
         this.cells = [];
+        this.imagesCell = [];
         this.map = $.csv.toObjects(map);
 
         this.backgroundColor = "#d9d9d9";
         this.endColor = "#88FF88";
         this.mazeColor = "#000000";
         this.playerColor = "#880088";
+
 
         this.generate()
     }
@@ -45,13 +47,12 @@ class Maze {
                         same_position = false
                         continue;
                     }
-                    let aux_color =  new Image();
-                    aux_color = reward.generateRandomItem();
+                    let aux_color = reward.generateRandomItem();
                     
                     reward.rewardsList.push([randomCol, randomRow,aux_color]);
                     this.drawCell(
                         randomCol, randomRow, aux_color);
-                   
+                    
                     cont += 1;
                 }
             }
@@ -99,16 +100,44 @@ class Maze {
         this.redraw();
     }
 
-    async drawCell(x_cell_position, y_cell_position, image_path) {
+    drawCell(x_cell_position, y_cell_position, image_path) {
         // Função responsável por desenhar obstáculos
         let x_dimension = this.cellSize - 18
         let y_dimension = this.cellSize - 18
         let x_position = x_cell_position * this.cellSize + 5
         let y_position = y_cell_position * this.cellSize + 18
-
         
-        ctx.drawImage(image_path, x_position, y_position,
-            x_dimension, y_dimension);
+        let flag = 0;
+        let i = 0;
+        let index = 0;
+        
+        for(i=0;i<this.imagesCell.length;i++){
+            let path_aux = "http://127.0.0.1:5500/"+image_path;
+            
+            if(this.imagesCell[i].src == path_aux){
+                flag = 1;
+                index = i;
+                break;
+            }
+        }
+        if(flag == 1){
+            console.log(flag);
+            
+                ctx.drawImage(this.imagesCell[index], x_position, y_position,
+                    x_dimension, y_dimension);
+                
+        }else{
+            console.log(flag);
+            var img = new Image;
+            img.addEventListener('load', function() {
+            // execute drawImage statements here
+            ctx.drawImage(img, x_position, y_position,
+                x_dimension, y_dimension);
+            
+            }, false);
+            img.src = image_path;
+            this.imagesCell.push(img);
+        }
         
         
     }

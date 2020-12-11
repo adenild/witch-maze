@@ -56,7 +56,11 @@ function onClick() {
   seed = new Date().getTime();
   randomModule = new MersenneTwister(seed);
   player.reset();
+  
   reward.reset();
+  
+  
+
   maze.cols = document.getElementById("cols").value;
   maze.rows = document.getElementById("rows").value;
   maze.generate();
@@ -97,10 +101,10 @@ async function onLoad() {
   canvas = document.getElementById('mainForm');
   ctx = canvas.getContext('2d');
   player = new Player(200);
-  player.loadPlayerImage();
+  await player.loadPlayerImage();
   $('#movesLeft').text(player.moves)
   reward = new Reward();
-  await reward.loadImages();
+  // reward.loadImages();
   maze = new Maze(10, 10, 50, await obtem_csv());
   document.addEventListener('keydown', onKeyDown);
   document.addEventListener('touchstart', handleTouchStart, false);        
