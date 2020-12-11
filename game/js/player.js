@@ -49,7 +49,9 @@ class Player {
             } else {
                 userData.userDict['round']['axis'].push('horizontal')
             }
-
+            userData.userDict['finalScore'] = userData.userDict['round']['score'][((userData.userDict['round']['score']).length-1)]
+            //console.log(userData.userDict['round']['score'][((userData.userDict['round']['score']).length-1)])
+            //console.log(((userData.userDict['round']['score']).length-1))
             /*Variáveis físicas
             let rewardColorList = [];
             let rewardLocation = [];
@@ -90,6 +92,8 @@ class Player {
             this.saveUserData(this.valid, direction, move_data, move_type)
             $('#movesLeft').text(this.moves);
         } else {
+            
+            console.log(userData.userDict);
             if (confirm('Obrigado por contribuir com este experimento científico!\n' +
                 'Deseja jogar de novo para ajudar mais com a coleta de dados?')) {
                 this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response)) //"Dados enviados! Obrigado"));
