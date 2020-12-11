@@ -81,6 +81,7 @@ class UserData{
         this.userDict['seed'] = this.seed; // Finalizado
         this.userDict['used_alg'] = this.method; // Trocar para variável
         this.userDict['user_id'] = this.userCookie; // Finalizado
+        this.userDict['finalScore'] = 0;
         this.userDict['game_type'] = 'player'; // Finalizado
     }
 }
