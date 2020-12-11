@@ -117,8 +117,8 @@ async function onLoad() {
     randomModule = checkRandomModule(seed, method)
     userCookie = getCookie()
 
-    userData = new UserData();
-    userData.setDataStructure(seed, method, userCookie);
+    userData = new UserData(seed, method, userCookie);
+    userData.setDataStructure();
 
     canvas = document.getElementById('mainForm');
     ctx = canvas.getContext('2d');
