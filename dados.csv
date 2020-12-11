@@ -1,0 +1,7 @@
+seed, id_user, id_partida, versao, tipo_do_jogo, algoritmo
+1000, cookie, auto_inc(db), V0.3,  player/controle, random
+
+move,Nivel,score,direção,eixo,Tmp_entre_clique(s),Dist_swipe(cm),Tmp_sair_cel(s),tmp_swipe(s),Cor_reward,Tam_reward,Loc_reward,Tp_obj_reward
+1,    1  , 0, 'cima', 'vertical',      0.7,       2.4,        2,           0.5,      ['ROXO';'AZUL'],['P';'M'], [(7;23)-(2;30)] , ['Poção'-'Livro']
+2,    1  , 0, 'direita', 'horizontal', 1.2,       2,          1.2,         0.5,      ['ROXO';'AZUL'],['P';'M'], [(7;23)-(2;30)] , ['Poção'-'Livro']
+

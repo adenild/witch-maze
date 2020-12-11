@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang='en'>
-  <head>
+<head>
     <link rel='stylesheet' href='game/css/game.css'>
     <meta charset='UTF-8'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.9/jquery.csv.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mersenne-twister@1/src/mersenne-twister.min.js"></script>
@@ -13,26 +13,26 @@
     <script src='game.js'></script>
     <script src='game/js/reward.js'></script>
     <title>Witch Maze</title>
-  </head>
+</head>
 
-  <body onload='onLoad();' style="overflow: hidden">
-    <header>🎃 Witch Maze 🎃</header>
-    <canvas id='mainForm'></canvas>
-    <div class='settings'>
-      <table style="display: inline-block">
+<body onload='onLoad();' style="overflow: hidden">
+<header>🎃 Witch Maze 🎃</header>
+<canvas id='mainForm'></canvas>
+<div class='settings'>
+    <table style="display: inline-block">
         <tr><th>Moves</th></tr>
         <tr><td class='round-box'><span class="round-box-text" id='movesLeft'>200</span></td></tr>
-      </table>
+    </table>
     <div class="table-center">
-      <table style="align-self: center">
-        <tr><th>Level</th></tr>
-        <tr><td class='round-box'><span class="round-box-text" id='level'>1</span></td></tr>
-      </table>
+        <table style="align-self: center">
+            <tr><th>Level</th></tr>
+            <tr><td class='round-box'><span class="round-box-text" id='level'>1</span></td></tr>
+        </table>
     </div>
-      <table style="display: inline-block">
+    <table style="display: inline-block">
         <tr><th>Score</th></tr>
         <tr><td class='round-box'><span class="round-box-text" id='rewardsScore'>0</span></td></tr>
-      </table>
-    </div>
-  </body>
+    </table>
+</div>
+</body>
 </html>

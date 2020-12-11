@@ -50,7 +50,7 @@ class UserData{
         let now = `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} ${d.getTime()}`
 
         // Variaveis internas de Round
-        this.userDict['moves'] = []; // TODO: Apagar depois que mudar no banco
+        //this.userDict['moves'] = []; // TODO: Apagar depois que mudar no banco
 
         // Outras variáveis
         this.userDict['round'] = {};
@@ -61,23 +61,30 @@ class UserData{
         this.userDict['round']['axis'] = [];
 
         // Variáveis físicas
-        this.userDict['round']['rewardColor'] = [];
+        /*this.userDict['round']['rewardColor'] = [];
         this.userDict['round']['rewardSize'] = [];
         this.userDict['round']['rewardLocation'] = [];
         this.userDict['round']['rewardType'] = [];
+        this.userDict['round']['rewardType'] = [];*/
 
         // Variáveis psicológicas
-        this.userDict['round']['timeBetweenClicks'] = [];
         this.userDict['round']['swipeDistance'] = [];
         this.userDict['round']['timeStep'] = [];
         this.userDict['round']['swipeTime'] = [];
+        this.userDict['round']['swipeCoordStart'] = []
+        this.userDict['round']['swipeCoordFinish'] = []
+        
 
         // Variaveis fixas
-        this.userDict['version'] = '3.2.7'; // Finalizado - MAJOR_CHANGES.ISSUE(DEZENA).ISSUE(UNIDADE)
+        this.userDict['version'] = '3.2.4'; // Finalizado - MAJOR_CHANGES.PR_IMPLEMENTADO(DEZENA).PR_IMPLEMENTADO(UNIDADE)
         this.userDict['game_date'] = now;
         this.userDict['seed'] = this.seed; // Finalizado
         this.userDict['used_alg'] = this.method; // Trocar para variável
         this.userDict['user_id'] = this.userCookie; // Finalizado
         this.userDict['game_type'] = 'player'; // Finalizado
     }
+}
+
+function euclideanDistance (startPos, finishPos) {
+    return Math.sqrt(startPos.reduce((acc, val, i) => acc + Math.pow(val - finishPos[i], 2), 0));
 }
