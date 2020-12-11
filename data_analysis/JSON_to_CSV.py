@@ -7,9 +7,11 @@ Created on Fri Dec 11 12:11:26 2020
 """
 import pandas as pd
 from json import loads
+import argparse
 
-# TRATAMENTO DE DADOS PARA O DATASET DE TREINAMENTO
-# Faz a carga da lista de JSONS
+parser = argparse.ArgumentParser()
+parser.add_argument('-f', '--file', help='Path to output file')
+args = parser.parse_args()
 
 
 def normaliza_dados_partida(dados_partida: dict) -> pd.DataFrame:
@@ -59,7 +61,7 @@ def normaliza_dados_witch_maze(
         Args:
             caminho_arquivo_entrada: Caminho para um arquivo txt
             caminho_pasta_saída: Caminho para pasta onde o csv gerado
-                será  salvo.
+                será salvo.
         Returns:
             Não retorna. Escreve em disco na
     """
@@ -78,3 +80,11 @@ def normaliza_dados_witch_maze(
                 normaliza_dados_partida(dado_partida)])
     df_partidas_normalizadas.to_csv(
         caminho_pasta_saída + '/partidas_normalizadas.csv', index=False)
+
+
+if __name__ == '__main__':
+    if args.file is None:
+        print("Please, write a file path.")
+        exit()
+    else:
+        normaliza_dados_witch_maze(args.file)
