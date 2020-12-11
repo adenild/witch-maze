@@ -52,7 +52,10 @@ class Player {
 
             //Variáveis físicas
 
-            userData.userDict['round']['fourScoreVariables'].push(reward.fourScoreVariables);
+            userData.userDict['round']['V1Score'].push(reward.fourScoreVariables[0]);
+            userData.userDict['round']['V2Score'].push(reward.fourScoreVariables[1]);
+            userData.userDict['round']['V3Score'].push(reward.fourScoreVariables[2]);
+            userData.userDict['round']['V4Score'].push(reward.fourScoreVariables[3]);
             userData.userDict['round']['magicScore'].push(reward.magicScore);
             console.log('Seu score mágico é:',reward.magicScore,'!!')
 
