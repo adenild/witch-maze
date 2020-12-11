@@ -76,8 +76,10 @@ class UserData{
         this.userDict['round']['swipeDistance'] = [];
         this.userDict['round']['timeStep'] = [];
         this.userDict['round']['swipeTime'] = [];
-        this.userDict['round']['swipeCoordStart'] = []
-        this.userDict['round']['swipeCoordFinish'] = []
+        this.userDict['round']['swipeCoordXStart'] = [];
+        this.userDict['round']['swipeCoordYStart'] = [];
+        this.userDict['round']['swipeCoordXFinish'] = [];
+        this.userDict['round']['swipeCoordYFinish'] = [];
         
 
         // Variaveis fixas

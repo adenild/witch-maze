@@ -34,8 +34,11 @@ class Player {
                 let finishPos = move_data.slice(2,4);
 
                 userData.userDict['round']['swipeDistance'].push(euclideanDistance(startPos,finishPos));
-                userData.userDict['round']['swipeCoordStart'].push(startPos);
-                userData.userDict['round']['swipeCoordFinish'].push(finishPos);
+                userData.userDict['round']['swipeCoordXStart'] = [startPos[0]];
+                userData.userDict['round']['swipeCoordYStart'] = [startPos[1]];
+                userData.userDict['round']['swipeCoordXFinish'] = [finishPos[0]];
+                userData.userDict['round']['swipeCoordYFinish'] = [finishPos[1]];
+
                 userData.userDict['round']['swipeTime'].push(move_data[4]);
             }
             
@@ -98,10 +101,10 @@ class Player {
             this.saveUserData(this.valid, direction, move_data, move_type)
             $('#movesLeft').text(this.moves);
         } else {
+            this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response)) //"Dados enviados! Obrigado"));
+            console.log(userData.userDict)
             if (confirm('Obrigado por contribuir com este experimento científico!\n' +
                 'Deseja jogar de novo para ajudar mais com a coleta de dados?')) {
-                console.log(userData.userDict)
-                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response)) //"Dados enviados! Obrigado"));
                 onClick();
             }
         }
