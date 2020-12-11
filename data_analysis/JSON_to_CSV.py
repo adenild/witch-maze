@@ -11,6 +11,10 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--file', help='Path to output file')
+parser.add_argument(
+    '-p', '--prefix',
+    help='What preffix will be add to the output files',
+    default="")
 args = parser.parse_args()
 
 
@@ -52,7 +56,8 @@ def normaliza_dados_partida(dados_partida: dict) -> pd.DataFrame:
 
 def normaliza_dados_witch_maze(
         caminho_arquivo_entrada: str,
-        caminho_pasta_saída: str = 'data_analysis/output_data/') -> None:
+        caminho_pasta_saída: str = 'data_analysis/output_data/',
+        prefixo: str = "") -> None:
     """
         Recebe o caminho para um arquivo de saída do banco de dados do jogo
         Witch Maze. Esse arquivo deve conter uma lista de jsons referentes aos
@@ -62,6 +67,8 @@ def normaliza_dados_witch_maze(
             caminho_arquivo_entrada: Caminho para um arquivo txt
             caminho_pasta_saída: Caminho para pasta onde o csv gerado
                 será salvo.
+            prefixo: Qual prefixo será adicionado ao início dos arquivos de
+                saída
         Returns:
             Não retorna. Escreve em disco na
     """
@@ -70,21 +77,22 @@ def normaliza_dados_witch_maze(
 
     json_carregado = loads(json_data)
 
-    df_partidas_normalizadas = None
-    for i, dado_partida in enumerate(json_carregado):
-        if df_partidas_normalizadas is None:
-            df_partidas_normalizadas = normaliza_dados_partida(dado_partida)
-        else:
-            df_partidas_normalizadas = pd.concat([
-                df_partidas_normalizadas,
-                normaliza_dados_partida(dado_partida)])
-    df_partidas_normalizadas.to_csv(
-        caminho_pasta_saída + '/partidas_normalizadas.csv', index=False)
+    lista_df_partidas_normalizadas = []
+    for dado_partida in json_carregado:
+        lista_df_partidas_normalizadas.append(
+            normaliza_dados_partida(dado_partida))
+
+    for df_partidas_normalizada in lista_df_partidas_normalizadas:
+        df_partidas_normalizada.to_csv(
+            caminho_pasta_saída +
+            '/' + prefixo + str(df_partidas_normalizada['_id'][0]) + '.csv',
+            index=False)
 
 
 if __name__ == '__main__':
     if args.file is None:
-        print("Please, write a file path.")
+        print("Please, write a file path using -f command.")
+        print("Use -h for more information.")
         exit()
     else:
-        normaliza_dados_witch_maze(args.file)
+        normaliza_dados_witch_maze(args.file, prefixo=args.prefix)
