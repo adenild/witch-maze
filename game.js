@@ -19,7 +19,7 @@ function generateRandomBetween(n,a,b) {
     let numbersList = [];
 
     for (i = 1; i <= n; ++i) {
-        numbersList.push((a + randomModule.random() * (b-a)));
+        numbersList.push(Math.floor((a + randomModule.random() * (b-a))));
     }
 
     return numbersList

@@ -60,7 +60,6 @@ class Player {
             userData.userDict['round']['V3Score'].push(reward.fourScoreVariables[2]);
             userData.userDict['round']['V4Score'].push(reward.fourScoreVariables[3]);
             userData.userDict['round']['magicScore'].push(reward.magicScore);
-            console.log('Seu score mágico é:',reward.magicScore,'!!')
 
             /*let rewardColorList = [];
             let rewardLocation = [];
