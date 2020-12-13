@@ -5,21 +5,28 @@ class Reward {
         this.rewardsScore = 0;
         this.level = 1;
         this.imageList = [];
+        this.magicScore = 0;
+        this.fourScoreVariables = [];
     }
 
     reset() {
         this.newRewards = true;
         this.rewardsList = [];
         this.rewardsScore = 0;
+        this.magicScore = 0;
         this.level = 1;
         $("#level").text(this.level);
         $("#rewardsScore").text(this.rewardsScore);
+        $("#magicScore").text(this.magicScore);
     }
     countScore() {
+        this.fourScoreVariables = generateRandomBetween(4,1,3);
         for (let r = 0; r < this.rewardsList.length; r++) {
             if (player.col === this.rewardsList[r][0] && player.row === this.rewardsList[r][1]) {
+                this.magicScore += this.fourScoreVariables.reduce((a, b) => a * b);
                 this.rewardsScore += 1;
                 $("#rewardsScore").text(this.rewardsScore);
+                $("#magicScore").text(this.magicScore);
                 this.rewardsList.splice(r, 1);
                 if (this.rewardsList.length === 0) {
                     this.newRewards = true;
