@@ -62,6 +62,7 @@ class Player {
             userData.userDict['round']['magicScore'].push(reward.magicScore);
 
             /*let rewardColorList = [];
+
             let rewardLocation = [];
             let rewardSize = [];
             let rewardType = [];
@@ -101,7 +102,7 @@ class Player {
             $('#movesLeft').text(this.moves);
         } else {
             this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response)) //"Dados enviados! Obrigado"));
-            console.log(userData.userDict)
+
             if (confirm('Obrigado por contribuir com este experimento científico!\n' +
                 'Deseja jogar de novo para ajudar mais com a coleta de dados?')) {
                 onClick();
