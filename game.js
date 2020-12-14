@@ -13,6 +13,7 @@ let y_down = null;
 let userData;
 let userCookie;
 let start_time_swipe, finish_time_swipe
+let mapa;
 
 function checkRandomModule(seed, module) {
     if (module == 'Mersenne') {
@@ -77,7 +78,8 @@ function handleTouchMove(event) {
 }
 
 
-function onClick() {
+function restartGame() {
+    //loadReplay(userData);
     seed = new Date().getTime();
     randomModule = checkRandomModule(seed, method);
     player.reset();
@@ -123,16 +125,46 @@ async function onLoad() {
     canvas = document.getElementById('mainForm');
     ctx = canvas.getContext('2d');
 
-    player = new Player(200);
+    player = new Player(10);
+
     await player.loadPlayerImage();
     $('#movesLeft').text(player.moves)
 
     reward = new Reward();
     await reward.loadImages();
 
-    maze = new Maze(10, 10, 50, await obtem_csv());
+    mapa = await obtem_csv();
+    maze = new Maze(10, 10, 50, mapa);
 
     document.addEventListener('keydown', onKeyDown);
     document.addEventListener('touchstart', handleTouchStart, false);
     document.addEventListener('touchmove', handleTouchMove, false);
+}
+
+function loadReplay(oldData) {
+    seed = oldData['seed'];
+    method = oldData['method'];
+    randomModule = checkRandomModule(seed, method);
+    userCookie = oldData['userCookie'];
+    moves = oldData.userDict['round']['direction'];
+
+    userData = new UserData(seed, method, userCookie);
+    userData.setDataStructure(player_status='controle');
+    
+    canvas = document.getElementById('mainForm');
+    ctx = canvas.getContext('2d');
+
+    controle = new Player(10, true);
+    //await controle.loadPlayerImage();
+    $('#movesLeft').text(controle.moves);
+
+    reward = new Reward();
+    //await reward.loadImages();
+
+    maze = new Maze(10, 10, 50, mapa);
+
+    controle.control_simulator(moves);
+    // document.addEventListener('keydown', onKeyDown);
+    // document.addEventListener('touchstart', handleTouchStart, false);
+    // document.addEventListener('touchmove', handleTouchMove, false);
 }

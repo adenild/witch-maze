@@ -45,7 +45,7 @@ class UserData{
         this.userCookie = userCookie;
     }
 
-    setDataStructure() {
+    setDataStructure(player_status='player') {
         let d = new Date()
         let now = `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} ${d.getTime()}`
 
@@ -82,10 +82,17 @@ class UserData{
         this.userDict['used_alg'] = this.method; // Trocar para variável
         this.userDict['user_id'] = this.userCookie; // Finalizado
         this.userDict['finalScore'] = 0;
-        this.userDict['game_type'] = 'player'; // Finalizado
+        //this.userDict['game_type'] = 'player'; // Finalizado
+        this.userDict['game_type'] = player_status; // Finalizado
+        
     }
 }
 
 function euclideanDistance (startPos, finishPos) {
     return Math.sqrt(startPos.reduce((acc, val, i) => acc + Math.pow(val - finishPos[i], 2), 0));
+}
+
+function sleepFor( sleepDuration ){
+    var now = new Date().getTime();
+    while(new Date().getTime() < now + sleepDuration){ /* do nothing */ } 
 }

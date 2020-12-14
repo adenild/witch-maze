@@ -1,11 +1,12 @@
 class Player {
-    constructor(moves) {
+    constructor(moves, isBot = false) {
         this.reset();
         this.startMoves = moves;
         this.moves = moves;
         this.image = [];
         this.valid = false;
         this.initialTime = null;
+        this.isBot = isBot
     }
     reset() {
         this.col = Math.floor(randomModule.random() * 10);
@@ -27,6 +28,7 @@ class Player {
             let dateAux = new Date().getTime();
             userData.userDict['round']['timeStep'].push(dateAux - this.initialTime);
             this.initialTime = dateAux;
+
 
 
             if (move_type == 'swipe'){
@@ -89,18 +91,32 @@ class Player {
     moveHandler(direction, move_data=[], move_type='keyboard') {
         if (this.moves > 0) {
             this[direction]();
-            this.saveUserData(this.valid, direction, move_data, move_type)
+    
+            this.saveUserData(this.valid, direction, move_data, move_type);
             $('#movesLeft').text(this.moves);
         } else {
             
-            console.log(userData.userDict);
+            //console.log(userData.userDict);
             if (confirm('Obrigado por contribuir com este experimento científico!\n' +
                 'Deseja jogar de novo para ajudar mais com a coleta de dados?')) {
                 this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response)) //"Dados enviados! Obrigado"));
-                onClick();
+            }
+            if (this.isBot != true) {
+                console.log('userData');
+                console.log(userData);
+            
+                loadReplay(userData);
+                sleepFor(5000);
+                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response));
+                restartGame();
+            }
+            else{
+                
+                console.log('Eu venho depois do segundo envio pro banco')
             }
         }
     }
+
     up() {
         if (!maze.cells[this.col][this.row].northWall && this.row !== 0) {
             this.row -= 1;
@@ -127,6 +143,15 @@ class Player {
             this.col += 1;
             this.moves -= 1;
             this.valid = true;
+        }
+    }
+
+    control_simulator(moves/*userData*/){
+
+        for (let index = 0; index < moves.length; index++) {
+            this.moveHandler(moves[index]);
+            console.log(moves[index]);
+            //console.log(reward.rewardsList);
         }
     }
 }
