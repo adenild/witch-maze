@@ -125,7 +125,7 @@ async function onLoad() {
     canvas = document.getElementById('mainForm');
     ctx = canvas.getContext('2d');
 
-    player = new Player(10);
+    player = new Player(100);
 
     await player.loadPlayerImage();
     $('#movesLeft').text(player.moves)
@@ -154,16 +154,16 @@ function loadReplay(oldData) {
     canvas = document.getElementById('mainForm');
     ctx = canvas.getContext('2d');
 
-    controle = new Player(10, true);
-    //await controle.loadPlayerImage();
-    $('#movesLeft').text(controle.moves);
+    player = new Player(100, true);
+    player.loadPlayerImage();
+    $('#movesLeft').text(player.moves);
 
     reward = new Reward();
-    //await reward.loadImages();
+    reward.loadImages();
 
     maze = new Maze(10, 10, 50, mapa);
 
-    controle.control_simulator(moves);
+    player.control_simulator(moves);
     // document.addEventListener('keydown', onKeyDown);
     // document.addEventListener('touchstart', handleTouchStart, false);
     // document.addEventListener('touchmove', handleTouchMove, false);

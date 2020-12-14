@@ -120,10 +120,8 @@ class Maze {
         // Função responsável por desenhar no ecrã
         ctx.fillStyle = this.backgroundColor;
         ctx.fillRect(0, 0, mazeHeight, mazeWidth);
-        console.log('redesenhei o score');
         reward.countScore()
         this.spawnRewards()
-        console.log('respawnei o score');
 
         ctx.strokeStyle = this.mazeColor;
         ctx.strokeRect(0, 0, mazeHeight, mazeWidth);

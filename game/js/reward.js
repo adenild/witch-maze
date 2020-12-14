@@ -30,6 +30,7 @@ class Reward {
             }
         }
     }
+    
     async loadImages(){
         let pathList = [
             "assets/src/sprites/Icons/icons/16x16/potion_03a.png",
