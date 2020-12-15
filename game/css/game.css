@@ -2,6 +2,7 @@
 
 * {
 /*  border: solid black 1px;*/
+
   box-sizing: border-box;
   font-family: 'Text Me One', sans-serif;
 }
@@ -30,14 +31,10 @@ header {
   font-weight: bold;
   padding: 10px;
   text-align: center;
-  
 }
 
 canvas {
   grid-area: canvas;
- 
-
-
 }
 
 label {
@@ -68,7 +65,7 @@ footer > a:hover {
 
 @media (max-width: 700px) {
   :root{
-    font-size: 70%;
+    font-size: 82%;
   }
   body {
     grid-template-areas:
@@ -79,7 +76,7 @@ footer > a:hover {
     grid-template-columns: max-content;
     grid-template-rows: max-content max-content max-content max-content;
   }
-  canvas { 
+  canvas {
     width: 90vw;
     align-self: center;
   }
@@ -90,12 +87,26 @@ footer > a:hover {
   }
 }
 
-.round_text_box {
-  border-radius: 10px; 
-  border: 2px solid #73AD21; 
-  padding: 2px; 
+.table-center {
+  display: inline-block;
+  /*min-width: 320px;*/
+  text-align: center;
+}
+
+.round-box {
+  width: 50px;
+  border-radius: 10px;
+  border: 2px solid #73AD21;
   background: #ffffff;
   text-align: center;
+}
+
+.round-box-text {
+  padding: 2px;
   font-weight: bold;
   color: teal;
+}
+
+.settings {
+  text-align: center;
 }

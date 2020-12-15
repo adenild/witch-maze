@@ -89,7 +89,7 @@ class Reward {
         this.level = 1;
         $("#level").text(this.level);
         $("#rewardsScore").text(this.rewardsScore);
-    };
+    }
     countScore() {
         for (let r = 0; r < this.rewardsList.length; r++) {
             if (player.col === this.rewardsList[r][0] && player.row === this.rewardsList[r][1]) {
@@ -101,6 +101,7 @@ class Reward {
                     this.level += 1;
                     $("#level").text(this.level);
                 }
+                break;
             }
         }
     };
@@ -110,13 +111,10 @@ class Reward {
         let index = Math.floor(randomModule.random() * 5);
         switch(item){
             case 0:
-                
                 return this.imageBook01[index];
             case 1:
-                
                 return this.imageCandy01[index];
             case 2:
-                
                 return this.imageCandy02[index];
             case 3:
                 return this.imageCrystal[index];
@@ -136,5 +134,4 @@ class Reward {
                 return this.imageStaff03[index];
         }
     };
-    
 }

@@ -18,13 +18,10 @@ class Maze {
         this.cells = [];
         this.imagesCell = [];
         this.map = $.csv.toObjects(map);
-
         this.backgroundColor = "#d9d9d9";
         this.endColor = "#88FF88";
         this.mazeColor = "#000000";
         this.playerColor = "#880088";
-
-
         this.generate()
     }
 
@@ -48,11 +45,9 @@ class Maze {
                         continue;
                     }
                     let aux_color = reward.generateRandomItem();
-                    
                     reward.rewardsList.push([randomCol, randomRow,aux_color]);
                     this.drawCell(
                         randomCol, randomRow, aux_color);
-                    
                     cont += 1;
                 }
             }
@@ -98,6 +93,7 @@ class Maze {
         }
 
         this.redraw();
+        player.initialTime = new Date().getTime();
     }
 
     drawCell(x_cell_position, y_cell_position, image_path) {
@@ -105,8 +101,7 @@ class Maze {
         let x_dimension = this.cellSize - 18
         let y_dimension = this.cellSize - 18
         let x_position = x_cell_position * this.cellSize + 5
-        let y_position = y_cell_position * this.cellSize + 18
-        
+        let y_position = y_cell_position * this.cellSize + 18     
         let flag = 0;
         let i = 0;
         let index = 0;
@@ -124,8 +119,7 @@ class Maze {
             console.log(flag);
             
                 ctx.drawImage(this.imagesCell[index], x_position, y_position,
-                    x_dimension, y_dimension);
-                
+                    x_dimension, y_dimension); 
         }else{
             console.log(flag);
             var img = new Image;
@@ -138,8 +132,6 @@ class Maze {
             img.src = image_path;
             this.imagesCell.push(img);
         }
-        
-        
     }
     drawCellPlayer(x_cell_position, y_cell_position, image_path) {
         // Função responsável por desenhar obstáculos
@@ -158,7 +150,6 @@ class Maze {
         ctx.fillRect(0, 0, mazeHeight, mazeWidth);
 
         reward.countScore()
-
         this.spawnRewards()
 
         ctx.strokeStyle = this.mazeColor;
@@ -192,8 +183,6 @@ class Maze {
                 }
             }
         }
-        
         this.drawCellPlayer(player.col, player.row, player.image[0]);
     }
-
 }
