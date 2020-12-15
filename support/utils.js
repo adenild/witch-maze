@@ -33,8 +33,6 @@ function maze_generator(maze_data,maze){
         col = maze_data[obj_index]['Col']
         row = maze_data[obj_index]['Row']
     }
-    //maze.cells[col][row] = new MazeCell(col, row);
-    console.log(maze)
 }
 
 class UserData{

@@ -12,6 +12,7 @@ class Player {
         this.col = Math.floor(randomModule.random() * 10);
         this.row = Math.floor(randomModule.random() * 10);
         this.moves = this.startMoves;
+        this.isBot = false;
         $('#movesLeft').text(this.moves);
     }
     async loadPlayerImage() {
@@ -97,22 +98,16 @@ class Player {
         } else {
             
             //console.log(userData.userDict);
-            if (confirm('Obrigado por contribuir com este experimento científico!\n' +
-                'Deseja jogar de novo para ajudar mais com a coleta de dados?')) {
-                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response)) //"Dados enviados! Obrigado"));
-            }
             if (this.isBot != true) {
-                console.log('userData');
                 console.log(userData);
-            
+                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response)) //"Dados enviados! Obrigado"));
                 loadReplay(userData);
-                sleepFor(5000);
+                console.log(userData);
                 this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response));
-                restartGame();
-            }
-            else{
-                
-                console.log('Eu venho depois do segundo envio pro banco')
+                if (confirm('Obrigado por contribuir com este experimento científico!\n' +
+                                'Deseja jogar de novo para ajudar mais com a coleta de dados?')) {
+                    onLoad();
+                }
             }
         }
     }
@@ -150,7 +145,7 @@ class Player {
 
         for (let index = 0; index < moves.length; index++) {
             this.moveHandler(moves[index]);
-            console.log(moves[index]);
+            //console.log(moves[index]);
             //console.log(reward.rewardsList);
         }
     }

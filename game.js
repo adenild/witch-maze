@@ -77,19 +77,6 @@ function handleTouchMove(event) {
     y_down = null;
 }
 
-
-function restartGame() {
-    //loadReplay(userData);
-    seed = new Date().getTime();
-    randomModule = checkRandomModule(seed, method);
-    player.reset();
-    reward.reset();
-    maze.cols = 10;
-    maze.rows = 10;
-    maze.generate();
-    userData.setDataStructure();
-}
-
 function onKeyDown(event) {
     switch (event.keyCode) {
         case 37:
@@ -154,7 +141,7 @@ function loadReplay(oldData) {
     canvas = document.getElementById('mainForm');
     ctx = canvas.getContext('2d');
 
-    player = new Player(100, true);
+    player = new Player(100, isBot = true);
     player.loadPlayerImage();
     $('#movesLeft').text(player.moves);
 
