@@ -113,7 +113,7 @@ class Maze {
         
         for(i=0;i<this.imagesCell.length;i++){
             let path_aux = "http://127.0.0.1:5500/"+image_path;
-            
+            console.log(this.imagesCell[i].src);
             if(this.imagesCell[i].src == path_aux){
                 flag = 1;
                 index = i;
