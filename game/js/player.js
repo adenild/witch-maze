@@ -99,10 +99,8 @@ class Player {
             
             //console.log(userData.userDict);
             if (this.isBot != true) {
-                console.log(userData);
                 this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response)) //"Dados enviados! Obrigado"));
                 loadReplay(userData);
-                console.log(userData);
                 this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response));
                 if (confirm('Obrigado por contribuir com este experimento científico!\n' +
                                 'Deseja jogar de novo para ajudar mais com a coleta de dados?')) {
