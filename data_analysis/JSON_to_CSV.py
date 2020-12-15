@@ -9,6 +9,8 @@ import pandas as pd
 from json import loads
 import argparse
 
+from os.path import join
+
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--file', help='Path to output file')
 parser.add_argument(
@@ -84,8 +86,7 @@ def normaliza_dados_witch_maze(
 
     for df_partidas_normalizada in lista_df_partidas_normalizadas:
         df_partidas_normalizada.to_csv(
-            caminho_pasta_saída +
-            '/' + prefixo + str(df_partidas_normalizada['_id'][0]) + '.csv',
+            join(caminho_pasta_saída, prefixo + str(df_partidas_normalizada['_id'][0]) + '.csv'),
             index=False)
 
 
@@ -96,3 +97,4 @@ if __name__ == '__main__':
         exit()
     else:
         normaliza_dados_witch_maze(args.file, prefixo=args.prefix)
+        normaliza_dados_witch_maze(".//data_analysis//JSON_2_Jogos.txt", ".//data_analysis//", 'teste')
