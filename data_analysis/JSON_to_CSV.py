@@ -97,4 +97,4 @@ if __name__ == '__main__':
         exit()
     else:
         normaliza_dados_witch_maze(args.file, prefixo=args.prefix)
-        normaliza_dados_witch_maze(".//data_analysis//JSON_2_Jogos.txt", ".//data_analysis//", 'teste')
+        # normaliza_dados_witch_maze(".//data_analysis//JSON_2_Jogos.txt", ".//data_analysis//", 'teste')
