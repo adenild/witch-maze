@@ -59,6 +59,11 @@ class UserData{
         this.userDict['round']['axis'] = [];
 
         // Variáveis físicas
+        this.userDict['round']['V1Score'] = [];
+        this.userDict['round']['V2Score'] = [];
+        this.userDict['round']['V3Score'] = [];
+        this.userDict['round']['V4Score'] = [];
+        this.userDict['round']['magicScore'] = [];
         /*this.userDict['round']['rewardColor'] = [];
         this.userDict['round']['rewardSize'] = [];
         this.userDict['round']['rewardLocation'] = [];
@@ -69,8 +74,10 @@ class UserData{
         this.userDict['round']['swipeDistance'] = [];
         this.userDict['round']['timeStep'] = [];
         this.userDict['round']['swipeTime'] = [];
-        this.userDict['round']['swipeCoordStart'] = []
-        this.userDict['round']['swipeCoordFinish'] = []
+        this.userDict['round']['swipeCoordXStart'] = [];
+        this.userDict['round']['swipeCoordYStart'] = [];
+        this.userDict['round']['swipeCoordXFinish'] = [];
+        this.userDict['round']['swipeCoordYFinish'] = [];
         
 
         // Variaveis fixas

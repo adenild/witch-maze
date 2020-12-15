@@ -15,6 +15,17 @@ let userCookie;
 let start_time_swipe, finish_time_swipe
 let mapa;
 
+function generateRandomBetween(n,a,b) {
+
+    let numbersList = [];
+
+    for (i = 1; i <= n; ++i) {
+        numbersList.push(Math.floor((a + randomModule.random() * (b-a))));
+    }
+
+    return numbersList
+}
+
 function checkRandomModule(seed, module) {
     if (module == 'Mersenne') {
         randomModule = new MersenneTwister(seed);
@@ -118,10 +129,11 @@ async function onLoad() {
     $('#movesLeft').text(player.moves)
 
     reward = new Reward();
-    await reward.loadImages();
+    //await reward.loadImages();
 
     mapa = await obtem_csv();
     maze = new Maze(10, 10, 50, mapa);
+
 
     document.addEventListener('keydown', onKeyDown);
     document.addEventListener('touchstart', handleTouchStart, false);
