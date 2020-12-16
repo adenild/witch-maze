@@ -26,7 +26,7 @@ async function csv_novo(allText){
     return $.csv.toObjects(allText)
 }
 
-function maze_generator(maze_data,maze){
+function maze_generator(maze_data){
     let col;
     let row;
     for (let obj_index = 0; obj_index < maze_data.length; obj_index++) {
@@ -59,6 +59,11 @@ class UserData{
         this.userDict['round']['axis'] = [];
 
         // Variáveis físicas
+        this.userDict['round']['V1Score'] = [];
+        this.userDict['round']['V2Score'] = [];
+        this.userDict['round']['V3Score'] = [];
+        this.userDict['round']['V4Score'] = [];
+        this.userDict['round']['magicScore'] = [];
         /*this.userDict['round']['rewardColor'] = [];
         this.userDict['round']['rewardSize'] = [];
         this.userDict['round']['rewardLocation'] = [];
@@ -69,8 +74,10 @@ class UserData{
         this.userDict['round']['swipeDistance'] = [];
         this.userDict['round']['timeStep'] = [];
         this.userDict['round']['swipeTime'] = [];
-        this.userDict['round']['swipeCoordStart'] = []
-        this.userDict['round']['swipeCoordFinish'] = []
+        this.userDict['round']['swipeCoordXStart'] = [];
+        this.userDict['round']['swipeCoordYStart'] = [];
+        this.userDict['round']['swipeCoordXFinish'] = [];
+        this.userDict['round']['swipeCoordYFinish'] = [];
         
 
         // Variaveis fixas
@@ -80,9 +87,7 @@ class UserData{
         this.userDict['used_alg'] = this.method; // Trocar para variável
         this.userDict['user_id'] = this.userCookie; // Finalizado
         this.userDict['finalScore'] = 0;
-        //this.userDict['game_type'] = 'player'; // Finalizado
         this.userDict['game_type'] = player_status; // Finalizado
-        
     }
 }
 
@@ -91,6 +96,6 @@ function euclideanDistance (startPos, finishPos) {
 }
 
 function sleepFor( sleepDuration ){
-    var now = new Date().getTime();
+    let now = new Date().getTime();
     while(new Date().getTime() < now + sleepDuration){ /* do nothing */ } 
 }

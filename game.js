@@ -15,6 +15,17 @@ let userCookie;
 let start_time_swipe, finish_time_swipe
 let mapa;
 
+function generateRandomBetween(n,a,b) {
+
+    let numbersList = [];
+
+    for (let i = 1; i <= n; ++i) {
+        numbersList.push(Math.floor((a + randomModule.random() * (b-a))));
+    }
+
+    return numbersList
+}
+
 function checkRandomModule(seed, module) {
     if (module == 'Mersenne') {
         randomModule = new MersenneTwister(seed);
@@ -32,7 +43,7 @@ function getCookie() {
 }
 
 function getTouches(event) {
-    return event.touches ||             // browser API
+    return event.touches ||          // browser API
         event.originalEvent.touches; // jQuery
 }
 
@@ -112,7 +123,7 @@ async function onLoad() {
     canvas = document.getElementById('mainForm');
     ctx = canvas.getContext('2d');
 
-    player = new Player(100);
+    player = new Player(280);
 
     await player.loadPlayerImage();
     $('#movesLeft').text(player.moves)
@@ -136,14 +147,14 @@ function loadReplay(oldData) {
     moves = oldData.userDict['round']['direction'];
 
     userData = new UserData(seed, method, userCookie);
-    userData.setDataStructure(player_status='controle');
+    userData.setDataStructure('controle');
     
     canvas = document.getElementById('mainForm');
     ctx = canvas.getContext('2d');
 
-    player = new Player(100, isBot = true);
+    player = new Player(280, true);
     player.loadPlayerImage();
-    $('#movesLeft').text(player.moves);
+    // $('#movesLeft').text(player.moves);
 
     reward = new Reward();
     reward.loadImages();

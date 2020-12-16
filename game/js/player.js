@@ -20,7 +20,6 @@ class Player {
         img.src = 'assets/src/sprites/mio_static.gif';
         await this.image.push(img);
     }
-
     // Banco de dados: 'https://safe-basin-68612.herokuapp.com/data'
     saveUserData(valid, direction, move_data=[], move_type='keyboard') {
         if (valid) {
@@ -29,19 +28,17 @@ class Player {
             let dateAux = new Date().getTime();
             userData.userDict['round']['timeStep'].push(dateAux - this.initialTime);
             this.initialTime = dateAux;
-
-
-
             if (move_type == 'swipe'){
                 let startPos = move_data.slice(0,2);
                 let finishPos = move_data.slice(2,4);
 
                 userData.userDict['round']['swipeDistance'].push(euclideanDistance(startPos,finishPos));
-                userData.userDict['round']['swipeCoordStart'].push(startPos);
-                userData.userDict['round']['swipeCoordFinish'].push(finishPos);
+                userData.userDict['round']['swipeCoordXStart'] = [startPos[0]];
+                userData.userDict['round']['swipeCoordYStart'] = [startPos[1]];
+                userData.userDict['round']['swipeCoordXFinish'] = [finishPos[0]];
+                userData.userDict['round']['swipeCoordYFinish'] = [finishPos[1]];
                 userData.userDict['round']['swipeTime'].push(move_data[4]);
             }
-            
             //Outras variáveis
             userData.userDict['round']['moves'].push(this.startMoves - this.moves);
             userData.userDict['round']['level'].push(reward.level);
@@ -55,8 +52,13 @@ class Player {
             userData.userDict['finalScore'] = userData.userDict['round']['score'][((userData.userDict['round']['score']).length-1)]
             //console.log(userData.userDict['round']['score'][((userData.userDict['round']['score']).length-1)])
             //console.log(((userData.userDict['round']['score']).length-1))
-            /*Variáveis físicas
-            let rewardColorList = [];
+            //Variáveis físicas
+            userData.userDict['round']['V1Score'].push(reward.fourScoreVariables[0]);
+            userData.userDict['round']['V2Score'].push(reward.fourScoreVariables[1]);
+            userData.userDict['round']['V3Score'].push(reward.fourScoreVariables[2]);
+            userData.userDict['round']['V4Score'].push(reward.fourScoreVariables[3]);
+            userData.userDict['round']['magicScore'].push(reward.magicScore);
+            /*let rewardColorList = [];
             let rewardLocation = [];
             let rewardSize = [];
             let rewardType = [];
@@ -88,28 +90,23 @@ class Player {
         });
         return response.json();
     }
-
     moveHandler(direction, move_data=[], move_type='keyboard') {
         if (this.moves > 0) {
             this[direction]();
-    
             this.saveUserData(this.valid, direction, move_data, move_type);
             $('#movesLeft').text(this.moves);
         } else {
-            
-            //console.log(userData.userDict);
             if (this.isBot != true) {
                 this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response)) //"Dados enviados! Obrigado"));
                 loadReplay(userData);
                 this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response));
                 if (confirm('Obrigado por contribuir com este experimento científico!\n' +
                                 'Deseja jogar de novo para ajudar mais com a coleta de dados?')) {
-                    onLoad();
+                    onLoad().then(r => console.log("Novo jogo iniciado"));
                 }
             }
         }
     }
-
     up() {
         if (!maze.cells[this.col][this.row].northWall && this.row !== 0) {
             this.row -= 1;
