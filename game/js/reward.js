@@ -4,10 +4,15 @@ class Reward {
         this.newRewards = true;
         this.rewardsList = [];
         this.rewardsScore = 0;
-        this.level = 1;
-        this.imageList = [];
         this.magicScore = 0;
         this.fourScoreVariables = [];
+        this.level = 1;
+        this.itemList = [
+            ["assets/src/sprites/Icons/icons/16x16/potion_03a.png", "assets/src/sprites/Icons/icons/16x16/potion_03b.png", "assets/src/sprites/Icons/icons/16x16/potion_03c.png", "assets/src/sprites/Icons/icons/16x16/potion_03d.png", "assets/src/sprites/Icons/icons/16x16/potion_03e.png"],
+            ["assets/src/sprites/Icons/icons/16x16/book_01b.png", "assets/src/sprites/Icons/icons/16x16/book_02b.png", "assets/src/sprites/Icons/icons/16x16/book_03b.png", "assets/src/sprites/Icons/icons/16x16/book_04b.png", "assets/src/sprites/Icons/icons/16x16/book_05b.png"],
+            ["assets/src/sprites/Icons/icons/16x16/candy_01a.png", "assets/src/sprites/Icons/icons/16x16/candy_01b.png", "assets/src/sprites/Icons/icons/16x16/candy_01c.png", "assets/src/sprites/Icons/icons/16x16/candy_01d.png", "assets/src/sprites/Icons/icons/16x16/candy_01e.png"],
+            ["assets/src/sprites/Icons/icons/16x16/shard_01a.png", "assets/src/sprites/Icons/icons/16x16/shard_01b.png", "assets/src/sprites/Icons/icons/16x16/shard_01c.png", "assets/src/sprites/Icons/icons/16x16/shard_01d.png", "assets/src/sprites/Icons/icons/16x16/shard_01e.png"]
+        ]
     }
 
     reset() {
@@ -38,38 +43,19 @@ class Reward {
             }
         }
     }
-    
-    async loadImages(){
-        let pathList = [
-            "assets/src/sprites/Icons/icons/16x16/potion_03a.png",
-            "assets/src/sprites/Icons/icons/16x16/potion_03b.png",
-            "assets/src/sprites/Icons/icons/16x16/potion_03c.png",
-            "assets/src/sprites/Icons/icons/16x16/potion_03d.png",
-            "assets/src/sprites/Icons/icons/16x16/potion_03e.png",
-            "assets/src/sprites/Icons/icons/16x16/book_01b.png",
-            "assets/src/sprites/Icons/icons/16x16/book_02b.png",
-            "assets/src/sprites/Icons/icons/16x16/book_03b.png",
-            "assets/src/sprites/Icons/icons/16x16/book_04b.png",
-            "assets/src/sprites/Icons/icons/16x16/book_05b.png",
-            "assets/src/sprites/Icons/icons/16x16/candy_01a.png",
-            "assets/src/sprites/Icons/icons/16x16/candy_01b.png",
-            "assets/src/sprites/Icons/icons/16x16/candy_01c.png",
-            "assets/src/sprites/Icons/icons/16x16/candy_01d.png",
-            "assets/src/sprites/Icons/icons/16x16/candy_01e.png",
-            "assets/src/sprites/Icons/icons/16x16/shard_01a.png",
-            "assets/src/sprites/Icons/icons/16x16/shard_01b.png",
-            "assets/src/sprites/Icons/icons/16x16/shard_01c.png",
-            "assets/src/sprites/Icons/icons/16x16/shard_01d.png",
-            "assets/src/sprites/Icons/icons/16x16/shard_01e.png"
-        ];
-        for(let i = 0; i<pathList.length;i++){
-            let img = new Image();
-            img.src = pathList[i];
-            this.imageList.push(img);
-        }
-    }
+
     generateRandomItem(){
-        let index = Math.floor(randomModule.random() * this.imageList.length);
-        return this.imageList[index];
+        let item = Math.floor(randomModule.random()*4);
+        let variant = Math.floor(randomModule.random()*5);
+        switch (item){
+            case 0:
+                return this.itemList[0][variant]
+            case 1:
+                return this.itemList[1][variant]
+            case 2:
+                return this.itemList[2][variant]
+            case 3:
+                return this.itemList[3][variant]
+        }
     };
 }

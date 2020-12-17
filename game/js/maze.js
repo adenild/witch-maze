@@ -11,11 +11,13 @@ class MazeCell {
 }
 
 class Maze {
+    // noinspection JSUnresolvedVariable
     constructor(cols, rows, cellSize, map) {
         this.cols = cols;
         this.rows = rows;
         this.cellSize = cellSize;
         this.cells = [];
+        this.imagesCell = [];
         this.map = $.csv.toObjects(map);
         this.backgroundColor = "#d9d9d9";
         this.endColor = "#88FF88";
@@ -33,7 +35,7 @@ class Maze {
                 let randomRow = Math.floor(randomModule.random() * 10);
                 // Checa se o jogador está na casa, para nao colocar uma recompensa lá
                 if (player.col !== randomCol || player.row !== randomRow) {
-                    // Checa se existe recompença naquela posição, se houver, gera outra.
+                    // Checa se existe recompensa naquela posição, se houver, gera outra.
                     reward.rewardsList.forEach(reward => {
                         if (compara_rewards(reward,[randomCol, randomRow, reward[2]])) {
                             same_position = true
@@ -43,11 +45,10 @@ class Maze {
                         same_position = false
                         continue;
                     }
-                    let aux_color =  new Image();
-                    aux_color = reward.generateRandomItem();
-                    reward.rewardsList.push([randomCol, randomRow,aux_color]);
+                    let aux_item = reward.generateRandomItem();
+                    reward.rewardsList.push([randomCol, randomRow,aux_item]);
                     this.drawCell(
-                        randomCol, randomRow, aux_color);
+                        randomCol, randomRow, aux_item);
                     cont += 1;
                 }
             }
@@ -102,8 +103,27 @@ class Maze {
         let y_dimension = this.cellSize - 18
         let x_position = x_cell_position * this.cellSize + 5
         let y_position = y_cell_position * this.cellSize + 18
-        ctx.drawImage(image_path, x_position, y_position,
-            x_dimension, y_dimension);
+
+        let loaded, index = 0;
+        for (let i=0; i<this.imagesCell.length; i++){
+            let auxiliar_path = image_path.split("/");
+            let auxiliar_imageSrc = this.imagesCell[i].src.split("/");
+            if (auxiliar_imageSrc[auxiliar_imageSrc.length-1] == auxiliar_path[auxiliar_path.length-1]){
+                loaded = 1;
+                index = i;
+                break
+            }
+        }
+        if (loaded == 1){
+            ctx.drawImage(this.imagesCell[index], x_position, y_position,
+                x_dimension, y_dimension)
+        }else {
+            let img = new Image;
+            img.addEventListener('load', function (){ ctx.drawImage(img, x_position, y_position, x_dimension, y_dimension)}, false);
+            img.src = image_path;
+            this.imagesCell.push(img)
+        }
+
     }
     drawCellPlayer(x_cell_position, y_cell_position, image_path) {
         // Função responsável por desenhar obstáculos

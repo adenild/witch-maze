@@ -129,7 +129,6 @@ async function onLoad() {
     $('#movesLeft').text(player.moves)
 
     reward = new Reward();
-    await reward.loadImages();
 
     mapa = await obtem_csv();
     maze = new Maze(10, 10, 50, mapa);
@@ -157,7 +156,6 @@ function loadReplay(oldData) {
     // $('#movesLeft').text(player.moves);
 
     reward = new Reward();
-    reward.loadImages();
 
     maze = new Maze(10, 10, 50, mapa);
 
