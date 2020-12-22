@@ -15,20 +15,18 @@ let userData;
 let userCookie;
 let start_time_swipe, finish_time_swipe
 let mapa;
+let lista;
 
 function generateRandomBetween(n,a,b,method) {
 
     let numbersList = [];
-    
-
     if (method == "Mersenne") {
         for (let i = 1; i <= n; ++i) {
             numbersList.push(Math.floor((a + randomModule.random() * (b-a))));
         }            
     }
     else { // Quantico
-        
-        return randomModuleQuant.random();
+        return randomModuleQuant.random(player.isBot);
     }
 
     return numbersList
@@ -131,7 +129,7 @@ async function onLoad() {
     canvas = document.getElementById('mainForm');
     ctx = canvas.getContext('2d');
 
-    player = new Player(280);
+    player = new Player(10);
 
     await player.loadPlayerImage();
     $('#movesLeft').text(player.moves)
@@ -149,17 +147,21 @@ async function onLoad() {
 function loadReplay(oldData) {
     seed = oldData['seed'];
     method = oldData['method'];
-    randomModule = checkRandomModule(seed, method);
+
+    randomModule = new MersenneTwister(seed);
+    randomModuleQuant = new AnuQRNG(seed,controle='controle');
+
     userCookie = oldData['userCookie'];
     moves = oldData.userDict['round']['direction'];
 
     userData = new UserData(seed, method, userCookie);
     userData.setDataStructure('controle');
     
+    
     canvas = document.getElementById('mainForm');
     ctx = canvas.getContext('2d');
 
-    player = new Player(280, true);
+    player = new Player(10, true);
     player.loadPlayerImage();
     // $('#movesLeft').text(player.moves);
 
