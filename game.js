@@ -6,6 +6,7 @@ let mazeWidth;
 let player;
 let reward;
 let randomModule;
+let randomModuleQuant;
 let seed;
 let method;
 let x_down = null;
@@ -15,24 +16,22 @@ let userCookie;
 let start_time_swipe, finish_time_swipe
 let mapa;
 
-function generateRandomBetween(n,a,b) {
+function generateRandomBetween(n,a,b,method) {
 
     let numbersList = [];
+    
 
-    for (let i = 1; i <= n; ++i) {
-        numbersList.push(Math.floor((a + randomModule.random() * (b-a))));
+    if (method == "Mersenne") {
+        for (let i = 1; i <= n; ++i) {
+            numbersList.push(Math.floor((a + randomModule.random() * (b-a))));
+        }            
+    }
+    else { // Quantico
+        
+        return randomModuleQuant.random();
     }
 
     return numbersList
-}
-
-function checkRandomModule(seed, module) {
-    if (module == 'Mersenne') {
-        randomModule = new MersenneTwister(seed);
-    } else if (module == 'ANUQRNG') {
-        randomModule = new AnuQRNG(seed);
-    }
-    return randomModule
 }
 
 function getCookie() {
@@ -113,9 +112,18 @@ function onKeyDown(event) {
 
 async function onLoad() {
     seed = new Date().getTime();
-    method = 'ANUQRNG';
-    randomModule = checkRandomModule(seed, method)
+
+    randomModule = new MersenneTwister(seed);
+    randomModuleQuant = new AnuQRNG(seed);
+    //console.log(randomModuleQuant.random());
     userCookie = getCookie()
+
+    if (Math.round(Math.random()) == 0){
+        method = 'ANUQRNG';
+    }
+    else {
+        method = 'Mersenne';
+    }
 
     userData = new UserData(seed, method, userCookie);
     userData.setDataStructure();
