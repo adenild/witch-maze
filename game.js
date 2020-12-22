@@ -29,8 +29,8 @@ function generateRandomBetween(n,a,b) {
 function checkRandomModule(seed, module) {
     if (module == 'Mersenne') {
         randomModule = new MersenneTwister(seed);
-    } else if (module == 'random_batata') {
-        randomModule = new random_batata(seed);
+    } else if (module == 'ANUQRNG') {
+        randomModule = new AnuQRNG(seed);
     }
     return randomModule
 }
@@ -113,7 +113,7 @@ function onKeyDown(event) {
 
 async function onLoad() {
     seed = new Date().getTime();
-    method = 'Mersenne';
+    method = 'ANUQRNG';
     randomModule = checkRandomModule(seed, method)
     userCookie = getCookie()
 
