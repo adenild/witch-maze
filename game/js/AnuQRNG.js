@@ -3,10 +3,10 @@ class AnuQRNG {
         this.seed = seed;
         //this.url = "https://qrng.anu.edu.au/API/jsonI.php?length=1024&type=uint16";
         if (controle == 'player') {
-          this.url = "https://www.random.org/integers/?num=4&min=1000000&max=2000000&col=1&base=10&format=plain&rnd=new"  
+          this.url = "https://www.random.org/integers/?num=4&min=1000000&max=3000000&col=1&base=10&format=plain&rnd=new"  
         }
         else{
-          this.url = "https://www.random.org/integers/?num=1120&min=1000000&max=2000000&col=1&base=10&format=plain&rnd=new"  
+          this.url = "https://www.random.org/integers/?num=1120&min=1000000&max=3000000&col=1&base=10&format=plain&rnd=new"  
         }
         
         //this.random_numbers = this.random();
