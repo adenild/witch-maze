@@ -37,7 +37,8 @@ class AnuQRNG {
         }
         else{ // controle
           if (lista.length >= 4) {
-            numeros = lista.slice(Math.max(a.length - 4, 0));
+            let numeros;
+            numeros = lista.slice(Math.max(lista.length - 4, 0));
             lista.length = lista.length - 4;
             return numeros;
             // Presente pro struct. 
