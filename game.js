@@ -161,7 +161,7 @@ function loadReplay(oldData) {
     canvas = document.getElementById('mainForm');
     ctx = canvas.getContext('2d');
 
-    player = new Player(10, true);
+    player = new Player(280, true);
     player.loadPlayerImage();
     // $('#movesLeft').text(player.moves);
 
