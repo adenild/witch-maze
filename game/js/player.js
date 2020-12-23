@@ -101,10 +101,7 @@ class Player {
                 this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response)) //"Dados enviados! Obrigado"));
                 loadReplay(userData);
                 this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response));
-                if (confirm('Obrigado por contribuir com este experimento científico!\n' +
-                                'Deseja jogar de novo para ajudar mais com a coleta de dados?')) {
-                    onLoad().then(r => console.log("Novo jogo iniciado"));
-                }
+                openGO();
             }
         }
     }
