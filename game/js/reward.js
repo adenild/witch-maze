@@ -29,7 +29,7 @@ class Reward {
         this.fourScoreVariables = generateRandomBetween(4,1,3,method);
         for (let r = 0; r < this.rewardsList.length; r++) {
             if (player.col === this.rewardsList[r][0] && player.row === this.rewardsList[r][1]) {
-                this.magicScore += this.fourScoreVariables.reduce((a, b) => a * b);
+                this.magicScore += Math.floor(this.fourScoreVariables.reduce((a, b) => a * b));
                 this.rewardsScore += 1;
                 $("#rewardsScore").text(this.rewardsScore);
                 $("#magicScore").text(this.magicScore);

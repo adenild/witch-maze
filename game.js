@@ -22,7 +22,7 @@ function generateRandomBetween(n,a,b,method) {
     let numbersList = [];
     if (method == "Mersenne") {
         for (let i = 1; i <= n; ++i) {
-            numbersList.push(Math.floor((a + randomModule.random() * (b-a))));
+            numbersList.push((a + randomModule.random() * (b-a)));
         }            
     }
     else { // Quantico
