@@ -129,7 +129,7 @@ async function onLoad() {
     canvas = document.getElementById('mainForm');
     ctx = canvas.getContext('2d');
 
-    player = new Player(10);
+    player = new Player(280);
 
     await player.loadPlayerImage();
     $('#movesLeft').text(player.moves)

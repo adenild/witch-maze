@@ -98,9 +98,9 @@ class Player {
             $('#movesLeft').text(this.moves);
         } else {
             if (this.isBot != true) {
-                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response)) //"Dados enviados! Obrigado"));
+                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(console.log("Dados enviados")) //"Dados enviados! Obrigado"));
                 loadReplay(userData);
-                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log(response));
+                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(console.log("Dados enviados"));
                 openGO();
             }
         }

@@ -29,9 +29,6 @@ class AnuQRNG {
           for (let index = 0; index < lista.length; index++) {
             lista[index] = lista[index]/1000000;
           }
-          console.log('player');
-          console.log(lista);
-          
           
           return lista;
         }
@@ -55,9 +52,7 @@ class AnuQRNG {
             let numeros;
             numeros = lista.slice(Math.max(lista.length - 4, 0));
             lista.length = lista.length - 4;
-            console.log('controle');
-            console.log(lista);
-
+            
             return numeros;
           }
         }
