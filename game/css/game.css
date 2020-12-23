@@ -87,13 +87,13 @@ footer > a:hover {
   }
 }
 
-.table-center {
+.wm-table-center {
   display: inline-block;
   /*min-width: 320px;*/
   text-align: center;
 }
 
-.round-box {
+.wm-round-box {
   width: 50px;
   border-radius: 10px;
   border: 2px solid #73AD21;
@@ -101,12 +101,12 @@ footer > a:hover {
   text-align: center;
 }
 
-.round-box-text {
+.wm-round-box-text {
   padding: 2px;
   font-weight: bold;
   color: teal;
 }
 
-.settings {
+.wm-settings {
   text-align: center;
 }
