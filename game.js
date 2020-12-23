@@ -17,6 +17,9 @@ let start_time_swipe, finish_time_swipe
 let mapa;
 let lista;
 
+const MAX_NUMBER_MOVES = 280;
+const MAZE_SPECIFICATIONS = [10, 10, 50];
+
 function generateRandomBetween(n,a,b,method) {
 
     let numbersList = [];
@@ -129,7 +132,7 @@ async function onLoad() {
     canvas = document.getElementById('mainForm');
     ctx = canvas.getContext('2d');
 
-    player = new Player(10);
+    player = new Player(MAX_NUMBER_MOVES);
 
     await player.loadPlayerImage();
     $('#movesLeft').text(player.moves)
@@ -137,7 +140,7 @@ async function onLoad() {
     reward = new Reward();
 
     mapa = await obtem_csv();
-    maze = new Maze(10, 10, 50, mapa);
+    maze = new Maze(...MAZE_SPECIFICATIONS, mapa);
 
     document.addEventListener('keydown', onKeyDown);
     document.addEventListener('touchstart', handleTouchStart, false);
@@ -161,16 +164,12 @@ function loadReplay(oldData) {
     canvas = document.getElementById('mainForm');
     ctx = canvas.getContext('2d');
 
-    player = new Player(280, true);
+    player = new Player(MAX_NUMBER_MOVES, true);
     player.loadPlayerImage();
-    // $('#movesLeft').text(player.moves);
 
     reward = new Reward();
 
-    maze = new Maze(10, 10, 50, mapa);
+    maze = new Maze(...MAZE_SPECIFICATIONS, mapa);
 
     player.control_simulator(moves);
-    // document.addEventListener('keydown', onKeyDown);
-    // document.addEventListener('touchstart', handleTouchStart, false);
-    // document.addEventListener('touchmove', handleTouchMove, false);
 }
