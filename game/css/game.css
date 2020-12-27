@@ -33,6 +33,23 @@ header {
   text-align: center;
 }
 
+.modal-body{
+  background-color: #fcfcfc;
+  color: #5c3505;
+  padding: 5px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.modal-title{
+  background-color: #fcfcfc;
+  color: #5c3505;
+  font-size: 2em;
+  font-weight: bold;
+  padding: 5px;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 canvas {
   grid-area: canvas;
 }
@@ -96,7 +113,6 @@ footer > a:hover {
 .wm-round-box {
   width: 50px;
   border-radius: 10px;
-  border: 2px solid #73AD21;
   background: #ffffff;
   text-align: center;
 }
