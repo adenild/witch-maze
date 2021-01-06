@@ -129,7 +129,7 @@ async function onLoad() {
     canvas = document.getElementById('mainForm');
     ctx = canvas.getContext('2d');
 
-    player = new Player(280);
+    player = new Player(240);
 
     await player.loadPlayerImage();
     $('#movesLeft').text(player.moves)
@@ -161,7 +161,7 @@ function loadReplay(oldData) {
     canvas = document.getElementById('mainForm');
     ctx = canvas.getContext('2d');
 
-    player = new Player(280, true);
+    player = new Player(240, true);
     player.loadPlayerImage();
     // $('#movesLeft').text(player.moves);
 
