@@ -21,6 +21,9 @@
 <body onload='onLoad();' style="overflow: hidden">
 <header>🎃 Witch Maze 🎃</header>
 <canvas id='mainForm'></canvas>
+<div class = 'instructions' style="margin: auto">
+    <a id="open" onclick="openHTP()" style="cursor: pointer">Como jogar / How to Play</a>
+</div>
 <div class='wm-settings'>
     <table style="display: inline-block">
         <tr><th>Moves</th></tr>
@@ -40,9 +43,6 @@
         <tr><th>Magic Score</th></tr>
         <tr><td class='wm-round-box'><span class="wm-round-box-text" id='magicScore'>0</span></td></tr>
     </table>
-</div>
-<div style="margin: auto">
-    <a id="open" onclick="openHTP()" style="cursor: pointer">Como jogar / How to Play</a>
 </div>
 <div class="modal" tabindex="-1" id="dataPrivacy">
     <div class="modal-dialog">
