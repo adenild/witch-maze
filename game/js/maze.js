@@ -46,7 +46,7 @@ class Maze {
                         continue;
                     }
                     let aux_item = reward.generateRandomItem();
-                    reward.rewardsList.push([randomCol, randomRow,aux_item]);
+                    reward.rewardsList.push([randomCol, randomRow, aux_item]);
                     this.drawCell(
                         randomCol, randomRow, aux_item);
                     cont += 1;
