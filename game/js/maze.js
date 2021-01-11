@@ -28,8 +28,14 @@ class Maze {
 
     spawnRewards() {
         if (reward.newRewards) {
+            reward.itemList = [
+                "assets/src/sprites/Icons/icons/16x16/potion_03a.png", "assets/src/sprites/Icons/icons/16x16/potion_03b.png", "assets/src/sprites/Icons/icons/16x16/potion_03c.png", "assets/src/sprites/Icons/icons/16x16/potion_03d.png", "assets/src/sprites/Icons/icons/16x16/potion_03e.png",
+                "assets/src/sprites/Icons/icons/16x16/book_01b.png", "assets/src/sprites/Icons/icons/16x16/book_02b.png", "assets/src/sprites/Icons/icons/16x16/book_03b.png", "assets/src/sprites/Icons/icons/16x16/book_04b.png", "assets/src/sprites/Icons/icons/16x16/book_05b.png",
+                "assets/src/sprites/Icons/icons/16x16/candy_01a.png", "assets/src/sprites/Icons/icons/16x16/candy_01b.png", "assets/src/sprites/Icons/icons/16x16/candy_01c.png", "assets/src/sprites/Icons/icons/16x16/candy_01d.png", "assets/src/sprites/Icons/icons/16x16/candy_01e.png",
+                "assets/src/sprites/Icons/icons/16x16/shard_01a.png", "assets/src/sprites/Icons/icons/16x16/shard_01b.png", "assets/src/sprites/Icons/icons/16x16/shard_01c.png", "assets/src/sprites/Icons/icons/16x16/shard_01d.png", "assets/src/sprites/Icons/icons/16x16/shard_01e.png"
+            ];
             let cont = 0;
-            let same_position = false
+            let same_position = false;
             while (cont < (reward.level*2)) {
                 let randomCol = Math.floor(randomModule.random() * 10);
                 let randomRow = Math.floor(randomModule.random() * 10);
@@ -46,7 +52,7 @@ class Maze {
                         continue;
                     }
                     let aux_item = reward.generateRandomItem();
-                    reward.rewardsList.push([randomCol, randomRow,aux_item]);
+                    reward.rewardsList.push([randomCol, randomRow, aux_item]);
                     this.drawCell(
                         randomCol, randomRow, aux_item);
                     cont += 1;
