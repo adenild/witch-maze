@@ -34,10 +34,10 @@ class Player {
                 let finishPos = move_data.slice(2,4);
 
                 userData.userDict['round']['swipeDistance'].push(euclideanDistance(startPos,finishPos));
-                userData.userDict['round']['swipeCoordXStart'] = [startPos[0]];
-                userData.userDict['round']['swipeCoordYStart'] = [startPos[1]];
-                userData.userDict['round']['swipeCoordXFinish'] = [finishPos[0]];
-                userData.userDict['round']['swipeCoordYFinish'] = [finishPos[1]];
+                userData.userDict['round']['swipeCoordXStart'].push(startPos[0]);
+                userData.userDict['round']['swipeCoordYStart'].push(startPos[1]);
+                userData.userDict['round']['swipeCoordXFinish'].push(finishPos[0]);
+                userData.userDict['round']['swipeCoordYFinish'].push(finishPos[1]);
                 userData.userDict['round']['swipeTime'].push(move_data[4]);
             }
             //Outras variáveis
