@@ -41,8 +41,11 @@ def normaliza_dados_partida(dados_partida: dict) -> pd.DataFrame:
     # Faz a transposta para colocar cada round em uma linha e as variáveis em colunas
     df_rounds_t = df_rounds.T
 
-    # Explode todas as colunas para gera um registro para cada movimento
-    df_rounds_detalhe = df_rounds_t.reset_index(drop=True).apply(pd.Series.explode).reset_index(drop=True)
+    # Explode todas as colunas para gerar um registro para cada movimento
+
+    df_rounds_dropped_index = df_rounds_t.reset_index(drop=True)
+    df_rounds_exploded = df_rounds_dropped_index.apply(pd.Series.explode)
+    df_rounds_detalhe = df_rounds_exploded.reset_index(drop=True)
 
     # Gera as informações da partida
     df_jogos = df_jogos.drop(columns='round')
@@ -58,7 +61,7 @@ def normaliza_dados_partida(dados_partida: dict) -> pd.DataFrame:
 
 def normaliza_dados_witch_maze(
         caminho_arquivo_entrada: str,
-        caminho_pasta_saída: str = 'data_analysis/output_data/',
+        caminho_pasta_saída: str = './',
         prefixo: str = "") -> None:
     """
         Recebe o caminho para um arquivo de saída do banco de dados do jogo
@@ -81,8 +84,13 @@ def normaliza_dados_witch_maze(
 
     lista_df_partidas_normalizadas = []
     for dado_partida in json_carregado:
-        lista_df_partidas_normalizadas.append(
-            normaliza_dados_partida(dado_partida))
+        try:
+            lista_df_partidas_normalizadas.append(
+                normaliza_dados_partida(dado_partida))
+        except Exception as e:
+            print(e)
+            print("Erro ao converter partida de _ID:", dado_partida['_id'])
+            print("Prosseguindo execução.")
 
     for df_partidas_normalizada in lista_df_partidas_normalizadas:
         df_partidas_normalizada.to_csv(
