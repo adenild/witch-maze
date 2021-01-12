@@ -1,0 +1,29 @@
+Cada partida é armazenada em um arquivo csv.
+Existem campos que são únicos para a partida, eles se repetem em todas as linhas.
+Os campos que mudam a cada movimento da bruxinha são atualizados a cada movimento.
+Campos e descrições:
+_id - id da partida, hash único
+game_date - data, hora e milissegundos em que a partida foi iniciada
+game_type - tipo do jogo: player (quando jogado pelo jogador), controle (quando jogado pelo dispositivo)
+finalScore - pontuação final da partida, quantidade de recompensas final
+seed - semente que foi utilizada para gerar a disposição da partida (posição do jogador e recompensas)
+used_alg - algoritmo de rng que foi utilizado para gerar os componentes do score mágico (V1Score, V2Score, V3Score, V4Score)
+user_id	- id do jogador, capturado via cookie no dispositivo (é o mesmo para único jogador por dispositivo)
+version	- versão do jogo, para permitir comparações de jogos apenas de versões compatíveis na análise
+V1Score	- primeiro componente do score mágico, armazenado a cada movimento
+V2Score	- segundo componente do score mágico, armazenado a cada movimento
+V3Score	- terceiro componente do score mágico, armazenado a cada movimento
+V4Score	- quarto componente do score mágico, armazenado a cada movimento
+axis - eixo de movimentação (horizontal / vertical), armazenado a cada movimento
+direction - direção de movimento (up, down, left, right), armazenado a cada movimento
+level - nível que o jogador se encontra ao final do movimento
+magicScore - score mágico total do jogador ao final do movimento
+moves - contador de movimentos
+score - pontuação da partida (quantidade de recompensas coletadas) ao final de cada movimento
+swipeCoordXFinish - coordenada x do final do movimento de swipe, pode não estar preenchida se o jogo foi jogado pelo teclado, armazenado a cada movimento
+swipeCoordXStart - coordenada x do início do movimento de swipe, pode não estar preenchida se o jogo foi jogado pelo teclado, armazenado a cada movimento
+swipeCoordYFinish - coordenada y do final do movimento de swipe, pode não estar preenchida se o jogo foi jogado pelo teclado, armazenado a cada movimento
+swipeCoordYStart - coordenada y do início do movimento de swipe, pode não estar preenchida se o jogo foi jogado pelo teclado, armazenado a cada movimento
+swipeDistance - distância em pixels do movimento de swipe, armazenado a cada movimento
+swipeTime - tempo de execução do movimento de swipe (em milissegundos), armazenado a cada movimento
+timeStep - tempo decorrido em milissegundos para o jogador comandar o movimento da bruxinha
