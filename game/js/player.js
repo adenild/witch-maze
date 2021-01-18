@@ -1,37 +1,45 @@
 class Player {
-    constructor(moves) {
+    constructor(moves, isBot = false) {
         this.reset();
         this.startMoves = moves;
         this.moves = moves;
         this.image = [];
         this.valid = false;
         this.initialTime = null;
+        this.isBot = isBot
     }
     reset() {
         this.col = Math.floor(randomModule.random() * 10);
         this.row = Math.floor(randomModule.random() * 10);
         this.moves = this.startMoves;
+        this.isBot = false;
         $('#movesLeft').text(this.moves);
     }
     async loadPlayerImage() {
         let img = new Image();
         img.src = 'assets/src/sprites/mio_static.gif';
+        img.addEventListener('load', e=>{})
         await this.image.push(img);
     }
-
     // Banco de dados: 'https://safe-basin-68612.herokuapp.com/data'
-    saveUserData(valid, direction) {
+    saveUserData(valid, direction, move_data=[], move_type='keyboard') {
         if (valid) {
             maze.redraw();
             //Variáveis psicológicas
             let dateAux = new Date().getTime();
             userData.userDict['round']['timeStep'].push(dateAux - this.initialTime);
             this.initialTime = dateAux;
+            if (move_type == 'swipe'){
+                let startPos = move_data.slice(0,2);
+                let finishPos = move_data.slice(2,4);
 
-            //userData.userDict['round']['swipeDistance'].push();
-            //userData.userDict['round']['timeBetweenClicks'].push();
-            //userData.userDict['round']['swipeTime'].push();
-
+                userData.userDict['round']['swipeDistance'].push(euclideanDistance(startPos,finishPos));
+                userData.userDict['round']['swipeCoordXStart'].push(startPos[0]);
+                userData.userDict['round']['swipeCoordYStart'].push(startPos[1]);
+                userData.userDict['round']['swipeCoordXFinish'].push(finishPos[0]);
+                userData.userDict['round']['swipeCoordYFinish'].push(finishPos[1]);
+                userData.userDict['round']['swipeTime'].push(move_data[4]);
+            }
             //Outras variáveis
             userData.userDict['round']['moves'].push(this.startMoves - this.moves);
             userData.userDict['round']['level'].push(reward.level);
@@ -42,9 +50,16 @@ class Player {
             } else {
                 userData.userDict['round']['axis'].push('horizontal')
             }
-
+            userData.userDict['finalScore'] = userData.userDict['round']['score'][((userData.userDict['round']['score']).length-1)]
+            //console.log(userData.userDict['round']['score'][((userData.userDict['round']['score']).length-1)])
+            //console.log(((userData.userDict['round']['score']).length-1))
             //Variáveis físicas
-            let rewardColorList = [];
+            userData.userDict['round']['V1Score'].push(reward.fourScoreVariables[0]);
+            userData.userDict['round']['V2Score'].push(reward.fourScoreVariables[1]);
+            userData.userDict['round']['V3Score'].push(reward.fourScoreVariables[2]);
+            userData.userDict['round']['V4Score'].push(reward.fourScoreVariables[3]);
+            userData.userDict['round']['magicScore'].push(reward.magicScore);
+            /*let rewardColorList = [];
             let rewardLocation = [];
             let rewardSize = [];
             let rewardType = [];
@@ -56,8 +71,8 @@ class Player {
             }
             userData.userDict['round']['rewardLocation'].push(rewardLocation);
             userData.userDict['round']['rewardColor'].push(rewardColorList);
-            //userData.userDict['round']['rewardSize'].push()
-            //userData.userDict['round']['rewardType'].push()
+            userData.userDict['round']['rewardSize'].push()
+            userData.userDict['round']['rewardType'].push()*/
             this.valid = false
         }
     }
@@ -76,17 +91,17 @@ class Player {
         });
         return response.json();
     }
-
-    moveHandler(direction) {
+    moveHandler(direction, move_data=[], move_type='keyboard') {
         if (this.moves > 0) {
             this[direction]();
-            this.saveUserData(this.valid, direction)
+            this.saveUserData(this.valid, direction, move_data, move_type);
             $('#movesLeft').text(this.moves);
         } else {
-            if (confirm('Obrigado por contribuir com este experimento científico!\n' +
-                'Deseja jogar de novo para ajudar mais com a coleta de dados?')) {
-                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(response => console.log("Dados enviados!"));
-                onClick()
+            if (this.isBot != true) {
+                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(console.log("Dados enviados")) //"Dados enviados! Obrigado"));
+                loadReplay(userData);
+                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(console.log("Dados enviados"));
+                openGO();
             }
         }
     }
@@ -116,6 +131,15 @@ class Player {
             this.col += 1;
             this.moves -= 1;
             this.valid = true;
+        }
+    }
+
+    control_simulator(moves/*userData*/){
+
+        for (let index = 0; index < moves.length; index++) {
+            this.moveHandler(moves[index]);
+            //console.log(moves[index]);
+            //console.log(reward.rewardsList);
         }
     }
 }

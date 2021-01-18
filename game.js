@@ -6,20 +6,30 @@ let mazeWidth;
 let player;
 let reward;
 let randomModule;
+let randomModuleQuant;
 let seed;
 let method;
 let x_down = null;
 let y_down = null;
 let userData;
 let userCookie;
+let start_time_swipe, finish_time_swipe
+let mapa;
+let lista;
 
-function checkRandomModule(seed, module) {
-    if (module == 'Mersenne') {
-        randomModule = new MersenneTwister(seed);
-    } else if (module == 'random_batata') {
-        randomModule = new random_batata(seed);
+function generateRandomBetween(n,a,b,method) {
+
+    let numbersList = [];
+    if (method == "Mersenne") {
+        for (let i = 1; i <= n; ++i) {
+            numbersList.push((a + randomModule.random() * (b-a)));
+        }            
     }
-    return randomModule
+    else { // Quantico
+        return randomModuleQuant.random(player.isBot);
+    }
+
+    return numbersList
 }
 
 function getCookie() {
@@ -30,7 +40,7 @@ function getCookie() {
 }
 
 function getTouches(event) {
-    return event.touches ||             // browser API
+    return event.touches ||          // browser API
         event.originalEvent.touches; // jQuery
 }
 
@@ -38,7 +48,8 @@ function handleTouchStart(event) {
     const firstTouch = getTouches(event)[0];
     x_down = firstTouch.clientX;
     y_down = firstTouch.clientY;
-};
+    start_time_swipe = new Date().getTime();
+}
 
 function handleTouchMove(event) {
     if (!x_down || !y_down) {
@@ -47,36 +58,31 @@ function handleTouchMove(event) {
 
     let x_up = event.touches[0].clientX;
     let y_up = event.touches[0].clientY;
+    finish_time_swipe = new Date().getTime();
 
     let x_diff = x_down - x_up;
     let y_diff = y_down - y_up;
 
+    //x_up,y_up,x_down,y_down
+    let diff_swipe_time = finish_time_swipe - start_time_swipe
+    let move_data = [x_down , y_down, x_up, y_up, diff_swipe_time];
+    let move_type = 'swipe';
+
     if (Math.abs(x_diff) > Math.abs(y_diff)) {/*most significant*/
         if (x_diff > 0) {
-            player.moveHandler("left")
+            player.moveHandler("left", move_data, move_type)
         } else {
-            player.moveHandler("right")
+            player.moveHandler("right", move_data, move_type)
         }
     } else {
         if (y_diff > 0) {
-            player.moveHandler("up")
+            player.moveHandler("up", move_data, move_type)
         } else {
-            player.moveHandler("down")
+            player.moveHandler("down", move_data, move_type)
         }
     }
     x_down = null;
     y_down = null;
-};
-
-function onClick() {
-    seed = new Date().getTime();
-    randomModule = checkRandomModule(seed, method);
-    player.reset();
-    reward.reset();
-    maze.cols = 10;
-    maze.rows = 10;
-    maze.generate();
-    userData.setDataStructure();
 }
 
 function onKeyDown(event) {
@@ -104,9 +110,18 @@ function onKeyDown(event) {
 
 async function onLoad() {
     seed = new Date().getTime();
-    method = 'Mersenne';
-    randomModule = checkRandomModule(seed, method)
+
+    randomModule = new MersenneTwister(seed);
+    randomModuleQuant = new AnuQRNG(seed);
+    //console.log(randomModuleQuant.random());
     userCookie = getCookie()
+
+    if (Math.round(Math.random()) == 0){
+        method = 'ANUQRNG';
+    }
+    else {
+        method = 'Mersenne';
+    }
 
     userData = new UserData(seed, method, userCookie);
     userData.setDataStructure();
@@ -114,16 +129,48 @@ async function onLoad() {
     canvas = document.getElementById('mainForm');
     ctx = canvas.getContext('2d');
 
-    player = new Player(200);
+    player = new Player(240);
+
     await player.loadPlayerImage();
     $('#movesLeft').text(player.moves)
 
     reward = new Reward();
-    await reward.loadImages();
 
-    maze = new Maze(10, 10, 50, await obtem_csv());
+    mapa = await obtem_csv();
+    maze = new Maze(10, 10, 50, mapa);
 
     document.addEventListener('keydown', onKeyDown);
     document.addEventListener('touchstart', handleTouchStart, false);
     document.addEventListener('touchmove', handleTouchMove, false);
+}
+
+function loadReplay(oldData) {
+    seed = oldData['seed'];
+    method = oldData['method'];
+
+    randomModule = new MersenneTwister(seed);
+    randomModuleQuant = new AnuQRNG(seed,controle='controle');
+
+    userCookie = oldData['userCookie'];
+    moves = oldData.userDict['round']['direction'];
+
+    userData = new UserData(seed, method, userCookie);
+    userData.setDataStructure('controle');
+    
+    
+    canvas = document.getElementById('mainForm');
+    ctx = canvas.getContext('2d');
+
+    player = new Player(240, true);
+    player.loadPlayerImage();
+    // $('#movesLeft').text(player.moves);
+
+    reward = new Reward();
+
+    maze = new Maze(10, 10, 50, mapa);
+
+    player.control_simulator(moves);
+    // document.addEventListener('keydown', onKeyDown);
+    // document.addEventListener('touchstart', handleTouchStart, false);
+    // document.addEventListener('touchmove', handleTouchMove, false);
 }

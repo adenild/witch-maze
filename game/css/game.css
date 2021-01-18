@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Text+Me+One&display=swap');
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
 * {
 /*  border: solid black 1px;*/
 
@@ -15,6 +25,7 @@ body {
   max-width: 960px;
   grid-template-areas:
     'header'
+    'instructions'
     'settings'
     'canvas';
   grid-template-columns: max-content;
@@ -31,6 +42,28 @@ header {
   font-weight: bold;
   padding: 10px;
   text-align: center;
+}
+
+#open::after{
+    content: "\a \a";
+    white-space: pre;
+}
+
+.modal-body{
+  background-color: #fcfcfc;
+  color: #5c3505;
+  padding: 5px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.modal-title{
+  background-color: #fcfcfc;
+  color: #5c3505;
+  font-size: 2em;
+  font-weight: bold;
+  padding: 5px;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 canvas {
@@ -70,6 +103,7 @@ footer > a:hover {
   body {
     grid-template-areas:
       'header'
+      'instructions'
       'settings'
       'canvas'
       'footer';
@@ -87,26 +121,25 @@ footer > a:hover {
   }
 }
 
-.table-center {
+.wm-table-center {
   display: inline-block;
   /*min-width: 320px;*/
   text-align: center;
 }
 
-.round-box {
+.wm-round-box {
   width: 50px;
   border-radius: 10px;
-  border: 2px solid #73AD21;
   background: #ffffff;
   text-align: center;
 }
 
-.round-box-text {
+.wm-round-box-text {
   padding: 2px;
   font-weight: bold;
   color: teal;
 }
 
-.settings {
+.wm-settings {
   text-align: center;
 }
