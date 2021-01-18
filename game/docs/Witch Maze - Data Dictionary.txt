@@ -26,4 +26,4 @@ swipeCoordYFinish - coordenada y do final do movimento de swipe, pode não estar
 swipeCoordYStart - coordenada y do início do movimento de swipe, pode não estar preenchida se o jogo foi jogado pelo teclado, armazenado a cada movimento
 swipeDistance - distância em pixels do movimento de swipe, armazenado a cada movimento
 swipeTime - tempo de execução do movimento de swipe (em milissegundos), armazenado a cada movimento
-timeStep - tempo decorrido em milissegundos para o jogador comandar o movimento da bruxinha
+timeStep - tempo decorrido em milissegundos para o jogador comandar um movimento válido da bruxinha
