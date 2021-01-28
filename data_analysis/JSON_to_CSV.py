@@ -10,13 +10,13 @@ from json import loads
 import argparse
 
 from os.path import join
+from collections import Counter
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-f', '--file', help='Path to output file')
 parser.add_argument(
-    '-p', '--prefix',
-    help='What preffix will be add to the output files',
-    default="")
+    '-f', '--filepath',
+    help='Input JSON filepath'
+)
 args = parser.parse_args()
 
 
@@ -31,7 +31,6 @@ def normaliza_dados_partida(dados_partida: dict) -> pd.DataFrame:
                 Dados de uma única partida normalizados.
     """
     df_jogos = pd.DataFrame(dados_partida)
-
     # Descarta coluna desnecessária
     df_jogos = df_jogos.drop(columns='__v')
 
@@ -56,13 +55,18 @@ def normaliza_dados_partida(dados_partida: dict) -> pd.DataFrame:
     df_partida = pd.concat([df_jogos, df_rounds_detalhe], axis=1)
     df_partida = df_partida.fillna(method='ffill')
 
+    # Tratando valor das colunas
+    df_partida['user_id'] = df_partida['user_id'].replace(
+        '(user_id=)', '', regex=True
+    )
+
     return df_partida
 
 
 def normaliza_dados_witch_maze(
         caminho_arquivo_entrada: str,
         caminho_pasta_saída: str = './',
-        prefixo: str = "") -> None:
+) -> None:
     """
         Recebe o caminho para um arquivo de saída do banco de dados do jogo
         Witch Maze. Esse arquivo deve conter uma lista de jsons referentes aos
@@ -79,30 +83,55 @@ def normaliza_dados_witch_maze(
     """
     with open(caminho_arquivo_entrada, 'r') as data_file:
         json_data = data_file.read()
-
+    
     json_carregado = loads(json_data)
 
-    lista_df_partidas_normalizadas = []
+    contador_partidas = Counter()
+    contagem_erros = 0
     for dado_partida in json_carregado:
         try:
-            lista_df_partidas_normalizadas.append(
-                normaliza_dados_partida(dado_partida))
+            df_partidas_normalizadas = normaliza_dados_partida(dado_partida)
+
+            codigo_usuario = df_partidas_normalizadas['user_id'][0]
+            algoritmo_usado = df_partidas_normalizadas['used_alg'][0]
+            tipo_jogador = df_partidas_normalizadas['game_type'][0]
+
+            # Assumindo que as partidas vem ordenadas cronologicamente e que a
+            # partida de jogador sempre vem antes do controle,
+            # podemos incrementar o número de vezes que um mesmo usuário
+            # aparecem e induzir a sua contagem
+            if tipo_jogador == "player":
+                contador_partidas.update([codigo_usuario])
+            contagem_partida = contador_partidas[codigo_usuario]
+            df_partidas_normalizadas['contagem_partida'] = contagem_partida
+
+            # Foi especificado pelo clinete uqe o nome de cada partida deve ser
+            # composto pelo código do usuário, game + a contagem da partida,
+            # o algoritmo usado para aleatorização e se aquela partida foi
+            # feita por um jogador ou pelo controle
+            nome_arquivo = "_".join([
+                codigo_usuario,
+                "game" + str(contagem_partida),
+                algoritmo_usado,
+                tipo_jogador
+            ])
+
+            df_partidas_normalizadas.to_csv(
+                join(caminho_pasta_saída,  nome_arquivo + '.csv'),
+                index=False)
         except Exception as e:
             print(e)
             print("Erro ao converter partida de _ID:", dado_partida['_id'])
             print("Prosseguindo execução.")
-
-    for df_partidas_normalizada in lista_df_partidas_normalizadas:
-        df_partidas_normalizada.to_csv(
-            join(caminho_pasta_saída, prefixo + str(df_partidas_normalizada['_id'][0]) + '.csv'),
-            index=False)
+            contagem_erros += 1
+    print(contagem_erros, len(json_carregado))
 
 
 if __name__ == '__main__':
-    if args.file is None:
-        print("Please, write a file path using -f command.")
+    if args.filepath is None:
+        print("Please, write a filepath path using -f command.")
         print("Use -h for more information.")
         exit()
     else:
-        normaliza_dados_witch_maze(args.file, prefixo=args.prefix)
+        normaliza_dados_witch_maze(args.filepath)
         # normaliza_dados_witch_maze(".//data_analysis//JSON_2_Jogos.txt", ".//data_analysis//", 'teste')
