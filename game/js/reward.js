@@ -33,12 +33,15 @@ class Reward {
                 this.magicScore += Math.floor(this.fourScoreVariables.reduce((a, b) => a * b));
                 this.rewardsScore += 1;
                 $("#rewardsScore").text(this.rewardsScore);
+                $("#finalScore").text(this.rewardsScore);
                 $("#magicScore").text(this.magicScore);
+                $("#finalMagicScore").text(this.magicScore);
                 this.rewardsList.splice(r, 1);
                 if (this.rewardsList.length === 0) {
                     this.newRewards = true;
                     this.level += 1;
                     $("#level").text(this.level);
+                    $("#finalLevel").text(this.level);
                 }
                 break;
             }
