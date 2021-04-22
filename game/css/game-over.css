@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap");
+
+.game-over {
+    background-color: #E8C177;
+    padding: 23px 38px;
+}
+
+.game-over * {
+    font-family: 'MedievalSharp', cursive;
+    color: #5C3505;
+}
+
+
+@media (min-width: 800px) {
+    .game-over-title {
+        font-size: 2.813rem;
+        margin: auto;
+    }
+}
+
+.game-over-title {
+    font-size: 2.7rem;
+    margin: auto;
+}
+
+.game-over-body {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    display: flex;
+}
+
+.game-over-body .morgana-gif {
+    display: flex;
+    justify-self: flex-start;
+    flex: 0.5;
+}
+
+.game-over-body img {
+    margin: auto;
+}
+
+.game-over-body .morgana-text {
+    font-size: 2rem;
+    flex: 1;
+}
+
+.game-over-body-bottom .player-info-container {
+    display: flex;
+}
+
+.game-over-body-bottom .player-info {
+    font-size: 2.2rem;
+    margin: auto;
+}
+
+.game-over-body-bottom img {
+    width: 30%;
+}
+
+.game-over-body-bottom .game-over-play-again {
+    display: flex;
+    flex-direction: column;
+}
+
+.game-over-body-bottom .game-over-play-again .play-again {
+    font-size: 1.7rem;
+    margin: 20px auto auto;
+}
+
+@media (min-width: 800px) {
+    .game-over-body-bottom .game-over-play-again .play-again {
+        font-size: 2rem;
+        margin: auto;
+    }
+}
+
+.game-over-body-bottom .game-over-play-again .buttons {
+    margin: auto;
+}
+
+.game-over-body-bottom .play-again-button {
+    font-size: 1.5rem;
+    margin: 0 10px;
+}

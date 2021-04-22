@@ -3,6 +3,7 @@
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel='stylesheet' href='game/css/game.css'>
+    <link rel='stylesheet' href='game/css/game-over.css'>
     <meta charset='UTF-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -197,56 +198,25 @@
                 <h5 class="modal-title">🎃 How To Play 🎃</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <table>
-                    <tr>
-                        <th>
-                            Como Jogar!<br><br>
-                        </th>
-                        <th></th>
-                        <th>
-                            How to Play!<br><br>
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>
-                            A bruxinha Morgana resolveu zombar de uma velha bruxa que andava devagar e estava sempre atrasada.<br><br>
-                        </td>
-                        <td></td>
-                        <td>
-                            The little witch Morgana decided to make fun of an old witch who walked slowly and was always late.<br><br>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Como maldição a poderosa bruxa velha mandou Morgana para um labirinto muito estranho, onde as paredes não mudam e o tempo parece se repetir eternamente.
-                        </td>
-                        <td></td>
-                        <td>
-                            As a curse, the powerful old witch sent Morgana into a very strange maze, where the walls do not change and time seems to repeat itself eternally.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Morgana convocou sua ajuda para recuperar os itens mágicos que aparecem e conseguir poder mágico suficiente para se libertar do labirinto.
-                        </td>
-                        <td></td>
-                        <td>
-                            Morgana enlisted your help to recover the magic items that appear and get enough magic power to break free from the maze.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Assim que você chega, escuta a maldição na voz da velha bruxa, que parece um pergaminho antigo que se desfaz quando tocado <br>
-                            - Morgana! Enquanto seu coração, empatia e bondade não estiverem alinhados e condizentes com seu poder mágico, você ficará confinada neste labirinto!
-                        </td>
-                        <td></td>
-                        <td>
-                            As soon as you arrive, you hear the curse in the old witch's voice, which looks like an ancient scroll that falls apart when touched <br>
-                            - Morgana! As long as your heart, empathy and kindness are not aligned and consistent with your magical power, you will be confined in this maze!
-                        </td>
-                    </tr>
-                </table>
+            <div class="modal-body" style="display: flex;">
+                <div style="flex: 1">
+                    <p style="margin: 1rem 0; border-right: solid 1px #cbcbcb;">
+                        O jogo tem por objetivo dar poderes mágicos a bruxinha Morgana. Para tal ela tem de recolher todos os objetos qua aparecem no labirinto. As paredes do labirinto não se movem e a sua falta de poderes mágicos obriga-a a contornar as paredes para os recolher.
+                        <br>
+                        Morgana move-se a cada toque no ecrã. O número de objetos mágicos disponíveis, aumentam a cada nível do jogo. Quando recolheres todos os objetos passas ao nível seguinte onde mais objetos mágicos aparecem. Morgana só consegue mover-se 240 vezes, no total dos 7 níveis de jogo.
+                        <br>
+                        Diverte-te a ajudar Morgana a tornar-se numa bruxinha Magica e Poderosa!!!!
+                    </p>
+                </div>
+                <div style="flex: 1; margin-left: 5px">
+                    <p style="margin: 1rem 0">
+                        The game aims to give magical powers to the little witch Morgana. To do this, she has to collect all the objects that appear in the maze. The walls of the labyrinth do not move and its lack of magical powers forces it to go around the walls to collect them.
+                        <br>
+                        Morgana moves with each touch on the screen. The number of magic objects available, increases with each level of the game. When you collect all the objects, you go to the next level where more magic objects appear. Morgana can only move 240 times, in a total of 7 game levels.
+                        <br>
+                        Have fun helping Morgana to become a magical and powerful little witch!!!!
+                    </p>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar / Close</button>
@@ -255,19 +225,32 @@
     </div>
 </div>
 <div class="modal" tabindex="-1" id="gameOver">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" style="align-self: center">🎃 Fim de Jogo 🎃</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content game-over">
+            <span class="game-over-title">Morgana está mais poderosa...</span>
+            <div class="game-over-body">
+                <div class="morgana-gif">
+                    <img src="assets/src/sprites/mio_static.gif" alt="Static Witch" width="98">
+                </div>
+                <div class="morgana-text">
+                    <p>
+                        Você ajudou Morgana a juntar muitos itens mágicos, mas sua jornada no labirinto ainda não acabou.
+                    </p>
+                </div>
             </div>
-            <div class="modal-body">
-                <p><strong>Obrigado por contribuir com este experimento científico!</strong><br>
-                Deseja jogar de novo para ajudar mais com a coleta de dados?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="playNext()">Sim!</button>
+            <div class="game-over-body-bottom">
+                <div class="player-info-container">
+                    <span class="player-info">Você coletou <span id="finalScore"></span> itens mágicos em <span id="finalLevel"></span> fases. O poder mágico acumulado foi de <span id="finalMagicScore"></span>.</span>
+                    <img src="assets/src/sprites/treasure.png" alt="treasures" style="margin: auto">
+                </div>
+
+                <div class="game-over-play-again">
+                    <div class="play-again">Deseja jogar novamente?</div>
+                    <div class="buttons" style="margin-top: 20px">
+                        <a class="play-again-button" data-bs-dismiss="modal" onclick="playNext()">Sim</a>
+                        <a class="play-again-button" data-bs-dismiss="modal">Não</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
