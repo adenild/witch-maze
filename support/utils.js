@@ -81,7 +81,7 @@ class UserData{
         
 
         // Variaveis fixas
-        this.userDict['version'] = '3.2.9'; // Finalizado - MAJOR_CHANGES.PR_IMPLEMENTADO(DEZENA).PR_IMPLEMENTADO(UNIDADE)
+        this.userDict['version'] = '3.3'; // Muda quantidade de números quânticos obtidos por movimento
         this.userDict['game_date'] = now;
         this.userDict['seed'] = this.seed; // Finalizado
         this.userDict['used_alg'] = this.method; // Trocar para variável

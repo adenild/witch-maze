@@ -15,7 +15,6 @@ let userData;
 let userCookie;
 let start_time_swipe, finish_time_swipe
 let mapa;
-let lista;
 
 function generateRandomBetween(n,a,b,method) {
 

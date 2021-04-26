@@ -1,12 +1,13 @@
 class AnuQRNG {
     constructor(seed,controle='player') {
         this.seed = seed;
+        this.lista = [];
         //this.url = "https://qrng.anu.edu.au/API/jsonI.php?length=1024&type=uint16";
         if (controle == 'player') {
-          this.url = "https://www.random.org/integers/?num=4&min=1000000&max=3000000&col=1&base=10&format=plain&rnd=new"  
+          this.url = "https://www.random.org/integers/?num=20&min=1000000&max=3000000&col=1&base=10&format=plain&rnd=new"
         }
         else{
-          this.url = "https://www.random.org/integers/?num=1120&min=1000000&max=3000000&col=1&base=10&format=plain&rnd=new"  
+          this.url = "https://www.random.org/integers/?num=960&min=1000000&max=3000000&col=1&base=10&format=plain&rnd=new"
         }
         
         //this.random_numbers = this.random();
@@ -20,23 +21,34 @@ class AnuQRNG {
 
     random(controle=false) {
         if (controle==false){
-          var xmlHttp = new XMLHttpRequest();
-          xmlHttp.open("GET", this.url, false); // false for synchronous request
-          xmlHttp.send(null);
+            console.log(this.lista)
+            if (this.lista.length > 8){
+                let numeros;
+                numeros = this.lista.slice(Math.max(this.lista.length - 4, 0));
+                this.lista.length = this.lista.length - 4;
+                return numeros;
+            }
+            else{
+              var xmlHttp = new XMLHttpRequest();
+              xmlHttp.open("GET", this.url, false); // false for synchronous request
+              xmlHttp.send(null);
+              this.lista = xmlHttp.responseText.split('\n');
+              this.lista.pop();
+              for (let index = 0; index < this.lista.length; index++) {
+                this.lista[index] = this.lista[index]/1000000;
+              }
+              let numeros;
+              numeros = this.lista.slice(Math.max(this.lista.length - 4, 0));
+              this.lista.length = this.lista.length - 4;
 
-          lista = xmlHttp.responseText.split('\n');
-          lista.pop();
-          for (let index = 0; index < lista.length; index++) {
-            lista[index] = lista[index]/1000000;
-          }
-          
-          return lista;
+              return numeros;
+            }
         }
         else{ // controle
-          if (lista.length >= 4) {
+          if (this.lista.length >= 4) {
             let numeros;
-            numeros = lista.slice(Math.max(lista.length - 4, 0));
-            lista.length = lista.length - 4;
+            numeros = this.lista.slice(Math.max(this.lista.length - 4, 0));
+            this.lista.length = this.lista.length - 4;
             return numeros;
             // Presente pro struct. 
           }
@@ -44,14 +56,14 @@ class AnuQRNG {
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.open("GET", this.url, false); // false for synchronous request
             xmlHttp.send(null);
-            lista = xmlHttp.responseText.split('\n');
-            lista.pop();
-            for (let index = 0; index < lista.length; index++) {
-              lista[index] = lista[index]/1000000;
+            this.lista = xmlHttp.responseText.split('\n');
+            this.lista.pop();
+            for (let index = 0; index < this.lista.length; index++) {
+              this.lista[index] = this.lista[index]/1000000;
             }
             let numeros;
-            numeros = lista.slice(Math.max(lista.length - 4, 0));
-            lista.length = lista.length - 4;
+            numeros = this.lista.slice(Math.max(this.lista.length - 4, 0));
+            this.lista.length = this.lista.length - 4;
             
             return numeros;
           }

@@ -54,10 +54,10 @@ class Player {
             //console.log(userData.userDict['round']['score'][((userData.userDict['round']['score']).length-1)])
             //console.log(((userData.userDict['round']['score']).length-1))
             //Variáveis físicas
-            userData.userDict['round']['V1Score'].push(reward.fourScoreVariables[0]);
-            userData.userDict['round']['V2Score'].push(reward.fourScoreVariables[1]);
-            userData.userDict['round']['V3Score'].push(reward.fourScoreVariables[2]);
-            userData.userDict['round']['V4Score'].push(reward.fourScoreVariables[3]);
+            userData.userDict['round']['V1Score'].push(reward.ScoreVariables[0]);
+            userData.userDict['round']['V2Score'].push(reward.ScoreVariables[1]);
+            userData.userDict['round']['V3Score'].push(reward.ScoreVariables[2]);
+            userData.userDict['round']['V4Score'].push(reward.ScoreVariables[3]);
             userData.userDict['round']['magicScore'].push(reward.magicScore);
             /*let rewardColorList = [];
             let rewardLocation = [];
@@ -98,8 +98,10 @@ class Player {
             $('#movesLeft').text(this.moves);
         } else {
             if (this.isBot != true) {
+                console.log(userData.userDict);
                 this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(console.log("Dados enviados")) //"Dados enviados! Obrigado"));
                 loadReplay(userData);
+                console.log(userData.userDict);
                 this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(console.log("Dados enviados"));
                 openGO();
             }
