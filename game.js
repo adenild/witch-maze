@@ -112,7 +112,6 @@ async function onLoad() {
 
     randomModule = new MersenneTwister(seed);
     randomModuleQuant = new AnuQRNG(seed);
-    //console.log(randomModuleQuant.random());
     userCookie = getCookie()
 
     if (Math.round(Math.random()) == 0){

@@ -98,10 +98,8 @@ class Player {
             $('#movesLeft').text(this.moves);
         } else {
             if (this.isBot != true) {
-                console.log(userData.userDict);
                 this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(console.log("Dados enviados")) //"Dados enviados! Obrigado"));
                 loadReplay(userData);
-                console.log(userData.userDict);
                 this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(console.log("Dados enviados"));
                 openGO();
             }
@@ -140,8 +138,6 @@ class Player {
 
         for (let index = 0; index < moves.length; index++) {
             this.moveHandler(moves[index]);
-            //console.log(moves[index]);
-            //console.log(reward.rewardsList);
         }
     }
 }

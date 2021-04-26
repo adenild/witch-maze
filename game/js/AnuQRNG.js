@@ -21,7 +21,6 @@ class AnuQRNG {
 
     random(controle=false) {
         if (controle==false){
-            console.log(this.lista)
             if (this.lista.length > 8){
                 let numeros;
                 numeros = this.lista.slice(Math.max(this.lista.length - 4, 0));
