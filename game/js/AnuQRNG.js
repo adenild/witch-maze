@@ -4,7 +4,7 @@ class AnuQRNG {
         this.lista = [];
         //this.url = "https://qrng.anu.edu.au/API/jsonI.php?length=1024&type=uint16";
         if (controle == 'player') {
-          this.url = "https://www.random.org/integers/?num=20&min=1000000&max=3000000&col=1&base=10&format=plain&rnd=new"
+          this.url = "https://www.random.org/integers/?num=40&min=1000000&max=3000000&col=1&base=10&format=plain&rnd=new"
         }
         else{
           this.url = "https://www.random.org/integers/?num=960&min=1000000&max=3000000&col=1&base=10&format=plain&rnd=new"
@@ -21,7 +21,7 @@ class AnuQRNG {
 
     random(controle=false) {
         if (controle==false){
-            if (this.lista.length > 8){
+            if (this.lista.length > 20){
                 let numeros;
                 numeros = this.lista.slice(Math.max(this.lista.length - 4, 0));
                 this.lista.length = this.lista.length - 4;
