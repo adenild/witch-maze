@@ -5,7 +5,7 @@ class Reward {
         this.rewardsList = [];
         this.rewardsScore = 0;
         this.magicScore = 0;
-        this.fourScoreVariables = [];
+        this.ScoreVariables = [];
         this.level = 1;
         this.itemList = [
             "assets/src/sprites/Icons/icons/16x16/potion_03a.png", "assets/src/sprites/Icons/icons/16x16/potion_03b.png", "assets/src/sprites/Icons/icons/16x16/potion_03c.png", "assets/src/sprites/Icons/icons/16x16/potion_03d.png", "assets/src/sprites/Icons/icons/16x16/potion_03e.png",
@@ -27,10 +27,10 @@ class Reward {
     }
 
     countScore() {
-        this.fourScoreVariables = generateRandomBetween(4,1,3,method);
+        this.ScoreVariables = generateRandomBetween(4,1,3,method);
         for (let r = 0; r < this.rewardsList.length; r++) {
             if (player.col === this.rewardsList[r][0] && player.row === this.rewardsList[r][1]) {
-                this.magicScore += Math.floor(this.fourScoreVariables.reduce((a, b) => a * b));
+                this.magicScore += Math.floor(this.ScoreVariables.reduce((a, b) => a * b));
                 this.rewardsScore += 1;
                 $("#rewardsScore").text(this.rewardsScore);
                 $("#finalScore").text(this.rewardsScore);
