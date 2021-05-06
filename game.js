@@ -15,7 +15,6 @@ let userData;
 let userCookie;
 let start_time_swipe, finish_time_swipe
 let mapa;
-let lista;
 
 function generateRandomBetween(n,a,b,method) {
 
@@ -113,7 +112,6 @@ async function onLoad() {
 
     randomModule = new MersenneTwister(seed);
     randomModuleQuant = new AnuQRNG(seed);
-    //console.log(randomModuleQuant.random());
     userCookie = getCookie()
 
     if (Math.round(Math.random()) == 0){
