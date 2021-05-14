@@ -21,8 +21,8 @@ function generateRandomBetween(n,a,b,method) {
     let numbersList = [];
     if (method == "Mersenne") {
         for (let i = 1; i <= n; ++i) {
-            numbersList.push((a + randomModule.random() * (b-a)));
-        }            
+            numbersList.push(parseFloat((a + randomModule.random() * (b-a)).toFixed(3)));
+        }
     }
     else { // Quantico
         return randomModuleQuant.random(player.isBot);
