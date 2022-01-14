@@ -16,14 +16,18 @@ class Reward {
     }
 
     reset() {
+        console.log('resetei')
         this.newRewards = true;
         this.rewardsList = [];
         this.rewardsScore = 0;
         this.magicScore = 0;
         this.level = 1;
         $("#level").text(this.level);
+        $("#finalLevel").text(this.level);
         $("#rewardsScore").text(this.rewardsScore);
+        $("#finalScore").text(this.rewardsScore);
         $("#magicScore").text(this.magicScore);
+        $("#finalMagicScore").text(this.magicScore);
     }
 
     countScore() {
