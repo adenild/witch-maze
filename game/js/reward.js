@@ -1,5 +1,6 @@
 class Reward {
-    constructor() {
+    constructor(isBot=false) {
+        this.isBot = isBot;
         this.reset();
         this.newRewards = true;
         this.rewardsList = [];
@@ -16,18 +17,21 @@ class Reward {
     }
 
     reset() {
-        console.log('resetei')
         this.newRewards = true;
         this.rewardsList = [];
         this.rewardsScore = 0;
         this.magicScore = 0;
         this.level = 1;
+        // console.log('finalLevel: '+this.level + ' finalScore: ' + this.rewardsScore + ' finalMS: ' + this.magicScore)
         $("#level").text(this.level);
-        $("#finalLevel").text(this.level);
         $("#rewardsScore").text(this.rewardsScore);
-        $("#finalScore").text(this.rewardsScore);
         $("#magicScore").text(this.magicScore);
-        $("#finalMagicScore").text(this.magicScore);
+        if (!this.isBot) {
+            console.log('atualizei pq não é bot')
+            $("#finalLevel").text(this.level);
+            $("#finalScore").text(this.rewardsScore);
+            $("#finalMagicScore").text(this.magicScore);
+        }
     }
 
     countScore() {
@@ -37,15 +41,22 @@ class Reward {
                 this.magicScore += Math.floor(this.ScoreVariables.reduce((a, b) => a * b));
                 this.rewardsScore += 1;
                 $("#rewardsScore").text(this.rewardsScore);
-                $("#finalScore").text(this.rewardsScore);
+                console.log("finalScore: " + this.rewardsScore)
                 $("#magicScore").text(this.magicScore);
-                $("#finalMagicScore").text(this.magicScore);
+                if (!this.isBot) {
+                    $("#finalScore").text(this.rewardsScore);
+                    $("#finalMagicScore").text(this.magicScore);
+                }
+                console.log("finalMagicScore: " + this.magicScore)
                 this.rewardsList.splice(r, 1);
                 if (this.rewardsList.length === 0) {
                     this.newRewards = true;
                     this.level += 1;
                     $("#level").text(this.level);
-                    $("#finalLevel").text(this.level);
+                    if (!this.isBot) {
+                        $("#finalLevel").text(this.level);
+                    }
+                    console.log("finalLevel: " + this.level)
                 }
                 break;
             }
