@@ -7,7 +7,6 @@ class Player {
         this.valid = false;
         this.initialTime = null;
         this.isBot = isBot
-        if (this.isBot) {console.log("ROBO JOGANDO")}
     }
     reset() {
         this.col = Math.floor(randomModule.random() * 10);
@@ -136,7 +135,7 @@ class Player {
     }
 
     control_simulator(moves/*userData*/){
-        console.log(moves)
+        //console.log(moves)
         for (let index = 0; index < moves.length; index++) {
             this.moveHandler(moves[index]);
         }
