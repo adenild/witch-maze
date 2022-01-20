@@ -163,7 +163,7 @@ function loadReplay(oldData) {
     player.loadPlayerImage();
     // $('#movesLeft').text(player.moves);
     if (player.isBot) {
-        console.log("verifiquei se é bot e é memo")
+        //console.log("verifiquei se é bot e é memo")
         reward = new Reward(true);
     } else {
         reward = new Reward();

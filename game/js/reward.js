@@ -27,7 +27,7 @@ class Reward {
         $("#rewardsScore").text(this.rewardsScore);
         $("#magicScore").text(this.magicScore);
         if (!this.isBot) {
-            console.log('atualizei pq não é bot')
+            //console.log('atualizei pq não é bot')
             $("#finalLevel").text(this.level);
             $("#finalScore").text(this.rewardsScore);
             $("#finalMagicScore").text(this.magicScore);
@@ -41,13 +41,13 @@ class Reward {
                 this.magicScore += Math.floor(this.ScoreVariables.reduce((a, b) => a * b));
                 this.rewardsScore += 1;
                 $("#rewardsScore").text(this.rewardsScore);
-                console.log("finalScore: " + this.rewardsScore)
+                //console.log("finalScore: " + this.rewardsScore)
                 $("#magicScore").text(this.magicScore);
                 if (!this.isBot) {
                     $("#finalScore").text(this.rewardsScore);
                     $("#finalMagicScore").text(this.magicScore);
                 }
-                console.log("finalMagicScore: " + this.magicScore)
+                //console.log("finalMagicScore: " + this.magicScore)
                 this.rewardsList.splice(r, 1);
                 if (this.rewardsList.length === 0) {
                     this.newRewards = true;
@@ -56,7 +56,7 @@ class Reward {
                     if (!this.isBot) {
                         $("#finalLevel").text(this.level);
                     }
-                    console.log("finalLevel: " + this.level)
+                    //console.log("finalLevel: " + this.level)
                 }
                 break;
             }
