@@ -162,8 +162,13 @@ function loadReplay(oldData) {
     player = new Player(240, true);
     player.loadPlayerImage();
     // $('#movesLeft').text(player.moves);
+    if (player.isBot) {
+        console.log("verifiquei se é bot e é memo")
+        reward = new Reward(true);
+    } else {
+        reward = new Reward();
+    }
 
-    reward = new Reward();
 
     maze = new Maze(10, 10, 50, mapa);
 
