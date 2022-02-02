@@ -5,9 +5,9 @@ let mazeHeight;
 let mazeWidth;
 let player;
 let reward;
-let randomModule;
-let randomModuleQuant;
-let seed;
+let randomModule, randomModule2;
+let randomModuleQuant, randomModuleQuant2;
+let seed, seed2;
 let method;
 let x_down = null;
 let y_down = null;
@@ -21,7 +21,7 @@ function generateRandomBetween(n,a,b,method) {
     let numbersList = [];
     if (method == "Mersenne") {
         for (let i = 1; i <= n; ++i) {
-            numbersList.push(parseFloat((a + randomModule.random() * (b-a)).toFixed(3)));
+            numbersList.push(parseFloat((a + randomModule2.random() * (b-a)).toFixed(3)));
         }
     }
     else { // Quantico
@@ -109,8 +109,10 @@ function onKeyDown(event) {
 
 async function onLoad() {
     seed = new Date().getTime();
+    seed2 = new Date().getTime()+(Math.random() * (9 - 1) + 1);
 
     randomModule = new MersenneTwister(seed);
+    randomModule2 = new MersenneTwister(seed2);
     randomModuleQuant = new AnuQRNG(seed);
     userCookie = getCookie()
 
@@ -121,7 +123,7 @@ async function onLoad() {
         method = 'Mersenne';
     }
 
-    userData = new UserData(seed, method, userCookie);
+    userData = new UserData(seed, seed2, method, userCookie);
     userData.setDataStructure();
 
     canvas = document.getElementById('mainForm');
@@ -173,6 +175,7 @@ function loadReplay(oldData) {
     maze = new Maze(10, 10, 50, mapa);
 
     player.control_simulator(moves);
+    // console.log(reward.magicScore)
     // document.addEventListener('keydown', onKeyDown);
     // document.addEventListener('touchstart', handleTouchStart, false);
     // document.addEventListener('touchmove', handleTouchMove, false);
