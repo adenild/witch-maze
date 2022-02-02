@@ -36,9 +36,10 @@ function maze_generator(maze_data){
 }
 
 class UserData{
-    constructor(seed, method, userCookie) {
+    constructor(seed, seed2, method, userCookie) {
         this.userDict = {};
         this.seed = seed;
+        this.seed2 = seed2;
         this.method = method;
         this.userCookie = userCookie;
     }
@@ -84,6 +85,7 @@ class UserData{
         this.userDict['version'] = '3.3'; // Muda quantidade de números quânticos obtidos por movimento
         this.userDict['game_date'] = now;
         this.userDict['seed'] = this.seed; // Finalizado
+        this.userDict['seed2'] = this.seed2;
         this.userDict['used_alg'] = this.method; // Trocar para variável
         this.userDict['user_id'] = this.userCookie; // Finalizado
         this.userDict['finalScore'] = 0;
