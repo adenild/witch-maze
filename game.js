@@ -123,7 +123,7 @@ async function onLoad() {
         method = 'Mersenne';
     }
 
-    userData = new UserData(seed, seed2, method, userCookie);
+    userData = new UserData(seed, method, userCookie);
     userData.setDataStructure();
 
     canvas = document.getElementById('mainForm');
