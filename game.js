@@ -116,12 +116,25 @@ async function onLoad() {
     randomModuleQuant = new AnuQRNG(seed);
     userCookie = getCookie()
 
-    if (Math.round(Math.random()) == 0){
-        method = 'ANUQRNG';
+    let method_index = userCookie.indexOf('previous_method')
+    if (method_index == -1) {
+        if (Math.round(Math.random()) == 0){
+            method = 'ANUQRNG';
+        }
+        else {
+            method = 'Mersenne';
+        }
+    } else {
+        let previous_method = userCookie.split(';')
+            .find(element => element.includes('previous_method'))
+            .replace(' previous_method=', '')
+        if (previous_method == 'ANUQRNG') {
+            method = 'Mersenne'
+        } else if (previous_method == 'Mersenne') {
+            method = 'ANUQRNG'
+        }
     }
-    else {
-        method = 'Mersenne';
-    }
+    document.cookie = `previous_method=${method}`
 
     userData = new UserData(seed, method, userCookie);
     userData.setDataStructure();

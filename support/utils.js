@@ -81,7 +81,7 @@ class UserData{
         
 
         // Variaveis fixas
-        this.userDict['version'] = '1.0'; // Versão para testes
+        this.userDict['version'] = '1.0.1'; // Versão para testes
         this.userDict['game_date'] = now;
         this.userDict['seed'] = this.seed; // Finalizado
         this.userDict['used_alg'] = this.method; // Trocar para variável
