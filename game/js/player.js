@@ -98,13 +98,9 @@ class Player {
             $('#movesLeft').text(this.moves);
         } else {
             if (this.isBot != true) {
-                // console.log('player ' + userData.userDict["round"]["magicScore"].at(-1))
-                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(console.log("Dados enviados")) //"Dados enviados! Obrigado"));
-                console.log(userData)
+                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict); //"Dados enviados! Obrigado"));
                 loadReplay(userData);
-                // console.log('bot ' + userData.userDict["round"]["magicScore"].at(-1))
-                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(console.log("Dados enviados"));
-                console.log(userData)
+                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict);
                 openGO();
             }
         }
