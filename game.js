@@ -138,7 +138,7 @@ class EasyCookies {
 }
 
 function choose_random_method(easycookies) {
-  let choices = ["MERSENNE", "ANUQRNG"];
+  let choices = ["Mersenne", "ANUQRNG"];
   let prev = easycookies.get("previousMethod");
   if (prev) {
     choices.splice(choices.indexOf(prev), 1);
