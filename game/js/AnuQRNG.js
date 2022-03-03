@@ -1,5 +1,5 @@
 class AnuQRNG {
-    constructor(seed,controle='player') {
+    constructor(seed, controle='player') {
         this.seed = seed;
         this.lista = [];
         if (controle == 'player') {
