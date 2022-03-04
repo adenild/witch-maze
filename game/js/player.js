@@ -98,10 +98,9 @@ class Player {
             $('#movesLeft').text(this.moves);
         } else {
             if (this.isBot != true) {
-                console.log('olha o dict q eu vou enviar: '+userData.userDict)
-                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(r => console.log("Dados enviados! Obrigado por jogar")); //"Dados enviados! Obrigado"));
+                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict)
                 loadReplay(userData);
-                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict).then(r => console.log("Dados enviados! Obrigado por jogar"));
+                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict)
                 openGO();
             }
         }

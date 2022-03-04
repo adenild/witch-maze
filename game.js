@@ -152,6 +152,7 @@ async function onLoad() {
   if (!user_id) {
     user_id = seed;
   }
+  cookies.set("user_id", user_id)
   console.log(user_id);
   method = choose_random_method(cookies);
 
