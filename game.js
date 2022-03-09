@@ -113,38 +113,26 @@ function onKeyDown(event) {
 
 class EasyCookies {
   constructor() {
-    this.cookies = this.loadCookies();
-  }
-
-  loadCookies() {
-    let cookies = {};
-    if (document.cookie) {
-      document.cookie
-        .split(";")
-        .map((x) => x.split("="))
-        .map((x) => (cookies[x[0].trim()] = x[1].trim()));
-    }
-    return cookies;
+    this.localStorage = new localStorage();
   }
 
   get(key) {
-    return this.cookies[key];
+    return this.localStorage.getItem(key);
   }
 
   set(key, value) {
-    this.cookies[key] = value;
-    document.cookie = `${key}=${value}`;
+    this.localStorage.setItem(key, value);
   }
 }
 
-function choose_random_method(easycookies) {
+function choose_random_method(localStorage) {
   let choices = ["MERSENNE", "ANUQRNG"];
-  let prev = easycookies.get("previousMethod");
+  let prev = localStorage.getItem("previousMethod");
   if (prev) {
     choices.splice(choices.indexOf(prev), 1);
   }
   let choice = choices[Math.floor(choices.length * Math.random())];
-  easycookies.set("previousMethod", choice);
+  localStorage.setItem("previousMethod", choice);
   return choice;
 }
 
@@ -155,13 +143,12 @@ async function onLoad() {
   randomModule = new MersenneTwister(seed);
   randomModule2 = new MersenneTwister(seed2);
   randomModuleQuant = new AnuQRNG(seed);
-  cookies = new EasyCookies();
-  userCookie = cookies.get("user_id");
+  userCookie = localStorage.getItem("user_id");
   if (!userCookie) {
     userCookie = seed;
+    localStorage.setItem("user_id", userCookie);
   }
-  console.log(userCookie);
-  method = choose_random_method(cookies);
+  method = choose_random_method(localStorage);
 
   userData = new UserData(seed, method, userCookie);
   userData.setDataStructure();
