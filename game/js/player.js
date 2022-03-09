@@ -98,9 +98,9 @@ class Player {
             $('#movesLeft').text(this.moves);
         } else {
             if (this.isBot != true) {
-                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict); //"Dados enviados! Obrigado"));
+                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict)
                 loadReplay(userData);
-                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict);
+                this.postData('https://safe-basin-68612.herokuapp.com/data', userData.userDict)
                 openGO();
             }
         }

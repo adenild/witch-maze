@@ -1,20 +1,13 @@
-let ctx;
-let canvas;
-let maze;
-let mazeHeight;
-let mazeWidth;
-let player;
-let reward;
+let ctx, canvas, maze, player, reward, mapa;
+let mazeHeight, mazeWidth;
+let method;
+let seed, seed2;
 let randomModule, randomModule2;
 let randomModuleQuant, randomModuleQuant2;
-let seed, seed2;
-let method;
-let x_down = null;
-let y_down = null;
-let userData;
-let userCookie;
+let x_down = null,
+  y_down = null;
 let start_time_swipe, finish_time_swipe;
-let mapa;
+let userData, user_id, cookies, moves;
 
 function generateRandomBetween(n, a, b, method) {
   let numbersList = [];
@@ -150,7 +143,7 @@ async function onLoad() {
   }
   method = choose_random_method(localStorage);
 
-  userData = new UserData(seed, method, userCookie);
+  userData = new UserData(seed, method, user_id);
   userData.setDataStructure();
 
   canvas = document.getElementById("mainForm");
@@ -176,12 +169,12 @@ function loadReplay(oldData) {
   method = oldData["method"];
 
   randomModule = new MersenneTwister(seed);
-  randomModuleQuant = new AnuQRNG(seed, (controle = "controle"));
+  randomModuleQuant = new AnuQRNG(seed, "controle");
 
-  userCookie = oldData["userCookie"];
+  user_id = oldData.userDict["user_id"];
   moves = oldData.userDict["round"]["direction"];
 
-  userData = new UserData(seed, method, userCookie);
+  userData = new UserData(seed, method, user_id);
   userData.setDataStructure("controle");
 
   canvas = document.getElementById("mainForm");
