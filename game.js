@@ -4,7 +4,8 @@ let method;
 let seed, seed2;
 let randomModule, randomModule2;
 let randomModuleQuant, randomModuleQuant2;
-let x_down = null, y_down = null;
+let x_down = null,
+  y_down = null;
 let start_time_swipe, finish_time_swipe;
 let userData, user_id, cookies, moves;
 
@@ -105,38 +106,26 @@ function onKeyDown(event) {
 
 class EasyCookies {
   constructor() {
-    this.cookies = this.loadCookies();
-  }
-
-  loadCookies() {
-    let cookies = {};
-    if (document.cookie) {
-      document.cookie
-        .split(";")
-        .map((x) => x.split("="))
-        .map((x) => (cookies[x[0].trim()] = x[1].trim()));
-    }
-    return cookies;
+    this.localStorage = new localStorage();
   }
 
   get(key) {
-    return this.cookies[key];
+    return this.localStorage.getItem(key);
   }
 
   set(key, value) {
-    this.cookies[key] = value;
-    document.cookie = `${key}=${value}`;
+    this.localStorage.setItem(key, value);
   }
 }
 
-function choose_random_method(easycookies) {
-  let choices = ["Mersenne", "ANUQRNG"];
-  let prev = easycookies.get("previousMethod");
+function choose_random_method(localStorage) {
+  let choices = ["MERSENNE", "ANUQRNG"];
+  let prev = localStorage.getItem("previousMethod");
   if (prev) {
     choices.splice(choices.indexOf(prev), 1);
   }
   let choice = choices[Math.floor(choices.length * Math.random())];
-  easycookies.set("previousMethod", choice);
+  localStorage.setItem("previousMethod", choice);
   return choice;
 }
 
@@ -147,14 +136,12 @@ async function onLoad() {
   randomModule = new MersenneTwister(seed);
   randomModule2 = new MersenneTwister(seed2);
   randomModuleQuant = new AnuQRNG(seed);
-  cookies = new EasyCookies();
-  user_id = cookies.get("user_id");
+  user_id = localStorage.getItem("user_id");
   if (!user_id) {
     user_id = seed;
+    localStorage.setItem("user_id", user_id);
   }
-  cookies.set("user_id", user_id)
-  console.log(user_id);
-  method = choose_random_method(cookies);
+  method = choose_random_method(localStorage);
 
   userData = new UserData(seed, method, user_id);
   userData.setDataStructure();
