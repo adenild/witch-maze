@@ -136,10 +136,10 @@ async function onLoad() {
   randomModule = new MersenneTwister(seed);
   randomModule2 = new MersenneTwister(seed2);
   randomModuleQuant = new AnuQRNG(seed);
-  userCookie = localStorage.getItem("user_id");
-  if (!userCookie) {
-    userCookie = seed;
-    localStorage.setItem("user_id", userCookie);
+  user_id = localStorage.getItem("user_id");
+  if (!user_id) {
+    user_id = seed;
+    localStorage.setItem("user_id", user_id);
   }
   method = choose_random_method(localStorage);
 
