@@ -11,7 +11,7 @@ let userData, user_id, cookies, moves;
 
 function generateRandomBetween(n, a, b, method) {
   let numbersList = [];
-  if (method == "Mersenne") {
+  if (method == "MERSENNE") {
     for (let i = 1; i <= n; ++i) {
       numbersList.push(
         parseFloat((a + randomModule2.random() * (b - a)).toFixed(3))
